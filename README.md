@@ -29,6 +29,8 @@ On 164 public Flight Review logs from 115 vehicles (`studies/fleet-2026/GRADE.md
 
 PX4 uses one `EKF2_GPS_DELAY` for every receiver. ArduPilot assigns a lag by u-blox generation: 120 ms for M8 "based on flight logs", and the same 120 ms for F9, M9 and M10, with the comment "F9 lag not verified yet from flight log" (`AP_GPS_UBLOX.cpp`, `get_lag`). PX4's GPS driver records the receiver model it detected in the device_id of every GPS message. `receiver.py` reads that model and measures the lag on a fresh random sample of public logs, leaving out every vehicle the earlier studies saw. It then compares M8, M9, F9P, M10/generic u-blox and DroneCAN receivers. The six predictions and the decision rules are in [`studies/receiver-2026/PLAN.md`](studies/receiver-2026/PLAN.md), committed before any log was downloaded. The grade will be published whatever it says.
 
+The first run, on 2026-10-30, was stopped from outside the job (the container got a stop signal, exit 143) after 88 of its logs, before it wrote a summary. Those partial rows were not scored. The same code, at the commit that published the plan, runs again from the start with the same seed, on Flight Review's list as it stands then (logs added or removed since the first run can change the draw).
+
 ## Suggested setting (rule D1)
 
 If a passing log's `lag_minus_param_ms` is more than about 50 ms either way, the measured `lag_ms` is a reasonable **starting value** for `EKF2_GPS_DELAY`.
@@ -46,6 +48,8 @@ History: D1 was withdrawn after the first innovation check came back C2 as writt
 - `studies/fleet-2026/PLAN-innov.md`, `GRADE-innov.md`, `innov/`: does EKF2's GPS velocity innovation, plotted against acceleration, lean the way the measured lag says it should? Graded C2 as written. The innovation sign was wrong in the plan; see the grade.
 - `studies/fleet-2026/PLAN-innov-confirm.md`, `GRADE-innov-confirm.md`, `confirm/`: the corrected check (`innov.py` 0.2.0, PX4's sign) on the 98 fresh logs from px4-log-health, with the same thresholds. 89 logs validated; C1.
 - `studies/receiver-2026/PLAN.md`: lag by GPS receiver model (`receiver.py` 0.1.0), pre-registered. Running.
+
+**How long the raw logs stay.** Since October 2024, Flight Review keeps every upload, public ones included, for 12 months, then removes it automatically (announcement on discuss.px4.io, "PX4 Flight Review & Data Retention", topic 41906, 2024-10-14). These studies drew logs uploaded from October 2025 on, so the raw logs behind them start to disappear from October 2026. The per-log rows in each study's `logs.jsonl` (log id, hashed vehicle id, every measured figure, no positions) stay here, and the scored checks can be recomputed from them, but once a log is gone it can't be measured again from the raw file. If you want to re-measure, download the logs you need while they are still listed.
 
 ## Tests
 
