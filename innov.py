@@ -1,22 +1,31 @@
 """innov.py: does EKF2's own GPS velocity innovation agree with gps_lag.py?
 
 EKF2 fuses a GPS velocity measured L seconds before its timestamp as if it
-were measured EKF2_GPS_DELAY (P) seconds before. Its innovation (GPS minus
-prediction, estimator_innovations.gps_hvel) is then about v(t - L) - v(t - P)
-= -a * (L - P) while the vehicle accelerates at a, so the slope k of the
-innovation against acceleration estimates -(L - P), shrunk by however much the
-filter's state has already followed the late GPS. This reads the innovation
-and the IMU's north-east acceleration (from sensor_combined and
+were measured EKF2_GPS_DELAY (P) seconds before. PX4's innovation is the
+prediction minus the measurement (estimator_innovations.gps_hvel; in the EKF2
+source, _state.vel - velocity), so it is about v(t - P) - v(t - L)
+= +a * (L - P) while the vehicle accelerates at a. The slope k of the
+innovation against acceleration therefore estimates L - P, shrunk by however
+much the filter's state has already followed the late GPS. This reads the
+innovation and the IMU's north-east acceleration (from sensor_combined and
 vehicle_attitude, as gps_lag.py does, averaged over +-0.1 s around the
 innovation's fusion time) from a log and fits k with one constant per axis.
-The implied excess lag is -k. It is an independent check of the direction of
+The implied excess lag is +k. It is an independent check of the direction of
 gps_lag.py's lag - P, not a second measurement of the lag.
+
+0.1.0 took the innovation to be measurement minus prediction and reported -k;
+see studies/fleet-2026/GRADE-innov.md.
 
     python innov.py --rows logs.jsonl --out-dir out --budget-min 100
 
-re-downloads the logs that passed in fleet.py's run (logs.jsonl), one at a
-time, 6 s apart, and scores studies/fleet-2026/PLAN-innov.md. Each log is
-deleted once measured; no position is read.
+re-downloads the logs that passed gps_lag.py in a fleet run (fleet.py's
+logs.jsonl, or px4-log-health's fleet_health.py logs.jsonl, whose lag figures
+sit under "lag"), one at a time, 6 s apart, and scores the plan's checks.
+Each log is deleted once measured; no position is read.
+
+    python innov.py --rescore-v010 innov.jsonl --out-dir out
+
+scores rows written by 0.1.0 again with PX4's sign, with no download.
 
 By MV2 of Munim, Inc.; written with AI agents. Apache-2.0.
 """
@@ -33,7 +42,7 @@ import numpy as np
 
 import gps_lag as gl
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 SMOOTH_S = 0.1          # acceleration is averaged over +-0.1 s around the fusion time
 MIN_SAMPLES = 100
@@ -136,7 +145,7 @@ def measure_innov(log, innov):
                     "excitation_m_s2": fit and fit["excitation_m_s2"]})
         return out
     out.update(fit)
-    out["implied_excess_ms"] = round(-fit["k_s"] * 1e3, 1)
+    out["implied_excess_ms"] = round(fit["k_s"] * 1e3, 1)
     out["implied_se_ms"] = round(fit["se_s"] * 1e3, 1)
     out["passed"] = True
     out["reason"] = "ok"
@@ -170,7 +179,7 @@ def spearman(x, y):
 
 
 def summarise(rows):
-    """The checks of studies/fleet-2026/PLAN-innov.md."""
+    """The checks of studies/fleet-2026/PLAN-innov.md (and PLAN-innov-confirm.md)."""
     ok = [r for r in rows if r.get("passed") and r.get("lag_minus_param_ms") is not None]
     d = [float(r["lag_minus_param_ms"]) for r in ok]
     x = [float(r["implied_excess_ms"]) for r in ok]
@@ -218,21 +227,62 @@ def summarise(rows):
     }
 
 
+def source_row(row):
+    """The lag figures of one fleet row: fleet.py rows carry them at the top
+    level, fleet_health.py rows under 'lag'."""
+    lag = row.get("lag")
+    if isinstance(lag, dict):
+        out = dict(lag)
+        out["log_id"] = row.get("log_id")
+        out["vehicle"] = row.get("vehicle")
+        return out
+    return row
+
+
+def flip_v010(row):
+    """A row written by 0.1.0, in PX4's sign."""
+    out = dict(row)
+    if out.get("implied_excess_ms") is not None:
+        out["implied_excess_ms"] = -out["implied_excess_ms"]
+    out["sign"] = "flipped from 0.1.0"
+    return out
+
+
+def rescore_v010(path, out_dir):
+    """Score 0.1.0's innov.jsonl again with PX4's sign, with no download."""
+    with open(path, encoding="utf-8") as f:
+        rows = [flip_v010(json.loads(line)) for line in f if line.strip()]
+    summary = summarise(rows)
+    summary.update({"innov": __version__, "rescored_from": os.path.basename(path),
+                    "sign": "PX4 (prediction minus measurement); 0.1.0 rows negated"})
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "summary.json"), "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=1)
+    print(json.dumps(summary, indent=1), flush=True)
+    return summary
+
+
 def main(argv=None):
-    import requests
-    import fleet
     p = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    p.add_argument("--rows", required=True, help="fleet.py's logs.jsonl")
+    p.add_argument("--rows", help="a fleet run's logs.jsonl")
+    p.add_argument("--rescore-v010", help="innov.jsonl written by innov.py 0.1.0")
     p.add_argument("--out-dir", required=True)
     p.add_argument("--budget-min", type=float, default=100)
     p.add_argument("--tmp", default="/tmp/px4-gps-lag-innov")
     args = p.parse_args(argv)
+    if args.rescore_v010:
+        rescore_v010(args.rescore_v010, args.out_dir)
+        return 0
+    if not args.rows:
+        p.error("--rows or --rescore-v010 is needed")
+    import requests
+    import fleet
     os.makedirs(args.out_dir, exist_ok=True)
     os.makedirs(args.tmp, exist_ok=True)
     with open(args.rows, encoding="utf-8") as f:
-        source = [json.loads(line) for line in f if line.strip()]
+        source = [source_row(json.loads(line)) for line in f if line.strip()]
     todo = [r for r in source if r.get("passed")]
-    print("%d logs passed in fleet.py's run" % len(todo), flush=True)
+    print("%d logs passed gps_lag.py in the fleet run" % len(todo), flush=True)
     started = time.time()
     session = requests.Session()
     session.headers["User-Agent"] = fleet.USER_AGENT.replace("px4-gps-lag/", "px4-gps-lag-innov/")

@@ -1,0 +1,46 @@
+{
+ "studies/fleet-2026/PLAN-innov.md": {
+  "on_main": true,
+  "sha256": "07c4a9d7e383e97b1a510b542ad0d2238d49588345cf9e40ed82cc0ab9eef525",
+  "waited_s": 0
+ },
+ "studies/fleet-2026/GRADE.md": {
+  "on_main": true,
+  "sha256": "1b639373604e0d891eca3bf3b940c84dfd8855b9793be0010dcd038ad140ae38",
+  "waited_s": 0
+ },
+ "studies/fleet-2026/v1/logs.jsonl": {
+  "on_main": true,
+  "sha256": "786cb1982dca2a265deb9305fb2f2b6a67b8b85c70b3872f4c8c05a72b7f052e",
+  "waited_s": 0,
+  "lines": 400
+ },
+ "gps_lag.py": {
+  "from_main": true,
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d"
+ },
+ "test_gps_lag.py": {
+  "from_main": true,
+  "sha256": "e9f7e1ccc19d76d0f221fb244565bbcb86a8fe6e6f2761fb87121895ded75b79"
+ },
+ "fleet.py": {
+  "local_sha256": "a953a27ce219aae2d46ca00cffaca5f4863da278f971195989a1dd3713f3171b",
+  "main_sha256": "a953a27ce219aae2d46ca00cffaca5f4863da278f971195989a1dd3713f3171b",
+  "same_as_main": true
+ },
+ "innov.py": {
+  "local_sha256": "d5c2f13af8e0b6a24bf8c8b92b8b9ea29ab720700d12b6fba5c759935a0e5fdb",
+  "main_sha256": "d5c2f13af8e0b6a24bf8c8b92b8b9ea29ab720700d12b6fba5c759935a0e5fdb",
+  "same_as_main": true
+ },
+ "test_fleet.py": {
+  "local_sha256": "31209addb4a62e01bf3861e93d6d08246403fa94106ef3ed895c54944b89e70a",
+  "main_sha256": "31209addb4a62e01bf3861e93d6d08246403fa94106ef3ed895c54944b89e70a",
+  "same_as_main": true
+ },
+ "test_innov.py": {
+  "local_sha256": "4d59181eb652727d528189ab4efe9ddbbbe0637b2d2f69342fc21736430752c4",
+  "main_sha256": "4d59181eb652727d528189ab4efe9ddbbbe0637b2d2f69342fc21736430752c4",
+  "same_as_main": true
+ }
+}

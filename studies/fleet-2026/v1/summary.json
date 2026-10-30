@@ -1,0 +1,233 @@
+{
+ "attempted": 400,
+ "downloaded": 332,
+ "passed": 164,
+ "vehicles_passed": 115,
+ "lag_ms": {
+  "median": 99.8,
+  "p10": 47.6,
+  "p25": 71.3,
+  "p75": 132.9,
+  "p90": 178.9,
+  "min": -9.4,
+  "max": 355.5
+ },
+ "median_se_ms": 1.2,
+ "param": {
+  "n": 159,
+  "share_default_110": 0.9811320754716981,
+  "values": [
+   100.0,
+   110.0,
+   160.0
+  ]
+ },
+ "lag_minus_param_ms": {
+  "median": -10.3,
+  "share_abs_over_50": 0.29559748427672955
+ },
+ "by_bus": {
+  "i2c": {
+   "n": 3,
+   "median_lag_ms": 152.1
+  },
+  "mavlink": {
+   "n": 2,
+   "median_lag_ms": -9.4
+  },
+  "serial": {
+   "n": 65,
+   "median_lag_ms": 108.7
+  },
+  "uavcan": {
+   "n": 34,
+   "median_lag_ms": 90.3
+  },
+  "unknown": {
+   "n": 60,
+   "median_lag_ms": 103.2
+  }
+ },
+ "repeat_vehicles": {
+  "n": 49,
+  "median_abs_diff_ms": 5.3
+ },
+ "not_passed_reasons": {
+  "too little manoeuvring": 31,
+  "download too large": 68,
+  "IMU explains too little of the GPS velocity change": 51,
+  "too few in-flight GPS pairs": 33,
+  "error: no vehicle_gps_position in the log": 44,
+  "best lag at the edge of the search": 4,
+  "error: no vehicle_attitude in the log": 3,
+  "error: no sensor_combined in the log": 2
+ },
+ "checks": {
+  "E1": true,
+  "P1": true,
+  "P2": true,
+  "P3": true,
+  "P4": false,
+  "P5": true,
+  "P6": true
+ },
+ "decision": {
+  "D1_suggest_param": true
+ },
+ "exploratory": {
+  "note": "not pre-registered; descriptive only",
+  "by_release": {
+   "v0.0": {
+    "n": 5,
+    "median_lag_ms": 71.3
+   },
+   "v1.10": {
+    "n": 1,
+    "median_lag_ms": 154.0
+   },
+   "v1.11": {
+    "n": 9,
+    "median_lag_ms": 68.0
+   },
+   "v1.12": {
+    "n": 23,
+    "median_lag_ms": 109.0
+   },
+   "v1.13": {
+    "n": 7,
+    "median_lag_ms": 38.9
+   },
+   "v1.14": {
+    "n": 27,
+    "median_lag_ms": 143.5
+   },
+   "v1.15": {
+    "n": 26,
+    "median_lag_ms": 108.7
+   },
+   "v1.16": {
+    "n": 36,
+    "median_lag_ms": 93.9
+   },
+   "v1.17": {
+    "n": 14,
+    "median_lag_ms": 110.9
+   },
+   "v1.18": {
+    "n": 1,
+    "median_lag_ms": 71.7
+   },
+   "v1.20": {
+    "n": 3,
+    "median_lag_ms": 103.2
+   },
+   "v1.3": {
+    "n": 4,
+    "median_lag_ms": 72.5
+   },
+   "v1.4": {
+    "n": 1,
+    "median_lag_ms": 44.2
+   },
+   "v1.5": {
+    "n": 1,
+    "median_lag_ms": 209.6
+   },
+   "v1.50": {
+    "n": 1,
+    "median_lag_ms": 68.7
+   },
+   "v1.6": {
+    "n": 2,
+    "median_lag_ms": -9.4
+   },
+   "v1.9": {
+    "n": 1,
+    "median_lag_ms": 105.4
+   },
+   "v5.10": {
+    "n": 1,
+    "median_lag_ms": 92.9
+   },
+   "v5.2": {
+    "n": 1,
+    "median_lag_ms": 71.2
+   }
+  },
+  "by_logged_gps_interval": {
+   "0.15-0.7 s": {
+    "n": 100,
+    "median_lag_ms": 101.4
+   },
+   "<=0.15 s": {
+    "n": 58,
+    "median_lag_ms": 99.9
+   },
+   ">0.7 s": {
+    "n": 6,
+    "median_lag_ms": 49.5
+   }
+  },
+  "by_mav_type": {
+   "Coaxial helicopter": {
+    "n": 3,
+    "median_lag_ms": 150.3
+   },
+   "Fixed Wing": {
+    "n": 30,
+    "median_lag_ms": 75.2
+   },
+   "Hexarotor": {
+    "n": 17,
+    "median_lag_ms": 105.5
+   },
+   "Octorotor": {
+    "n": 7,
+    "median_lag_ms": 154.0
+   },
+   "Quad-rotor VTOL (Tailsitter)": {
+    "n": 2,
+    "median_lag_ms": 81.4
+   },
+   "Quadrotor": {
+    "n": 62,
+    "median_lag_ms": 108.8
+   },
+   "Tiltrotor VTOL": {
+    "n": 5,
+    "median_lag_ms": 97.9
+   },
+   "Two-rotor VTOL (Tailsitter)": {
+    "n": 6,
+    "median_lag_ms": 129.7
+   },
+   "VTOL Standard": {
+    "n": 30,
+    "median_lag_ms": 83.8
+   },
+   "unknown type": {
+    "n": 2,
+    "median_lag_ms": 82.1
+   }
+  },
+  "mismatch_direction": {
+   "n": 159,
+   "lag_over_param_by_50": 24,
+   "lag_under_param_by_50": 23
+  },
+  "stamp_minus_sample_ms": {
+   "n": 10,
+   "median": 55.0
+  },
+  "r2": {
+   "median": 0.9261,
+   "median_gain_over_zero_lag": 0.0213
+  }
+ },
+ "gps_lag": "0.1.0",
+ "fleet": "0.1.1",
+ "seed": 20261030,
+ "first_date": "2025-10-01",
+ "min_duration_s": 240,
+ "rescored_from": "v1-logs.jsonl"
+}

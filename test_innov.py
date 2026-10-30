@@ -1,6 +1,9 @@
 """Tests for innov.py on synthetic flights whose GPS is late by L while EKF2
 assumes P. By MV2 of Munim, Inc.; written with AI agents. Apache-2.0."""
 
+import json
+import os
+import tempfile
 import unittest
 
 import numpy as np
@@ -10,11 +13,12 @@ from test_gps_lag import synth, velocity
 
 
 def innovations(log, lag_s, param_s=0.11, scale=1.0, noise=0.0, with_sample=True, seed=1):
-    """What EKF2 would log: GPS stamped at t_g reads v(t_g - L) and is fused at
-    t_g - P against a state that knows v(t_g - P)."""
+    """What EKF2 would log, in PX4's sign (prediction minus measurement): GPS
+    stamped at t_g reads v(t_g - L) and is fused at t_g - P against a state
+    that knows v(t_g - P)."""
     t_g = np.asarray(log["gps_t"], dtype=float)
     t_s = t_g - param_s
-    inn = scale * (velocity(t_g - lag_s) - velocity(t_s))
+    inn = scale * (velocity(t_s) - velocity(t_g - lag_s))
     if noise:
         inn = inn + np.random.default_rng(seed).normal(0.0, noise, inn.shape)
     return {"t_log": t_s + param_s, "t_sample": t_s if with_sample else None, "inn": inn,
@@ -28,7 +32,7 @@ class ImpliedExcess(unittest.TestCase):
         self.assertTrue(r["passed"], r)
         self.assertLess(abs(r["implied_excess_ms"] - 90.0), 12.0)
         self.assertEqual(r["time_source"], "timestamp_sample")
-        self.assertLess(r["r"], -0.9)        # late GPS: innovation opposes acceleration
+        self.assertGreater(r["r"], 0.9)      # late GPS: PX4's innovation follows acceleration
 
     def test_early_gps_gives_a_negative_excess(self):
         log = synth()
@@ -118,6 +122,40 @@ class Scoring(unittest.TestCase):
         s = innov.summarise(self.rows()[:30])
         self.assertFalse(s["checks"]["VE1"])
         self.assertEqual(s["decision"], "pilot")
+
+
+class Sources(unittest.TestCase):
+    def test_fleet_rows_pass_through(self):
+        row = {"log_id": "a", "passed": True, "lag_ms": 150.0, "lag_minus_param_ms": 40.0}
+        self.assertEqual(innov.source_row(row), row)
+
+    def test_fleet_health_rows_are_read_from_lag(self):
+        row = {"log_id": "a", "vehicle": "v", "health_ok": True,
+               "lag": {"passed": True, "lag_ms": 67.3, "lag_minus_param_ms": -42.7, "gps_bus": "uavcan"}}
+        s = innov.source_row(row)
+        self.assertTrue(s["passed"])
+        self.assertEqual((s["log_id"], s["vehicle"], s["lag_minus_param_ms"], s["gps_bus"]),
+                         ("a", "v", -42.7, "uavcan"))
+        self.assertFalse(innov.source_row({"log_id": "b", "lag": {"passed": False}})["passed"])
+
+    def test_rescoring_0_1_0_rows_flips_every_signed_check(self):
+        old = [dict(r) for r in Scoring.rows(sign_of_far=-1.0)]
+        for r in old:
+            if "implied_excess_ms" in r:
+                r["implied_excess_ms"] = -r["implied_excess_ms"]   # as 0.1.0 wrote them
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "innov.jsonl")
+            with open(path, "w", encoding="utf-8") as f:
+                for r in old:
+                    f.write(json.dumps(r) + "\n")
+            s = innov.rescore_v010(path, os.path.join(tmp, "out"))
+            self.assertTrue(os.path.exists(os.path.join(tmp, "out", "summary.json")))
+        before = innov.summarise(old)
+        self.assertAlmostEqual(s["spearman_rho"], -before["spearman_rho"])
+        self.assertAlmostEqual(s["far"]["same_sign_share"], 1 - before["far"]["same_sign_share"])
+        self.assertAlmostEqual(s["far"]["median_ratio_implied_to_measured"],
+                               -before["far"]["median_ratio_implied_to_measured"])
+        self.assertEqual(s["near"]["median_abs_implied_ms"], before["near"]["median_abs_implied_ms"])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,38 @@
+{
+ "attempted": 164,
+ "validated": 152,
+ "spearman_rho": -0.757,
+ "far": {
+  "n": 41,
+  "same_sign_share": 0.049,
+  "median_ratio_implied_to_measured": -0.483,
+  "median_abs_implied_ms": 38.0
+ },
+ "near": {
+  "n": 47,
+  "median_abs_implied_ms": 7.8
+ },
+ "median_implied_excess_ms": 5.5,
+ "median_implied_se_ms": 1.6,
+ "time_source": {
+  "timestamp_sample": 137,
+  "timestamp - param": 15
+ },
+ "not_passed_reasons": {
+  "too few in-flight innovations": 2,
+  "error: no GPS velocity innovation in the log": 5
+ },
+ "checks": {
+  "VE1": true,
+  "V1": false,
+  "V2": false,
+  "V3": false,
+  "V4": true
+ },
+ "decision": "C2",
+ "innov": "0.1.0",
+ "gps_lag": "0.1.0",
+ "blocked": null,
+ "rows_from": "v1-logs.jsonl",
+ "wall_s": 1362.6
+}
