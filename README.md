@@ -15,6 +15,8 @@ It prints one JSON line per log, with `lag_ms`, its nominal standard error `se_m
 
 How it works: for each pair of consecutive logged GPS samples in flight, the change in GPS north and east velocity is compared with the IMU's acceleration (`sensor_combined`, rotated by `vehicle_attitude`) integrated over the same interval shifted back by a candidate lag. The lag that fits best, allowing a constant accelerometer bias, is the measurement. No position is read.
 
+For a readable report per flight (health flags, fleet comparison and this GPS delay verdict), and a GitHub Action, see [px4-log-health](https://github.com/munimtechnologies/px4-log-health)'s `checkup.py`.
+
 ## What the fleet says
 
 On 164 public Flight Review logs from 115 vehicles (`studies/fleet-2026/GRADE.md`, pre-registered), the median lag was 99.8 ms, close to the default 110 ms. But 29.6% of logs were more than 50 ms away from their own setting, and two logs of the same vehicle agreed to a median 5.3 ms. 98% of them ran the default.
@@ -22,6 +24,10 @@ On 164 public Flight Review logs from 115 vehicles (`studies/fleet-2026/GRADE.md
 **Replicated.** On an independent sample, 98 logs from 98 other vehicles, the median was 113.8 ms and 31.2% were more than 50 ms off their setting. Both figures were inside the ranges set before that run (px4-log-health, [`studies/fleet-health-2026/GRADE.md`](https://github.com/munimtechnologies/px4-log-health/blob/main/studies/fleet-health-2026/GRADE.md), R1 and R2).
 
 **EKF2's own residuals agree.** On those 98 fresh logs, EKF2's GPS velocity innovations, compared with acceleration, lean the way the measured mismatch says they should in 25 of 27 logs that are more than 50 ms off their setting, and the two methods rank the logs alike (Spearman +0.86). The check was pre-registered and decided C1 ([`studies/fleet-2026/GRADE-innov-confirm.md`](studies/fleet-2026/GRADE-innov-confirm.md)). The innovation shows about 0.6 of the measured mismatch, as a filter that partly follows a late GPS should.
+
+## Does the receiver model matter? (pre-registered, running)
+
+PX4 uses one `EKF2_GPS_DELAY` for every receiver. ArduPilot assigns a lag by u-blox generation: 120 ms for M8 "based on flight logs", and the same 120 ms for F9, M9 and M10, with the comment "F9 lag not verified yet from flight log" (`AP_GPS_UBLOX.cpp`, `get_lag`). PX4's GPS driver records the receiver model it detected in the device_id of every GPS message. `receiver.py` reads that model and measures the lag on a fresh random sample of public logs, leaving out every vehicle the earlier studies saw. It then compares M8, M9, F9P, M10/generic u-blox and DroneCAN receivers. The six predictions and the decision rules are in [`studies/receiver-2026/PLAN.md`](studies/receiver-2026/PLAN.md), committed before any log was downloaded. The grade will be published whatever it says.
 
 ## Suggested setting (rule D1)
 
@@ -39,12 +45,13 @@ History: D1 was withdrawn after the first innovation check came back C2 as writt
 - `studies/fleet-2026/`: GPS lag across a random sample of PX4 Flight Review public logs (CC BY 4.0) from 2025-10 on, compared with each vehicle's `EKF2_GPS_DELAY`. Plan, grade (E1 passed, 5 of 6 predictions held), and one line per log in `v1/logs.jsonl`. `v1/summary.json` is the same rows re-scored, and it matches the grade.
 - `studies/fleet-2026/PLAN-innov.md`, `GRADE-innov.md`, `innov/`: does EKF2's GPS velocity innovation, plotted against acceleration, lean the way the measured lag says it should? Graded C2 as written. The innovation sign was wrong in the plan; see the grade.
 - `studies/fleet-2026/PLAN-innov-confirm.md`, `GRADE-innov-confirm.md`, `confirm/`: the corrected check (`innov.py` 0.2.0, PX4's sign) on the 98 fresh logs from px4-log-health, with the same thresholds. 89 logs validated; C1.
+- `studies/receiver-2026/PLAN.md`: lag by GPS receiver model (`receiver.py` 0.1.0), pre-registered. Running.
 
 ## Tests
 
 ```
 pip install numpy pyulog ijson requests
-python -m unittest -v test_gps_lag test_fleet test_innov
+python -m unittest -v test_gps_lag test_fleet test_innov test_receiver
 ```
 
-The tests fly synthetic vehicles with known GPS delays and check that they are recovered within 3 ms. They also check that the innovation slope, in PX4's sign, recovers a known excess delay, and that re-scoring 0.1.0's rows flips every signed check.
+The tests fly synthetic vehicles with known GPS delays and check that they are recovered within 3 ms. They also check that the innovation slope, in PX4's sign, recovers a known excess delay, and that re-scoring 0.1.0's rows flips every signed check. `test_receiver` checks the device_id decoding against PX4's bit layout, the choice of receiver, the exclusion of earlier vehicles and every scored check on synthetic rows.
