@@ -12,6 +12,11 @@ deleted as soon as it is measured; no position is read. Vehicle ids are
 published only as a hash.
 
     python fleet.py --out-dir out --budget-min 120 --max-logs 400
+    python fleet.py --out-dir out --rescore logs.jsonl   # score saved rows, no download
+
+0.1.1: the checks are plain booleans (0.1.0 crashed writing summary.json when a
+numpy comparison reached it), and --rescore scores an existing logs.jsonl.
+The draw, the measurement and the checks are unchanged.
 
 By MV2 of Munim, Inc.; written with AI agents. Apache-2.0.
 """
@@ -31,7 +36,7 @@ import requests
 
 import gps_lag as gl
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 DBINFO = "https://review.px4.io/dbinfo"
 DOWNLOAD = "https://review.px4.io/download"
@@ -157,13 +162,19 @@ def download(session, log_id, path):
     return "failed"
 
 
+def _num(x):
+    """A plain float (numpy scalars compare to numpy booleans, which json
+    cannot write), or None."""
+    return None if x is None else float(x)
+
+
 def _median(xs):
-    xs = [x for x in xs if x is not None]
+    xs = [_num(x) for x in xs if x is not None]
     return round(statistics.median(xs), 1) if xs else None
 
 
 def _quantile(xs, p):
-    xs = sorted(x for x in xs if x is not None)
+    xs = sorted(_num(x) for x in xs if x is not None)
     if not xs:
         return None
     k = (len(xs) - 1) * p
@@ -175,18 +186,18 @@ def _quantile(xs, p):
 def summarise(rows):
     """Fleet figures and the PLAN's checks, from the per-log rows."""
     passed = [r for r in rows if r.get("passed")]
-    lags = [r["lag_ms"] for r in passed]
+    lags = [_num(r["lag_ms"]) for r in passed]
     vehicles = {r.get("vehicle") or "log:" + r["log_id"] for r in passed}
     with_param = [r for r in passed if r.get("param_gps_delay_ms") is not None]
-    diffs = [r["lag_ms"] - r["param_gps_delay_ms"] for r in with_param]
-    at_default = [r for r in with_param if abs(r["param_gps_delay_ms"] - DEFAULT_DELAY_MS) < 0.5]
+    diffs = [_num(r["lag_ms"]) - _num(r["param_gps_delay_ms"]) for r in with_param]
+    at_default = [r for r in with_param if abs(_num(r["param_gps_delay_ms"]) - DEFAULT_DELAY_MS) < 0.5]
     bus = {}
     for r in passed:
-        bus.setdefault(r.get("gps_bus") or "unknown", []).append(r["lag_ms"])
+        bus.setdefault(r.get("gps_bus") or "unknown", []).append(_num(r["lag_ms"]))
     first_two = {}
     for r in passed:
         if r.get("vehicle"):
-            first_two.setdefault(r["vehicle"], []).append(r["lag_ms"])
+            first_two.setdefault(r["vehicle"], []).append(_num(r["lag_ms"]))
     repeats = [abs(v[0] - v[1]) for v in first_two.values() if len(v) >= 2]
     reasons = {}
     for r in rows:
@@ -209,6 +220,7 @@ def summarise(rows):
         "P5": (statistics.median(repeats) <= 25 if len(repeats) >= 15 else None),
         "P6": median_se is not None and median_se <= 10,
     }
+    checks = {k: (None if v is None else bool(v)) for k, v in checks.items()}
     return {
         "attempted": len(rows),
         "downloaded": sum(r.get("download") == "ok" for r in rows),
@@ -219,7 +231,7 @@ def summarise(rows):
                    "min": min(lags) if lags else None, "max": max(lags) if lags else None},
         "median_se_ms": median_se,
         "param": {"n": len(with_param), "share_default_110": share_default,
-                  "values": sorted({r["param_gps_delay_ms"] for r in with_param})},
+                  "values": sorted({_num(r["param_gps_delay_ms"]) for r in with_param})},
         "lag_minus_param_ms": {"median": _median(diffs), "share_abs_over_50": share_over_50},
         "by_bus": {k: {"n": len(v), "median_lag_ms": _median(v)} for k, v in sorted(bus.items())},
         "repeat_vehicles": {"n": len(repeats), "median_abs_diff_ms": _median(repeats)},
@@ -229,14 +241,78 @@ def summarise(rows):
     }
 
 
+def _groups(rows, key):
+    out = {}
+    for r in rows:
+        out.setdefault(key(r), []).append(_num(r["lag_ms"]))
+    return {k: {"n": len(v), "median_lag_ms": _median(v)} for k, v in sorted(out.items())}
+
+
+def _release(r):
+    name = r.get("ver_sw_release") or ""
+    parts = name.lstrip("v").split(".")
+    return "v%s.%s" % (parts[0], parts[1]) if len(parts) >= 2 and name.startswith("v") else "unknown"
+
+
+def _gps_rate(r):
+    dt = r.get("gps_logged_dt_s")
+    if dt is None:
+        return "unknown"
+    return "<=0.15 s" if dt <= 0.15 else ("0.15-0.7 s" if dt <= 0.7 else ">0.7 s")
+
+
+def explore(rows):
+    """Breakdowns the PLAN did not predict, labelled exploratory."""
+    passed = [r for r in rows if r.get("passed")]
+    with_param = [r for r in passed if r.get("param_gps_delay_ms") is not None]
+    diffs = [_num(r["lag_ms"]) - _num(r["param_gps_delay_ms"]) for r in with_param]
+    sms = [_num(r["stamp_minus_sample_ms"]) for r in passed if r.get("stamp_minus_sample_ms") is not None]
+    return {
+        "note": "not pre-registered; descriptive only",
+        "by_release": _groups(passed, _release),
+        "by_logged_gps_interval": _groups(passed, _gps_rate),
+        "by_mav_type": _groups(passed, lambda r: r.get("mav_type") or "unknown"),
+        "mismatch_direction": {"n": len(diffs), "lag_over_param_by_50": sum(d > 50 for d in diffs),
+                               "lag_under_param_by_50": sum(d < -50 for d in diffs)},
+        "stamp_minus_sample_ms": {"n": len(sms), "median": _median(sms)},
+        "r2": {"median": _median4([r.get("r2") for r in passed]),
+               "median_gain_over_zero_lag": _median4([_num(r["r2"]) - _num(r["r2_at_zero"]) for r in passed
+                                                      if r.get("r2") is not None
+                                                      and r.get("r2_at_zero") is not None])},
+    }
+
+
+def _median4(xs):
+    xs = [_num(x) for x in xs if x is not None]
+    return round(statistics.median(xs), 4) if xs else None
+
+
+def rescore(path, out_dir):
+    """Score saved per-log rows again, with no download."""
+    with open(path, encoding="utf-8") as f:
+        rows = [json.loads(line) for line in f if line.strip()]
+    summary = summarise(rows)
+    summary["exploratory"] = explore(rows)
+    summary.update({"gps_lag": gl.__version__, "fleet": __version__, "seed": SEED,
+                    "first_date": FIRST_DATE, "min_duration_s": MIN_DURATION_S,
+                    "rescored_from": os.path.basename(path)})
+    with open(os.path.join(out_dir, "summary.json"), "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=1)
+    print(json.dumps(summary, indent=1), flush=True)
+    return 0
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     p.add_argument("--out-dir", required=True)
     p.add_argument("--budget-min", type=float, default=120)
     p.add_argument("--max-logs", type=int, default=400)
     p.add_argument("--tmp", default="/tmp/px4-gps-lag")
+    p.add_argument("--rescore", help="score an existing logs.jsonl instead of downloading")
     args = p.parse_args(argv)
     os.makedirs(args.out_dir, exist_ok=True)
+    if args.rescore:
+        return rescore(args.rescore, args.out_dir)
     os.makedirs(args.tmp, exist_ok=True)
     started = time.time()
     session = requests.Session()
@@ -292,6 +368,7 @@ def main(argv=None):
                                               row.get("lag_ms"), row.get("reason")), flush=True)
 
     summary = summarise(rows)
+    summary["exploratory"] = explore(rows)
     summary.update({"gps_lag": gl.__version__, "fleet": __version__, "seed": SEED,
                     "first_date": FIRST_DATE, "min_duration_s": MIN_DURATION_S,
                     "list": counts, "blocked": blocked,
