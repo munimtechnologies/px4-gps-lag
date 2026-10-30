@@ -21,13 +21,24 @@ On 164 public Flight Review logs from 115 vehicles (`studies/fleet-2026/GRADE.md
 
 **Replicated.** On an independent sample, 98 logs from 98 other vehicles, the median was 113.8 ms and 31.2% were more than 50 ms off their setting. Both figures were inside the ranges set before that run (px4-log-health, [`studies/fleet-health-2026/GRADE.md`](https://github.com/munimtechnologies/px4-log-health/blob/main/studies/fleet-health-2026/GRADE.md), R1 and R2).
 
-**Diagnostic only, no suggested setting.** Earlier versions of this README offered the measured lag as a starting value for `EKF2_GPS_DELAY` (rule D1). A pre-registered cross-check against EKF2's own GPS velocity innovations (`studies/fleet-2026/GRADE-innov.md`) came back C2 as written, so that suggestion is withdrawn. The grade explains why. The plan had EKF2's innovation sign backwards: PX4 computes prediction minus measurement. With PX4's sign, the same 152 logs agree strongly (Spearman +0.76; same direction in 39 of 41 logs that are more than 50 ms off). That reading was found after the data were seen, so it is being tested on fresh logs (`studies/fleet-2026/PLAN-innov-confirm.md`) before anything is suggested again. Until then, treat `lag_minus_param_ms` as a reason to look at your GPS timing with EKF2 replay (PX4 docs: "EKF2 log replay"), not as a value to set.
+**EKF2's own residuals agree.** On those 98 fresh logs, EKF2's GPS velocity innovations, compared with acceleration, lean the way the measured mismatch says they should in 25 of 27 logs that are more than 50 ms off their setting, and the two methods rank the logs alike (Spearman +0.86). The check was pre-registered and decided C1 ([`studies/fleet-2026/GRADE-innov-confirm.md`](studies/fleet-2026/GRADE-innov-confirm.md)). The innovation shows about 0.6 of the measured mismatch, as a filter that partly follows a late GPS should.
+
+## Suggested setting (rule D1)
+
+If a passing log's `lag_minus_param_ms` is more than about 50 ms either way, the measured `lag_ms` is a reasonable **starting value** for `EKF2_GPS_DELAY`.
+
+- Measure two or three flights first. Flights of one vehicle should agree within a few ms.
+- Check the change with EKF2 log replay (PX4 docs: "EKF2 log replay") before flying it.
+- Smaller differences aren't worth changing.
+- This is not a calibration. The studies show that two independent methods agree on the direction and rank of the mismatch, not that the new setting improves any one vehicle's estimate. There is no ground truth for any one vehicle.
+
+History: D1 was withdrawn after the first innovation check came back C2 as written, because that plan had EKF2's innovation sign backwards (PX4 computes prediction minus measurement; see `GRADE-innov.md`). The corrected check was pre-registered on fresh logs and held, so D1 is back.
 
 ## Studies
 
 - `studies/fleet-2026/`: GPS lag across a random sample of PX4 Flight Review public logs (CC BY 4.0) from 2025-10 on, compared with each vehicle's `EKF2_GPS_DELAY`. Plan, grade (E1 passed, 5 of 6 predictions held), and one line per log in `v1/logs.jsonl`. `v1/summary.json` is the same rows re-scored, and it matches the grade.
 - `studies/fleet-2026/PLAN-innov.md`, `GRADE-innov.md`, `innov/`: does EKF2's GPS velocity innovation, plotted against acceleration, lean the way the measured lag says it should? Graded C2 as written. The innovation sign was wrong in the plan; see the grade.
-- `studies/fleet-2026/PLAN-innov-confirm.md`: the corrected check (`innov.py` 0.2.0, PX4's sign), on the 98 fresh logs from px4-log-health, with the same thresholds.
+- `studies/fleet-2026/PLAN-innov-confirm.md`, `GRADE-innov-confirm.md`, `confirm/`: the corrected check (`innov.py` 0.2.0, PX4's sign) on the 98 fresh logs from px4-log-health, with the same thresholds. 89 logs validated; C1.
 
 ## Tests
 

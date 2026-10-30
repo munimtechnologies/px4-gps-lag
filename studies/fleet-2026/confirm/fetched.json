@@ -1,0 +1,55 @@
+{
+ "studies/fleet-2026/PLAN-innov-confirm.md": {
+  "on_main": true,
+  "sha256": "0d5f68eba18c77a6960eb9d56444c5633097e7a945c9460f78d361f648534a90",
+  "waited_s": 0
+ },
+ "studies/fleet-2026/GRADE-innov.md": {
+  "on_main": true,
+  "sha256": "ad614fed3fc8d2e0c0df6fb1ca301ac92f2a82fb0405f841b4735643898b6dac",
+  "waited_s": 0
+ },
+ "studies/fleet-2026/innov/innov.jsonl": {
+  "on_main": true,
+  "sha256": "54f7285976d150fcd9382bd52b646fa60149d5bab3040a1e7ac181ecafdd998f",
+  "waited_s": 0,
+  "lines": 164
+ },
+ "px4-log-health/studies/fleet-health-2026/GRADE.md": {
+  "on_main": true,
+  "sha256": "806365e620f3254ff78603ed404b1f7dbed7405307acb02a9a9854910d921ba8",
+  "waited_s": 0
+ },
+ "px4-log-health/studies/fleet-health-2026/logs.jsonl": {
+  "on_main": true,
+  "sha256": "06fe782030fbdc484933a2ce8c5b2c289965f47210bd5c13409f6e40c86cf200",
+  "waited_s": 0,
+  "lines": 300
+ },
+ "gps_lag.py": {
+  "from_main": true,
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d"
+ },
+ "test_gps_lag.py": {
+  "from_main": true,
+  "sha256": "e9f7e1ccc19d76d0f221fb244565bbcb86a8fe6e6f2761fb87121895ded75b79"
+ },
+ "fleet.py": {
+  "from_main": true,
+  "sha256": "a953a27ce219aae2d46ca00cffaca5f4863da278f971195989a1dd3713f3171b"
+ },
+ "test_fleet.py": {
+  "from_main": true,
+  "sha256": "31209addb4a62e01bf3861e93d6d08246403fa94106ef3ed895c54944b89e70a"
+ },
+ "innov.py": {
+  "local_sha256": "64625526298a14f3fb4a11d24a545788971625229f1b36b5fd3e289d73e657d6",
+  "main_sha256": "64625526298a14f3fb4a11d24a545788971625229f1b36b5fd3e289d73e657d6",
+  "same_as_main": true
+ },
+ "test_innov.py": {
+  "local_sha256": "a4262ba54fe5d0327d858e445d6a49e47266639e0636ec63d1124440c1c11020",
+  "main_sha256": "a4262ba54fe5d0327d858e445d6a49e47266639e0636ec63d1124440c1c11020",
+  "same_as_main": true
+ }
+}

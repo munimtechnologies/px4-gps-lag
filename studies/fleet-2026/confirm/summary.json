@@ -1,0 +1,38 @@
+{
+ "attempted": 98,
+ "validated": 89,
+ "spearman_rho": 0.861,
+ "far": {
+  "n": 27,
+  "same_sign_share": 0.926,
+  "median_ratio_implied_to_measured": 0.622,
+  "median_abs_implied_ms": 53.9
+ },
+ "near": {
+  "n": 30,
+  "median_abs_implied_ms": 7.6
+ },
+ "median_implied_excess_ms": 3.7,
+ "median_implied_se_ms": 1.5,
+ "time_source": {
+  "timestamp_sample": 79,
+  "timestamp - param": 10
+ },
+ "not_passed_reasons": {
+  "too few in-flight innovations": 3,
+  "too little manoeuvring": 1
+ },
+ "checks": {
+  "VE1": true,
+  "V1": true,
+  "V2": true,
+  "V3": true,
+  "V4": true
+ },
+ "decision": "C1",
+ "innov": "0.2.0",
+ "gps_lag": "0.1.0",
+ "blocked": null,
+ "rows_from": "health-logs.jsonl",
+ "wall_s": 777.1
+}
