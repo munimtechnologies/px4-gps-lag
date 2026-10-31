@@ -1,0 +1,683 @@
+{
+ "attempted": 537,
+ "downloaded": 441,
+ "passed": 163,
+ "known_receiver": 136,
+ "classes": {
+  "ashtech": {
+   "n": 2,
+   "median_lag_ms": 76.8,
+   "p25": 73.1,
+   "p75": 80.6
+  },
+  "multiple": {
+   "n": 11,
+   "median_lag_ms": 126.6,
+   "p25": 110.8,
+   "p75": 157.7
+  },
+  "nmea": {
+   "n": 13,
+   "median_lag_ms": 150.0,
+   "p25": 96.1,
+   "p75": 212.5
+  },
+  "other:i2c/0x00": {
+   "n": 1,
+   "median_lag_ms": 160.5,
+   "p25": 160.5,
+   "p75": 160.5
+  },
+  "other:mavlink/0xAF": {
+   "n": 2,
+   "median_lag_ms": -13.2,
+   "p25": -13.8,
+   "p75": -12.7
+  },
+  "uavcan": {
+   "n": 39,
+   "median_lag_ms": 104.4,
+   "p25": 70.4,
+   "p75": 114.5
+  },
+  "ubx_10": {
+   "n": 4,
+   "median_lag_ms": 100.0,
+   "p25": 73.3,
+   "p75": 131.5
+  },
+  "ubx_f9p": {
+   "n": 16,
+   "median_lag_ms": 142.6,
+   "p25": 133.9,
+   "p75": 176.6
+  },
+  "ubx_generic": {
+   "n": 19,
+   "median_lag_ms": 127.8,
+   "p25": 113.9,
+   "p75": 136.5
+  },
+  "ubx_m8": {
+   "n": 15,
+   "median_lag_ms": 146.6,
+   "p25": 124.8,
+   "p75": 169.7
+  },
+  "ubx_m9": {
+   "n": 25,
+   "median_lag_ms": 71.3,
+   "p25": 47.8,
+   "p75": 87.9
+  },
+  "unknown": {
+   "n": 16,
+   "median_lag_ms": 87.7,
+   "p25": 43.1,
+   "p75": 135.7
+  }
+ },
+ "compared_classes": [
+  "uavcan",
+  "ubx_f9p",
+  "ubx_generic",
+  "ubx_m8",
+  "ubx_m9"
+ ],
+ "compared_models": [
+  "ubx_f9p",
+  "ubx_generic",
+  "ubx_m8",
+  "ubx_m9"
+ ],
+ "P2_f9p_minus_m8": {
+  "diff_ms": -4.0,
+  "ci95_ms": [
+   -28.0,
+   29.3
+  ]
+ },
+ "P3_largest_gap": {
+  "diff_ms": 75.3,
+  "ci95_ms": [
+   52.9,
+   106.5
+  ],
+  "high": "ubx_m8",
+  "low": "ubx_m9"
+ },
+ "P4_class_default": {
+  "n": 114,
+  "within_50_at_110": 0.7719,
+  "within_50_at_class_median": 0.886,
+  "gain": 0.1141
+ },
+ "P5_uavcan_minus_serial": {
+  "diff_ms": -20.4,
+  "ci95_ms": [
+   -42.8,
+   -1.6
+  ]
+ },
+ "receiver_source": {
+  "none": 16,
+  "sensor_gps": 33,
+  "several sensor_gps": 11,
+  "vehicle_gps_position": 103
+ },
+ "not_passed_reasons": {
+  "too little manoeuvring": 44,
+  "IMU explains too little of the GPS velocity change": 97,
+  "error: no vehicle_gps_position in the log": 74,
+  "download too large": 96,
+  "too few in-flight GPS pairs": 55,
+  "simulated GPS": 1,
+  "error: no sensor_combined in the log": 4,
+  "best lag at the edge of the search": 1,
+  "error: no vehicle_attitude in the log": 2
+ },
+ "checks": {
+  "E1": false,
+  "P1": true,
+  "P2": true,
+  "P3": true,
+  "P4": true,
+  "P5": true,
+  "P6": true
+ },
+ "decision": {
+  "D1_class_note_in_checkup": false
+ },
+ "exploratory": {
+  "note": "not pre-registered; descriptive only",
+  "by_receiver_and_release": {
+   "ashtech v1.12": {
+    "n": 2,
+    "median_lag_ms": 76.8
+   },
+   "multiple v1.12": {
+    "n": 4,
+    "median_lag_ms": 110.0
+   },
+   "multiple v1.13": {
+    "n": 1,
+    "median_lag_ms": 207.4
+   },
+   "multiple v1.14": {
+    "n": 4,
+    "median_lag_ms": 127.2
+   },
+   "multiple v1.16": {
+    "n": 2,
+    "median_lag_ms": 157.7
+   },
+   "nmea v0.0": {
+    "n": 1,
+    "median_lag_ms": 256.8
+   },
+   "nmea v1.12": {
+    "n": 3,
+    "median_lag_ms": 71.2
+   },
+   "nmea v1.14": {
+    "n": 1,
+    "median_lag_ms": 9.8
+   },
+   "nmea v1.15": {
+    "n": 5,
+    "median_lag_ms": 212.5
+   },
+   "nmea v1.16": {
+    "n": 1,
+    "median_lag_ms": 188.8
+   },
+   "nmea v1.17": {
+    "n": 1,
+    "median_lag_ms": 135.5
+   },
+   "nmea v2.13": {
+    "n": 1,
+    "median_lag_ms": 206.5
+   },
+   "other:i2c/0x00 v1.14": {
+    "n": 1,
+    "median_lag_ms": 160.5
+   },
+   "other:mavlink/0xAF v1.12": {
+    "n": 1,
+    "median_lag_ms": -12.2
+   },
+   "other:mavlink/0xAF v1.20": {
+    "n": 1,
+    "median_lag_ms": -14.3
+   },
+   "uavcan v1.12": {
+    "n": 1,
+    "median_lag_ms": 114.5
+   },
+   "uavcan v1.13": {
+    "n": 1,
+    "median_lag_ms": 108.0
+   },
+   "uavcan v1.14": {
+    "n": 3,
+    "median_lag_ms": 64.1
+   },
+   "uavcan v1.15": {
+    "n": 11,
+    "median_lag_ms": 111.3
+   },
+   "uavcan v1.16": {
+    "n": 16,
+    "median_lag_ms": 104.1
+   },
+   "uavcan v1.17": {
+    "n": 6,
+    "median_lag_ms": 95.5
+   },
+   "uavcan v1.18": {
+    "n": 1,
+    "median_lag_ms": 57.7
+   },
+   "ubx_10 v1.12": {
+    "n": 2,
+    "median_lag_ms": 138.9
+   },
+   "ubx_10 v1.14": {
+    "n": 2,
+    "median_lag_ms": 70.5
+   },
+   "ubx_f9p v0.0": {
+    "n": 1,
+    "median_lag_ms": 124.6
+   },
+   "ubx_f9p v1.12": {
+    "n": 4,
+    "median_lag_ms": 145.1
+   },
+   "ubx_f9p v1.13": {
+    "n": 2,
+    "median_lag_ms": 141.2
+   },
+   "ubx_f9p v1.14": {
+    "n": 1,
+    "median_lag_ms": 146.7
+   },
+   "ubx_f9p v1.15": {
+    "n": 3,
+    "median_lag_ms": 180.7
+   },
+   "ubx_f9p v1.16": {
+    "n": 1,
+    "median_lag_ms": 136.2
+   },
+   "ubx_f9p v1.17": {
+    "n": 4,
+    "median_lag_ms": 156.8
+   },
+   "ubx_generic v1.14": {
+    "n": 7,
+    "median_lag_ms": 116.3
+   },
+   "ubx_generic v1.15": {
+    "n": 2,
+    "median_lag_ms": 277.7
+   },
+   "ubx_generic v1.16": {
+    "n": 6,
+    "median_lag_ms": 122.7
+   },
+   "ubx_generic v1.17": {
+    "n": 3,
+    "median_lag_ms": 128.1
+   },
+   "ubx_generic v1.24": {
+    "n": 1,
+    "median_lag_ms": 130.8
+   },
+   "ubx_m8 v1.12": {
+    "n": 5,
+    "median_lag_ms": 117.5
+   },
+   "ubx_m8 v1.13": {
+    "n": 2,
+    "median_lag_ms": 163.3
+   },
+   "ubx_m8 v1.15": {
+    "n": 3,
+    "median_lag_ms": 179.5
+   },
+   "ubx_m8 v1.16": {
+    "n": 2,
+    "median_lag_ms": 152.7
+   },
+   "ubx_m8 v1.17": {
+    "n": 2,
+    "median_lag_ms": 102.2
+   },
+   "ubx_m8 v1.9": {
+    "n": 1,
+    "median_lag_ms": 207.7
+   },
+   "ubx_m9 v1.12": {
+    "n": 1,
+    "median_lag_ms": 36.2
+   },
+   "ubx_m9 v1.13": {
+    "n": 2,
+    "median_lag_ms": 65.8
+   },
+   "ubx_m9 v1.14": {
+    "n": 7,
+    "median_lag_ms": 60.5
+   },
+   "ubx_m9 v1.15": {
+    "n": 5,
+    "median_lag_ms": 100.5
+   },
+   "ubx_m9 v1.16": {
+    "n": 7,
+    "median_lag_ms": 64.9
+   },
+   "ubx_m9 v1.17": {
+    "n": 3,
+    "median_lag_ms": 73.0
+   },
+   "unknown unknown": {
+    "n": 1,
+    "median_lag_ms": 140.3
+   },
+   "unknown v1.11": {
+    "n": 12,
+    "median_lag_ms": 73.6
+   },
+   "unknown v1.4": {
+    "n": 2,
+    "median_lag_ms": 82.2
+   },
+   "unknown v1.9": {
+    "n": 1,
+    "median_lag_ms": 109.2
+   }
+  },
+  "by_receiver_and_fix": {
+   "ashtech fix<=3": {
+    "n": 2,
+    "median_lag_ms": 76.8
+   },
+   "multiple fix<=3": {
+    "n": 4,
+    "median_lag_ms": 110.8
+   },
+   "multiple fix<=4": {
+    "n": 1,
+    "median_lag_ms": 126.6
+   },
+   "multiple fix<=6": {
+    "n": 6,
+    "median_lag_ms": 131.4
+   },
+   "nmea fix<=3": {
+    "n": 5,
+    "median_lag_ms": 99.0
+   },
+   "nmea fix<=4": {
+    "n": 1,
+    "median_lag_ms": 135.5
+   },
+   "nmea fix<=6": {
+    "n": 7,
+    "median_lag_ms": 206.5
+   },
+   "other:i2c/0x00 fix<=4": {
+    "n": 1,
+    "median_lag_ms": 160.5
+   },
+   "other:mavlink/0xAF fix<=3": {
+    "n": 2,
+    "median_lag_ms": -13.2
+   },
+   "uavcan fix<=3": {
+    "n": 17,
+    "median_lag_ms": 97.9
+   },
+   "uavcan fix<=4": {
+    "n": 14,
+    "median_lag_ms": 77.4
+   },
+   "uavcan fix<=6": {
+    "n": 8,
+    "median_lag_ms": 118.2
+   },
+   "ubx_10 fix<=3": {
+    "n": 1,
+    "median_lag_ms": 76.0
+   },
+   "ubx_10 fix<=6": {
+    "n": 3,
+    "median_lag_ms": 124.1
+   },
+   "ubx_f9p fix<=3": {
+    "n": 2,
+    "median_lag_ms": 136.4
+   },
+   "ubx_f9p fix<=4": {
+    "n": 7,
+    "median_lag_ms": 135.5
+   },
+   "ubx_f9p fix<=6": {
+    "n": 7,
+    "median_lag_ms": 156.1
+   },
+   "ubx_generic fix<=3": {
+    "n": 9,
+    "median_lag_ms": 128.1
+   },
+   "ubx_generic fix<=4": {
+    "n": 10,
+    "median_lag_ms": 120.2
+   },
+   "ubx_m8 fix<=3": {
+    "n": 3,
+    "median_lag_ms": 146.6
+   },
+   "ubx_m8 fix<=4": {
+    "n": 10,
+    "median_lag_ms": 156.8
+   },
+   "ubx_m8 fix<=5": {
+    "n": 1,
+    "median_lag_ms": 109.0
+   },
+   "ubx_m8 fix<=6": {
+    "n": 1,
+    "median_lag_ms": 117.5
+   },
+   "ubx_m9 fix<=3": {
+    "n": 9,
+    "median_lag_ms": 71.3
+   },
+   "ubx_m9 fix<=4": {
+    "n": 16,
+    "median_lag_ms": 68.9
+   },
+   "unknown fix<=3": {
+    "n": 4,
+    "median_lag_ms": 42.0
+   },
+   "unknown fix<=4": {
+    "n": 11,
+    "median_lag_ms": 93.5
+   },
+   "unknown fix<=6": {
+    "n": 1,
+    "median_lag_ms": 234.8
+   }
+  },
+  "by_receiver_count": {
+   "0 receiver(s)": {
+    "n": 16,
+    "median_lag_ms": 87.7
+   },
+   "1 receiver(s)": {
+    "n": 135,
+    "median_lag_ms": 111.1
+   },
+   "2 receiver(s)": {
+    "n": 12,
+    "median_lag_ms": 126.4
+   }
+  },
+  "by_receiver_and_logged_interval": {
+   "ashtech <=0.15 s": {
+    "n": 2,
+    "median_lag_ms": 76.8
+   },
+   "multiple <=0.15 s": {
+    "n": 4,
+    "median_lag_ms": 110.0
+   },
+   "multiple >0.15 s": {
+    "n": 7,
+    "median_lag_ms": 134.9
+   },
+   "nmea <=0.15 s": {
+    "n": 2,
+    "median_lag_ms": 97.5
+   },
+   "nmea >0.15 s": {
+    "n": 11,
+    "median_lag_ms": 188.8
+   },
+   "other:i2c/0x00 >0.15 s": {
+    "n": 1,
+    "median_lag_ms": 160.5
+   },
+   "other:mavlink/0xAF >0.15 s": {
+    "n": 2,
+    "median_lag_ms": -13.2
+   },
+   "uavcan <=0.15 s": {
+    "n": 2,
+    "median_lag_ms": 130.6
+   },
+   "uavcan >0.15 s": {
+    "n": 37,
+    "median_lag_ms": 104.4
+   },
+   "ubx_10 >0.15 s": {
+    "n": 4,
+    "median_lag_ms": 100.0
+   },
+   "ubx_f9p <=0.15 s": {
+    "n": 4,
+    "median_lag_ms": 159.6
+   },
+   "ubx_f9p >0.15 s": {
+    "n": 12,
+    "median_lag_ms": 141.4
+   },
+   "ubx_generic <=0.15 s": {
+    "n": 10,
+    "median_lag_ms": 125.3
+   },
+   "ubx_generic >0.15 s": {
+    "n": 9,
+    "median_lag_ms": 130.8
+   },
+   "ubx_m8 >0.15 s": {
+    "n": 15,
+    "median_lag_ms": 146.6
+   },
+   "ubx_m9 <=0.15 s": {
+    "n": 15,
+    "median_lag_ms": 72.6
+   },
+   "ubx_m9 >0.15 s": {
+    "n": 10,
+    "median_lag_ms": 65.9
+   },
+   "unknown <=0.15 s": {
+    "n": 2,
+    "median_lag_ms": 139.6
+   },
+   "unknown >0.15 s": {
+    "n": 14,
+    "median_lag_ms": 87.7
+   }
+  },
+  "param_by_receiver": {
+   "ashtech param 110.0": {
+    "n": 2,
+    "median_lag_ms": 76.8
+   },
+   "multiple param 110.0": {
+    "n": 10,
+    "median_lag_ms": 123.5
+   },
+   "multiple param None": {
+    "n": 1,
+    "median_lag_ms": 207.4
+   },
+   "nmea param 110.0": {
+    "n": 12,
+    "median_lag_ms": 142.8
+   },
+   "nmea param 80.0": {
+    "n": 1,
+    "median_lag_ms": 206.5
+   },
+   "other:i2c/0x00 param 110.0": {
+    "n": 1,
+    "median_lag_ms": 160.5
+   },
+   "other:mavlink/0xAF param 110.0": {
+    "n": 2,
+    "median_lag_ms": -13.2
+   },
+   "uavcan param 110.0": {
+    "n": 37,
+    "median_lag_ms": 108.0
+   },
+   "uavcan param None": {
+    "n": 2,
+    "median_lag_ms": 52.4
+   },
+   "ubx_10 param 110.0": {
+    "n": 2,
+    "median_lag_ms": 70.5
+   },
+   "ubx_10 param 120.0": {
+    "n": 2,
+    "median_lag_ms": 138.9
+   },
+   "ubx_f9p param 110.0": {
+    "n": 13,
+    "median_lag_ms": 138.4
+   },
+   "ubx_f9p param 120.0": {
+    "n": 2,
+    "median_lag_ms": 169.2
+   },
+   "ubx_f9p param 160.0": {
+    "n": 1,
+    "median_lag_ms": 126.2
+   },
+   "ubx_generic param 110.0": {
+    "n": 19,
+    "median_lag_ms": 127.8
+   },
+   "ubx_m8 param 110.0": {
+    "n": 13,
+    "median_lag_ms": 155.5
+   },
+   "ubx_m8 param 120.0": {
+    "n": 2,
+    "median_lag_ms": 113.2
+   },
+   "ubx_m9 param 110.0": {
+    "n": 25,
+    "median_lag_ms": 71.3
+   },
+   "unknown param 100.0": {
+    "n": 1,
+    "median_lag_ms": 109.2
+   },
+   "unknown param 110.0": {
+    "n": 15,
+    "median_lag_ms": 81.9
+   }
+  },
+  "stamp_minus_sample_by_receiver": {
+   "ashtech": null,
+   "multiple": null,
+   "nmea": 0.0,
+   "other:i2c/0x00": 0.0,
+   "other:mavlink/0xAF": null,
+   "uavcan": 59.8,
+   "ubx_10": null,
+   "ubx_f9p": null,
+   "ubx_generic": null,
+   "ubx_m8": null,
+   "ubx_m9": 0.0,
+   "unknown": null
+  }
+ },
+ "receiver_py": "0.1.0",
+ "gps_lag": "0.1.0",
+ "fleet": "0.1.1",
+ "seed": 20261101,
+ "list": {
+  "listed": 483966,
+  "eligible": 36269,
+  "excluded": {
+   "shorter than 240 s": 148458,
+   "simulation": 16326,
+   "before 2025-10-01": 282913
+  }
+ },
+ "excluded_logs": 700,
+ "excluded_vehicles": 634,
+ "blocked": null,
+ "wall_s": 7814.0
+}
