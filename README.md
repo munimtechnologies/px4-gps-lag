@@ -47,6 +47,8 @@ What this means: on PX4, the M9 being far less late than the F9P is now seen on 
 
 **Next, pre-registered: is it the measurement rate?** PX4's driver asks the M8 for 200 ms, the M9 for 125 ms and the F9P for 100 ms. [`studies/receiver-2026/PLAN-rate.md`](studies/receiver-2026/PLAN-rate.md) reads each log's actual rate from the phase of the receiver's own UTC times (`rate.py`). It then tests, on the lags already published, whether the M9 is still less late than other receivers measuring at the same 125 ms.
 
+**Then, pre-registered: does the gap hold on fresh logs?** [`studies/receiver-2026/PLAN-fresh.md`](studies/receiver-2026/PLAN-fresh.md) draws a new random sample that leaves out every vehicle above, sized from receiver-2026's own class shares so that enough M8 logs turn up this time (`fresh.py`). It tests M9 against M8 and F9P, ArduPilot's assumption that the F9 is no later than the M8, and the NMEA hint in the table. It runs after the rate study, so that only one study downloads from Flight Review at a time.
+
 ## Suggested setting (rule D1)
 
 If a passing log's `lag_minus_param_ms` is more than about 50 ms either way, the measured `lag_ms` is a reasonable **starting value** for `EKF2_GPS_DELAY`.
@@ -66,6 +68,7 @@ History: D1 was withdrawn after the first innovation check came back C2 as writt
 - `studies/receiver-2026/`: lag by GPS receiver model (`receiver.py` 0.1.0). Plan, grade (E1 failed, so exploratory; 5 of 6 predictions held as written), `logs.jsonl`, `summary.json` and `job-fetched.json`. The first run was stopped from outside the job after 88 logs (exit 143). Its rows were never scored, and the complete second run is the one graded.
 - `studies/receiver-2026/PLAN-confirm.md`, `GRADE-confirm.md`, `confirm/`: the M9 gap tested on the earlier samples' published lags (`confirm.py` 0.1.0). All 213 logs re-read; E0 held (213 of 213 re-measured within 1 ms); E1 failed (M8 7); C2 and C4 held as written; C1, C3 and C5 not scored.
 - `studies/receiver-2026/PLAN-rate.md`: measurement rate from the receiver's UTC times (`rate.py` 0.1.0), scored on the published lags, pre-registered. Running.
+- `studies/receiver-2026/PLAN-fresh.md`: the receiver gap on a fresh sample of public logs (`fresh.py` 0.1.0, which reuses `gps_lag.py`, `receiver.py` and `rate.py` unchanged), pre-registered. Queued after the rate study.
 
 **How long the raw logs stay.** Since October 2024, Flight Review keeps every upload, public ones included, for 12 months, then removes it automatically (announcement on discuss.px4.io, "PX4 Flight Review & Data Retention", topic 41906, 2024-10-14). These studies drew logs uploaded from October 2025 on, so the raw logs behind them start to disappear from October 2026. The per-log rows in each study's `logs.jsonl` (log id, hashed vehicle id, every measured figure, no positions) stay here, and the scored checks can be recomputed from them, but once a log is gone it can't be measured again from the raw file. If you want to re-measure, download the logs you need while they are still listed.
 
@@ -73,7 +76,7 @@ History: D1 was withdrawn after the first innovation check came back C2 as writt
 
 ```
 pip install numpy pyulog ijson requests
-python -m unittest -v test_gps_lag test_fleet test_innov test_receiver test_confirm test_rate
+python -m unittest -v test_gps_lag test_fleet test_innov test_receiver test_confirm test_rate test_fresh
 ```
 
-The tests fly synthetic vehicles with known GPS delays and check that they are recovered within 3 ms. They also check that the innovation slope, in PX4's sign, recovers a known excess delay, and that re-scoring 0.1.0's rows flips every signed check. `test_receiver` checks the device_id decoding against PX4's bit layout, the choice of receiver, the exclusion of earlier vehicles and every scored check on synthetic rows. `test_confirm` checks that one published lag per vehicle is taken from both earlier formats, and checks every scored check on synthetic rows. `test_rate` checks that synthetic receivers at 100, 125 and 200 ms get their grid, and that 1-2 Hz receivers, logs throttled to 500 ms and times off any grid get none. It also checks every scored check on synthetic rows.
+The tests fly synthetic vehicles with known GPS delays and check that they are recovered within 3 ms. They also check that the innovation slope, in PX4's sign, recovers a known excess delay, and that re-scoring 0.1.0's rows flips every signed check. `test_receiver` checks the device_id decoding against PX4's bit layout, the choice of receiver, the exclusion of earlier vehicles and every scored check on synthetic rows. `test_confirm` checks that one published lag per vehicle is taken from both earlier formats, and checks every scored check on synthetic rows. `test_rate` checks that synthetic receivers at 100, 125 and 200 ms get their grid, and that 1-2 Hz receivers, logs throttled to 500 ms and times off any grid get none. It also checks every scored check on synthetic rows. `test_fresh` checks every scored check of the fresh study on synthetic rows, including the ones it leaves unscored when a class is too small, and that the draw uses its own seed and leaves out earlier vehicles.
