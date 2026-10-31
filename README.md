@@ -25,11 +25,27 @@ On 164 public Flight Review logs from 115 vehicles (`studies/fleet-2026/GRADE.md
 
 **EKF2's own residuals agree.** On those 98 fresh logs, EKF2's GPS velocity innovations, compared with acceleration, lean the way the measured mismatch says they should in 25 of 27 logs that are more than 50 ms off their setting, and the two methods rank the logs alike (Spearman +0.86). The check was pre-registered and decided C1 ([`studies/fleet-2026/GRADE-innov-confirm.md`](studies/fleet-2026/GRADE-innov-confirm.md)). The innovation shows about 0.6 of the measured mismatch, as a filter that partly follows a late GPS should.
 
-## Does the receiver model matter? (pre-registered, running)
+## Does the receiver model matter? (exploratory so far; confirmation running)
 
-PX4 uses one `EKF2_GPS_DELAY` for every receiver. ArduPilot assigns a lag by u-blox generation: 120 ms for M8 "based on flight logs", and the same 120 ms for F9, M9 and M10, with the comment "F9 lag not verified yet from flight log" (`AP_GPS_UBLOX.cpp`, `get_lag`). PX4's GPS driver records the receiver model it detected in the device_id of every GPS message. `receiver.py` reads that model and measures the lag on a fresh random sample of public logs, leaving out every vehicle the earlier studies saw. It then compares M8, M9, F9P, M10/generic u-blox and DroneCAN receivers. The six predictions and the decision rules are in [`studies/receiver-2026/PLAN.md`](studies/receiver-2026/PLAN.md), committed before any log was downloaded. The grade will be published whatever it says.
+PX4 uses one `EKF2_GPS_DELAY` for every receiver. ArduPilot assigns a lag by u-blox generation: 120 ms for M8 "based on flight logs", and the same 120 ms for F9, M9 and M10, with the comment "F9 lag not verified yet from flight log" (`AP_GPS_UBLOX.cpp`, `get_lag`). PX4's GPS driver records the receiver model it detected in the device_id of every GPS message, and `receiver.py` reads it.
 
-The first run, on 2026-10-30, was stopped from outside the job (the container got a stop signal, exit 143) after 88 of its logs, before it wrote a summary. Those partial rows were not scored. The same code, at the commit that published the plan, runs again from the start with the same seed, on Flight Review's list as it stands then (logs added or removed since the first run can change the draw).
+On a fresh random sample of 163 passing public logs, one per vehicle, none seen before ([`studies/receiver-2026/GRADE.md`](studies/receiver-2026/GRADE.md)):
+
+| receiver (as PX4 detected it) | vehicles | median lag |
+|---|---:|---:|
+| u-blox M9 | 25 | 71.3 ms |
+| DroneCAN | 39 | 104.4 ms |
+| u-blox, model not detected (includes M10 on v1.15) | 19 | 127.8 ms |
+| u-blox F9P | 16 | 142.6 ms |
+| u-blox M8 | 15 | 146.6 ms |
+
+**Exploratory only.** The pre-registered enough-data check (E1: two u-blox classes with at least 25 logs) failed, because only M9 reached 25. So none of this is a confirmed result, even though five of the six predictions held as written.
+
+What it suggests: M9 receivers are about 75 ms less late than M8 (interval 53 to 107 ms). F9P and M8 can't be told apart (−4 ms, interval −28 to +29). The single 110 ms default sits between the two groups. DroneCAN GPS was again about 20 ms below serial receivers, the third sample to show that.
+
+These are PX4 measurements only and say nothing about ArduPilot's own lag. The pre-registered decision to add a per-receiver line to px4-log-health's checkup did not fire.
+
+**Confirmation, pre-registered.** [`studies/receiver-2026/PLAN-confirm.md`](studies/receiver-2026/PLAN-confirm.md) reads the receiver model of the vehicles in the two earlier samples. Their lags were measured and published before the M9 gap was seen, and `confirm.py` scores those published lags. The plan predicts that M9 sits at least 20 ms below both M8 and F9P. The grade will be published whatever it says.
 
 ## Suggested setting (rule D1)
 
@@ -47,7 +63,8 @@ History: D1 was withdrawn after the first innovation check came back C2 as writt
 - `studies/fleet-2026/`: GPS lag across a random sample of PX4 Flight Review public logs (CC BY 4.0) from 2025-10 on, compared with each vehicle's `EKF2_GPS_DELAY`. Plan, grade (E1 passed, 5 of 6 predictions held), and one line per log in `v1/logs.jsonl`. `v1/summary.json` is the same rows re-scored, and it matches the grade.
 - `studies/fleet-2026/PLAN-innov.md`, `GRADE-innov.md`, `innov/`: does EKF2's GPS velocity innovation, plotted against acceleration, lean the way the measured lag says it should? Graded C2 as written. The innovation sign was wrong in the plan; see the grade.
 - `studies/fleet-2026/PLAN-innov-confirm.md`, `GRADE-innov-confirm.md`, `confirm/`: the corrected check (`innov.py` 0.2.0, PX4's sign) on the 98 fresh logs from px4-log-health, with the same thresholds. 89 logs validated; C1.
-- `studies/receiver-2026/PLAN.md`: lag by GPS receiver model (`receiver.py` 0.1.0), pre-registered. Running.
+- `studies/receiver-2026/`: lag by GPS receiver model (`receiver.py` 0.1.0). Plan, grade (E1 failed, so exploratory; 5 of 6 predictions held as written), `logs.jsonl`, `summary.json` and `job-fetched.json`. The first run was stopped from outside the job after 88 logs (exit 143). Its rows were never scored, and the complete second run is the one graded.
+- `studies/receiver-2026/PLAN-confirm.md`: the M9 gap tested on the earlier samples' published lags (`confirm.py` 0.1.0), pre-registered. Running.
 
 **How long the raw logs stay.** Since October 2024, Flight Review keeps every upload, public ones included, for 12 months, then removes it automatically (announcement on discuss.px4.io, "PX4 Flight Review & Data Retention", topic 41906, 2024-10-14). These studies drew logs uploaded from October 2025 on, so the raw logs behind them start to disappear from October 2026. The per-log rows in each study's `logs.jsonl` (log id, hashed vehicle id, every measured figure, no positions) stay here, and the scored checks can be recomputed from them, but once a log is gone it can't be measured again from the raw file. If you want to re-measure, download the logs you need while they are still listed.
 
@@ -55,7 +72,7 @@ History: D1 was withdrawn after the first innovation check came back C2 as writt
 
 ```
 pip install numpy pyulog ijson requests
-python -m unittest -v test_gps_lag test_fleet test_innov test_receiver
+python -m unittest -v test_gps_lag test_fleet test_innov test_receiver test_confirm
 ```
 
-The tests fly synthetic vehicles with known GPS delays and check that they are recovered within 3 ms. They also check that the innovation slope, in PX4's sign, recovers a known excess delay, and that re-scoring 0.1.0's rows flips every signed check. `test_receiver` checks the device_id decoding against PX4's bit layout, the choice of receiver, the exclusion of earlier vehicles and every scored check on synthetic rows.
+The tests fly synthetic vehicles with known GPS delays and check that they are recovered within 3 ms. They also check that the innovation slope, in PX4's sign, recovers a known excess delay, and that re-scoring 0.1.0's rows flips every signed check. `test_receiver` checks the device_id decoding against PX4's bit layout, the choice of receiver, the exclusion of earlier vehicles and every scored check on synthetic rows. `test_confirm` checks that one published lag per vehicle is taken from both earlier formats, and checks every scored check on synthetic rows.
