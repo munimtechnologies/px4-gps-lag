@@ -1,0 +1,60 @@
+{
+ "px4-gps-lag/main/studies/receiver-2026/PLAN-confirm.md": {
+  "sha256": "de40c28c1786a44cf709b284c3de2ab49b0ec83d78b69b33cb26cbb20543ed6b",
+  "waited_s": 0
+ },
+ "px4-gps-lag/main/confirm.py": {
+  "sha256": "3b1dedb1c1a8516d8b118e4d163402e5694650b9c95e83b6aec87065c77c002f",
+  "waited_s": 0
+ },
+ "px4-gps-lag/main/test_confirm.py": {
+  "sha256": "e598a514d9643e51f97ccb5c181e55b8acbb60421663a71b3f0d3079dd165046",
+  "waited_s": 0
+ },
+ "px4-gps-lag/main/studies/receiver-2026/logs.jsonl": {
+  "sha256": "12202a3ed97d493ac25129368aac6831096b834ec7521321c47e1c135509f267",
+  "waited_s": 0,
+  "saved_as": "receiver-2026.jsonl",
+  "lines": 537
+ },
+ "px4-gps-lag/f654f61454daa3ca048e4e0856e7f7f2cb12bd64/receiver.py": {
+  "sha256": "8077de08b27cfc5ad7960b275fd287eb91028503b77043de917241e78c32a28e",
+  "saved_as": "receiver.py",
+  "lines": 372
+ },
+ "px4-gps-lag/f654f61454daa3ca048e4e0856e7f7f2cb12bd64/test_receiver.py": {
+  "sha256": "b0ad9fff658e465760d6d8242daba8ea9e0eb307576c9237f036516ea4887d0c",
+  "saved_as": "test_receiver.py",
+  "lines": 180
+ },
+ "px4-gps-lag/62a205e946244d206e8298c51a75f20361f131ec/gps_lag.py": {
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d",
+  "saved_as": "gps_lag.py",
+  "lines": 348
+ },
+ "px4-gps-lag/62a205e946244d206e8298c51a75f20361f131ec/fleet.py": {
+  "sha256": "a953a27ce219aae2d46ca00cffaca5f4863da278f971195989a1dd3713f3171b",
+  "saved_as": "fleet.py",
+  "lines": 383
+ },
+ "px4-gps-lag/62a205e946244d206e8298c51a75f20361f131ec/test_gps_lag.py": {
+  "sha256": "e9f7e1ccc19d76d0f221fb244565bbcb86a8fe6e6f2761fb87121895ded75b79",
+  "saved_as": "test_gps_lag.py",
+  "lines": 164
+ },
+ "px4-gps-lag/62a205e946244d206e8298c51a75f20361f131ec/test_fleet.py": {
+  "sha256": "31209addb4a62e01bf3861e93d6d08246403fa94106ef3ed895c54944b89e70a",
+  "saved_as": "test_fleet.py",
+  "lines": 133
+ },
+ "px4-gps-lag/62a205e946244d206e8298c51a75f20361f131ec/studies/fleet-2026/v1/logs.jsonl": {
+  "sha256": "786cb1982dca2a265deb9305fb2f2b6a67b8b85c70b3872f4c8c05a72b7f052e",
+  "saved_as": "fleet-2026.jsonl",
+  "lines": 400
+ },
+ "px4-log-health/07c8e1fce3258e3b3f427ef92f11dd4f811c0dcb/studies/fleet-health-2026/logs.jsonl": {
+  "sha256": "06fe782030fbdc484933a2ce8c5b2c289965f47210bd5c13409f6e40c86cf200",
+  "saved_as": "fleet-health-2026.jsonl",
+  "lines": 300
+ }
+}

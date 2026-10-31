@@ -1,0 +1,557 @@
+{
+ "sample": 213,
+ "downloads": {
+  "ok": 213
+ },
+ "read": 213,
+ "classes": {
+  "femtomes": {
+   "n": 1,
+   "median_lag_ms": 65.7,
+   "p25": 65.7,
+   "p75": 65.7
+  },
+  "multiple": {
+   "n": 22,
+   "median_lag_ms": 109.4,
+   "p25": 80.2,
+   "p75": 126.8
+  },
+  "nmea": {
+   "n": 16,
+   "median_lag_ms": 230.9,
+   "p25": 136.6,
+   "p75": 254.4
+  },
+  "other:i2c/0x00": {
+   "n": 2,
+   "median_lag_ms": 160.6,
+   "p25": 156.4,
+   "p75": 164.9
+  },
+  "other:i2c/0x49": {
+   "n": 1,
+   "median_lag_ms": 314.3,
+   "p25": 314.3,
+   "p75": 314.3
+  },
+  "other:mavlink/0xAF": {
+   "n": 4,
+   "median_lag_ms": -5.9,
+   "p25": -7.7,
+   "p75": -4.7
+  },
+  "sbf": {
+   "n": 1,
+   "median_lag_ms": -15.8,
+   "p25": -15.8,
+   "p75": -15.8
+  },
+  "uavcan": {
+   "n": 49,
+   "median_lag_ms": 92.9,
+   "p25": 73.1,
+   "p75": 105.5
+  },
+  "ubx_10": {
+   "n": 1,
+   "median_lag_ms": 154.7,
+   "p25": 154.7,
+   "p75": 154.7
+  },
+  "ubx_f9p": {
+   "n": 27,
+   "median_lag_ms": 143.5,
+   "p25": 121.7,
+   "p75": 177.9
+  },
+  "ubx_generic": {
+   "n": 27,
+   "median_lag_ms": 130.3,
+   "p25": 110.5,
+   "p75": 154.9
+  },
+  "ubx_m8": {
+   "n": 7,
+   "median_lag_ms": 150.9,
+   "p25": 102.0,
+   "p75": 222.1
+  },
+  "ubx_m9": {
+   "n": 32,
+   "median_lag_ms": 76.2,
+   "p25": 63.3,
+   "p75": 94.5
+  },
+  "unknown": {
+   "n": 23,
+   "median_lag_ms": 105.7,
+   "p25": 49.5,
+   "p75": 140.8
+  }
+ },
+ "compared_classes": [
+  "nmea",
+  "uavcan",
+  "ubx_f9p",
+  "ubx_generic",
+  "ubx_m9"
+ ],
+ "E0_agree_share": 1.0,
+ "E0_remeasured": 213,
+ "C1_m9_minus_m8": null,
+ "C2_m9_minus_f9p": {
+  "diff_ms": -67.3,
+  "ci95_ms": [
+   -101.0,
+   -48.4
+  ]
+ },
+ "C3_f9p_minus_m8": null,
+ "C4_class_default": {
+  "n": 151,
+  "within_50_at_110": 0.7417,
+  "within_50_at_class_median": 0.8278,
+  "gain": 0.0861
+ },
+ "checks": {
+  "E0": true,
+  "E1": false,
+  "C1": null,
+  "C2": true,
+  "C3": null,
+  "C4": true,
+  "C5": null
+ },
+ "decision": {
+  "D1_class_line_in_checkup": false
+ },
+ "exploratory": {
+  "note": "not pre-registered; descriptive only",
+  "by_receiver_and_study": {
+   "femtomes fleet-2026": {
+    "n": 1,
+    "median_lag_ms": 65.7
+   },
+   "multiple fleet-2026": {
+    "n": 12,
+    "median_lag_ms": 111.6
+   },
+   "multiple fleet-health-2026": {
+    "n": 10,
+    "median_lag_ms": 107.7
+   },
+   "nmea fleet-2026": {
+    "n": 4,
+    "median_lag_ms": 150.7
+   },
+   "nmea fleet-health-2026": {
+    "n": 12,
+    "median_lag_ms": 238.3
+   },
+   "other:i2c/0x00 fleet-2026": {
+    "n": 1,
+    "median_lag_ms": 152.1
+   },
+   "other:i2c/0x00 fleet-health-2026": {
+    "n": 1,
+    "median_lag_ms": 169.2
+   },
+   "other:i2c/0x49 fleet-2026": {
+    "n": 1,
+    "median_lag_ms": 314.3
+   },
+   "other:mavlink/0xAF fleet-2026": {
+    "n": 3,
+    "median_lag_ms": -7.1
+   },
+   "other:mavlink/0xAF fleet-health-2026": {
+    "n": 1,
+    "median_lag_ms": -4.8
+   },
+   "sbf fleet-health-2026": {
+    "n": 1,
+    "median_lag_ms": -15.8
+   },
+   "uavcan fleet-2026": {
+    "n": 27,
+    "median_lag_ms": 88.9
+   },
+   "uavcan fleet-health-2026": {
+    "n": 22,
+    "median_lag_ms": 105.6
+   },
+   "ubx_10 fleet-2026": {
+    "n": 1,
+    "median_lag_ms": 154.7
+   },
+   "ubx_f9p fleet-2026": {
+    "n": 16,
+    "median_lag_ms": 135.6
+   },
+   "ubx_f9p fleet-health-2026": {
+    "n": 11,
+    "median_lag_ms": 179.0
+   },
+   "ubx_generic fleet-2026": {
+    "n": 15,
+    "median_lag_ms": 130.9
+   },
+   "ubx_generic fleet-health-2026": {
+    "n": 12,
+    "median_lag_ms": 129.2
+   },
+   "ubx_m8 fleet-2026": {
+    "n": 3,
+    "median_lag_ms": 191.1
+   },
+   "ubx_m8 fleet-health-2026": {
+    "n": 4,
+    "median_lag_ms": 126.6
+   },
+   "ubx_m9 fleet-2026": {
+    "n": 19,
+    "median_lag_ms": 74.5
+   },
+   "ubx_m9 fleet-health-2026": {
+    "n": 13,
+    "median_lag_ms": 86.6
+   },
+   "unknown fleet-2026": {
+    "n": 12,
+    "median_lag_ms": 105.6
+   },
+   "unknown fleet-health-2026": {
+    "n": 11,
+    "median_lag_ms": 132.1
+   }
+  },
+  "by_receiver_and_release": {
+   "femtomes v1.12": {
+    "n": 1,
+    "median_lag_ms": 65.7
+   },
+   "multiple v1.12": {
+    "n": 9,
+    "median_lag_ms": 109.1
+   },
+   "multiple v1.13": {
+    "n": 1,
+    "median_lag_ms": 34.7
+   },
+   "multiple v1.14": {
+    "n": 3,
+    "median_lag_ms": 355.5
+   },
+   "multiple v1.15": {
+    "n": 2,
+    "median_lag_ms": 114.2
+   },
+   "multiple v1.16": {
+    "n": 4,
+    "median_lag_ms": 87.2
+   },
+   "multiple v1.17": {
+    "n": 1,
+    "median_lag_ms": 146.4
+   },
+   "multiple v1.20": {
+    "n": 2,
+    "median_lag_ms": 70.7
+   },
+   "nmea v0.0": {
+    "n": 1,
+    "median_lag_ms": 238.5
+   },
+   "nmea v1.12": {
+    "n": 2,
+    "median_lag_ms": 97.8
+   },
+   "nmea v1.14": {
+    "n": 1,
+    "median_lag_ms": 77.1
+   },
+   "nmea v1.15": {
+    "n": 10,
+    "median_lag_ms": 245.4
+   },
+   "nmea v1.16": {
+    "n": 1,
+    "median_lag_ms": 239.8
+   },
+   "nmea v5.2": {
+    "n": 1,
+    "median_lag_ms": 150.1
+   },
+   "other:i2c/0x00 v1.14": {
+    "n": 2,
+    "median_lag_ms": 160.6
+   },
+   "other:i2c/0x49 v1.16": {
+    "n": 1,
+    "median_lag_ms": 314.3
+   },
+   "other:mavlink/0xAF v1.12": {
+    "n": 1,
+    "median_lag_ms": -4.8
+   },
+   "other:mavlink/0xAF v1.13": {
+    "n": 2,
+    "median_lag_ms": -5.8
+   },
+   "other:mavlink/0xAF v1.6": {
+    "n": 1,
+    "median_lag_ms": -9.4
+   },
+   "sbf v1.14": {
+    "n": 1,
+    "median_lag_ms": -15.8
+   },
+   "uavcan v0.0": {
+    "n": 2,
+    "median_lag_ms": 59.0
+   },
+   "uavcan v1.12": {
+    "n": 1,
+    "median_lag_ms": 65.7
+   },
+   "uavcan v1.13": {
+    "n": 1,
+    "median_lag_ms": 76.8
+   },
+   "uavcan v1.14": {
+    "n": 9,
+    "median_lag_ms": 85.8
+   },
+   "uavcan v1.15": {
+    "n": 12,
+    "median_lag_ms": 105.2
+   },
+   "uavcan v1.16": {
+    "n": 14,
+    "median_lag_ms": 101.5
+   },
+   "uavcan v1.17": {
+    "n": 4,
+    "median_lag_ms": 84.5
+   },
+   "uavcan v1.24": {
+    "n": 1,
+    "median_lag_ms": 106.3
+   },
+   "uavcan v1.50": {
+    "n": 1,
+    "median_lag_ms": 68.7
+   },
+   "uavcan v5.10": {
+    "n": 1,
+    "median_lag_ms": 92.9
+   },
+   "uavcan v5.2": {
+    "n": 1,
+    "median_lag_ms": 71.2
+   },
+   "uavcan v6.4": {
+    "n": 1,
+    "median_lag_ms": 51.7
+   },
+   "uavcan v6.9": {
+    "n": 1,
+    "median_lag_ms": 102.8
+   },
+   "ubx_10 v1.12": {
+    "n": 1,
+    "median_lag_ms": 154.7
+   },
+   "ubx_f9p v1.12": {
+    "n": 5,
+    "median_lag_ms": 125.2
+   },
+   "ubx_f9p v1.14": {
+    "n": 8,
+    "median_lag_ms": 156.6
+   },
+   "ubx_f9p v1.15": {
+    "n": 8,
+    "median_lag_ms": 137.2
+   },
+   "ubx_f9p v1.16": {
+    "n": 6,
+    "median_lag_ms": 186.4
+   },
+   "ubx_generic v1.12": {
+    "n": 1,
+    "median_lag_ms": 105.6
+   },
+   "ubx_generic v1.13": {
+    "n": 1,
+    "median_lag_ms": 158.7
+   },
+   "ubx_generic v1.14": {
+    "n": 2,
+    "median_lag_ms": 162.4
+   },
+   "ubx_generic v1.15": {
+    "n": 7,
+    "median_lag_ms": 130.9
+   },
+   "ubx_generic v1.16": {
+    "n": 9,
+    "median_lag_ms": 126.1
+   },
+   "ubx_generic v1.17": {
+    "n": 5,
+    "median_lag_ms": 118.5
+   },
+   "ubx_generic v1.24": {
+    "n": 1,
+    "median_lag_ms": 181.7
+   },
+   "ubx_generic v1.3": {
+    "n": 1,
+    "median_lag_ms": 63.6
+   },
+   "ubx_m8 v1.12": {
+    "n": 2,
+    "median_lag_ms": 157.9
+   },
+   "ubx_m8 v1.14": {
+    "n": 1,
+    "median_lag_ms": 102.3
+   },
+   "ubx_m8 v1.16": {
+    "n": 4,
+    "median_lag_ms": 171.0
+   },
+   "ubx_m9 v1.12": {
+    "n": 1,
+    "median_lag_ms": 64.3
+   },
+   "ubx_m9 v1.13": {
+    "n": 4,
+    "median_lag_ms": 74.0
+   },
+   "ubx_m9 v1.14": {
+    "n": 2,
+    "median_lag_ms": 101.5
+   },
+   "ubx_m9 v1.15": {
+    "n": 11,
+    "median_lag_ms": 91.3
+   },
+   "ubx_m9 v1.16": {
+    "n": 11,
+    "median_lag_ms": 64.1
+   },
+   "ubx_m9 v1.17": {
+    "n": 2,
+    "median_lag_ms": 58.7
+   },
+   "ubx_m9 v1.18": {
+    "n": 1,
+    "median_lag_ms": 71.7
+   },
+   "unknown v1.10": {
+    "n": 1,
+    "median_lag_ms": 154.0
+   },
+   "unknown v1.11": {
+    "n": 14,
+    "median_lag_ms": 107.8
+   },
+   "unknown v1.12": {
+    "n": 2,
+    "median_lag_ms": 130.6
+   },
+   "unknown v1.3": {
+    "n": 2,
+    "median_lag_ms": 84.4
+   },
+   "unknown v1.4": {
+    "n": 1,
+    "median_lag_ms": 44.2
+   },
+   "unknown v1.5": {
+    "n": 1,
+    "median_lag_ms": 209.6
+   },
+   "unknown v1.9": {
+    "n": 1,
+    "median_lag_ms": 105.4
+   },
+   "unknown v25.11": {
+    "n": 1,
+    "median_lag_ms": 162.9
+   }
+  },
+  "pooled_with_receiver_2026": {
+   "ashtech": {
+    "n": 2,
+    "median_lag_ms": 76.8
+   },
+   "femtomes": {
+    "n": 1,
+    "median_lag_ms": 65.7
+   },
+   "multiple": {
+    "n": 33,
+    "median_lag_ms": 111.6
+   },
+   "nmea": {
+    "n": 29,
+    "median_lag_ms": 206.5
+   },
+   "other:i2c/0x00": {
+    "n": 3,
+    "median_lag_ms": 160.5
+   },
+   "other:i2c/0x49": {
+    "n": 1,
+    "median_lag_ms": 314.3
+   },
+   "other:mavlink/0xAF": {
+    "n": 6,
+    "median_lag_ms": -8.2
+   },
+   "sbf": {
+    "n": 1,
+    "median_lag_ms": -15.8
+   },
+   "uavcan": {
+    "n": 88,
+    "median_lag_ms": 97.9
+   },
+   "ubx_10": {
+    "n": 5,
+    "median_lag_ms": 124.1
+   },
+   "ubx_f9p": {
+    "n": 43,
+    "median_lag_ms": 143.5
+   },
+   "ubx_generic": {
+    "n": 46,
+    "median_lag_ms": 128.1
+   },
+   "ubx_m8": {
+    "n": 22,
+    "median_lag_ms": 148.8
+   },
+   "ubx_m9": {
+    "n": 57,
+    "median_lag_ms": 73.6
+   },
+   "unknown": {
+    "n": 39,
+    "median_lag_ms": 105.4
+   }
+  }
+ },
+ "confirm_py": "0.1.0",
+ "receiver_py": "0.1.0",
+ "gps_lag": "0.1.0",
+ "fleet": "0.1.1",
+ "blocked": null,
+ "not_reached_in_budget": 0,
+ "wall_s": 1997.1
+}
