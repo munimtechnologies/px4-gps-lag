@@ -1,0 +1,607 @@
+{
+ "sample": 376,
+ "downloads": {
+  "ok": 376
+ },
+ "read": 376,
+ "E0_gridded_share_serial_ublox": 0.5838,
+ "E0_serial_ublox": 173,
+ "Q1_driver_grid": {
+  "ubx_m8": {
+   "gridded": 12,
+   "on_driver": 12,
+   "share": 1.0
+  },
+  "ubx_m9": {
+   "gridded": 41,
+   "on_driver": 19,
+   "share": 0.4634
+  },
+  "ubx_f9p": {
+   "gridded": 20,
+   "on_driver": 6,
+   "share": 0.3
+  }
+ },
+ "Q2_m9_minus_other_at_125": {
+  "diff_ms": -53.3,
+  "ci95_ms": [
+   -105.6,
+   -18.7
+  ]
+ },
+ "Q2_n": [
+  19,
+  10
+ ],
+ "Q3_generic_200_minus_125": null,
+ "Q3_n": [
+  0,
+  8
+ ],
+ "Q4_f9p_100_minus_other": {
+  "diff_ms": 5.3,
+  "ci95_ms": [
+   -59.3,
+   47.2
+  ]
+ },
+ "Q4_n": [
+  5,
+  15
+ ],
+ "checks": {
+  "E0": true,
+  "E1": true,
+  "Q1": false,
+  "Q2": true,
+  "Q3": null,
+  "Q4": false
+ },
+ "decision": {
+  "D1_rate_line_in_checkup": false,
+  "D2_rate_not_the_m9_story": true
+ },
+ "exploratory": {
+  "note": "not pre-registered; descriptive only",
+  "by_receiver_and_grid": {
+   "ashtech none": {
+    "n": 2,
+    "median_lag_ms": 76.8
+   },
+   "femtomes 200": {
+    "n": 1,
+    "median_lag_ms": 65.7
+   },
+   "multiple 100": {
+    "n": 2,
+    "median_lag_ms": 95.8
+   },
+   "multiple 125": {
+    "n": 14,
+    "median_lag_ms": 109.4
+   },
+   "multiple 200": {
+    "n": 3,
+    "median_lag_ms": 146.4
+   },
+   "multiple none": {
+    "n": 14,
+    "median_lag_ms": 123.5
+   },
+   "nmea 100": {
+    "n": 4,
+    "median_lag_ms": 97.7
+   },
+   "nmea 200": {
+    "n": 14,
+    "median_lag_ms": 212.8
+   },
+   "nmea none": {
+    "n": 11,
+    "median_lag_ms": 224.3
+   },
+   "other:i2c/0x00 none": {
+    "n": 3,
+    "median_lag_ms": 160.5
+   },
+   "other:i2c/0x49 none": {
+    "n": 1,
+    "median_lag_ms": 314.3
+   },
+   "other:mavlink/0xAF none": {
+    "n": 6,
+    "median_lag_ms": -8.2
+   },
+   "sbf none": {
+    "n": 1,
+    "median_lag_ms": -15.8
+   },
+   "uavcan 200": {
+    "n": 62,
+    "median_lag_ms": 102.5
+   },
+   "uavcan none": {
+    "n": 26,
+    "median_lag_ms": 85.3
+   },
+   "ubx_10 none": {
+    "n": 5,
+    "median_lag_ms": 124.1
+   },
+   "ubx_f9p 100": {
+    "n": 5,
+    "median_lag_ms": 141.5
+   },
+   "ubx_f9p 125": {
+    "n": 2,
+    "median_lag_ms": 140.9
+   },
+   "ubx_f9p 200": {
+    "n": 13,
+    "median_lag_ms": 136.2
+   },
+   "ubx_f9p none": {
+    "n": 23,
+    "median_lag_ms": 146.7
+   },
+   "ubx_generic 100": {
+    "n": 20,
+    "median_lag_ms": 122.2
+   },
+   "ubx_generic 125": {
+    "n": 8,
+    "median_lag_ms": 130.6
+   },
+   "ubx_generic none": {
+    "n": 18,
+    "median_lag_ms": 140.6
+   },
+   "ubx_m8 200": {
+    "n": 12,
+    "median_lag_ms": 154.6
+   },
+   "ubx_m8 none": {
+    "n": 10,
+    "median_lag_ms": 139.3
+   },
+   "ubx_m9 100": {
+    "n": 22,
+    "median_lag_ms": 64.5
+   },
+   "ubx_m9 125": {
+    "n": 19,
+    "median_lag_ms": 77.3
+   },
+   "ubx_m9 none": {
+    "n": 16,
+    "median_lag_ms": 72.4
+   },
+   "unknown 100": {
+    "n": 3,
+    "median_lag_ms": 44.3
+   },
+   "unknown 125": {
+    "n": 4,
+    "median_lag_ms": 151.8
+   },
+   "unknown 200": {
+    "n": 14,
+    "median_lag_ms": 140.4
+   },
+   "unknown 250": {
+    "n": 1,
+    "median_lag_ms": 172.4
+   },
+   "unknown none": {
+    "n": 17,
+    "median_lag_ms": 48.6
+   }
+  },
+  "by_release_and_grid": {
+   "unknown grid": {
+    "n": 1,
+    "median_lag_ms": 140.3
+   },
+   "v0.0 grid": {
+    "n": 4,
+    "median_lag_ms": 97.9
+   },
+   "v0.0 none": {
+    "n": 1,
+    "median_lag_ms": 238.5
+   },
+   "v1.10 grid": {
+    "n": 1,
+    "median_lag_ms": 154.0
+   },
+   "v1.11 grid": {
+    "n": 11,
+    "median_lag_ms": 140.7
+   },
+   "v1.11 none": {
+    "n": 15,
+    "median_lag_ms": 47.2
+   },
+   "v1.12 grid": {
+    "n": 23,
+    "median_lag_ms": 109.1
+   },
+   "v1.12 none": {
+    "n": 26,
+    "median_lag_ms": 116.0
+   },
+   "v1.13 grid": {
+    "n": 1,
+    "median_lag_ms": 74.5
+   },
+   "v1.13 none": {
+    "n": 16,
+    "median_lag_ms": 85.1
+   },
+   "v1.14 grid": {
+    "n": 2,
+    "median_lag_ms": 86.5
+   },
+   "v1.14 none": {
+    "n": 53,
+    "median_lag_ms": 109.0
+   },
+   "v1.15 grid": {
+    "n": 66,
+    "median_lag_ms": 111.1
+   },
+   "v1.15 none": {
+    "n": 13,
+    "median_lag_ms": 224.3
+   },
+   "v1.16 grid": {
+    "n": 74,
+    "median_lag_ms": 105.2
+   },
+   "v1.16 none": {
+    "n": 11,
+    "median_lag_ms": 136.8
+   },
+   "v1.17 grid": {
+    "n": 28,
+    "median_lag_ms": 105.8
+   },
+   "v1.17 none": {
+    "n": 3,
+    "median_lag_ms": 135.6
+   },
+   "v1.18 grid": {
+    "n": 2,
+    "median_lag_ms": 64.7
+   },
+   "v1.20 none": {
+    "n": 3,
+    "median_lag_ms": 38.2
+   },
+   "v1.24 none": {
+    "n": 3,
+    "median_lag_ms": 130.8
+   },
+   "v1.3 grid": {
+    "n": 2,
+    "median_lag_ms": 84.4
+   },
+   "v1.3 none": {
+    "n": 1,
+    "median_lag_ms": 63.6
+   },
+   "v1.4 grid": {
+    "n": 3,
+    "median_lag_ms": 44.3
+   },
+   "v1.5 none": {
+    "n": 1,
+    "median_lag_ms": 209.6
+   },
+   "v1.50 grid": {
+    "n": 1,
+    "median_lag_ms": 68.7
+   },
+   "v1.6 none": {
+    "n": 1,
+    "median_lag_ms": -9.4
+   },
+   "v1.9 grid": {
+    "n": 2,
+    "median_lag_ms": 107.3
+   },
+   "v1.9 none": {
+    "n": 1,
+    "median_lag_ms": 207.7
+   },
+   "v2.13 none": {
+    "n": 1,
+    "median_lag_ms": 206.5
+   },
+   "v25.11 grid": {
+    "n": 1,
+    "median_lag_ms": 162.9
+   },
+   "v5.10 none": {
+    "n": 1,
+    "median_lag_ms": 92.9
+   },
+   "v5.2 grid": {
+    "n": 1,
+    "median_lag_ms": 150.1
+   },
+   "v5.2 none": {
+    "n": 1,
+    "median_lag_ms": 71.2
+   },
+   "v6.4 none": {
+    "n": 1,
+    "median_lag_ms": 51.7
+   },
+   "v6.9 none": {
+    "n": 1,
+    "median_lag_ms": 102.8
+   }
+  },
+  "dt_mode_without_grid": {
+   "ashtech dt 1000.0": {
+    "n": 1,
+    "median_lag_ms": 84.3
+   },
+   "ashtech dt None": {
+    "n": 1,
+    "median_lag_ms": 69.4
+   },
+   "multiple dt 1000.0": {
+    "n": 1,
+    "median_lag_ms": 465.6
+   },
+   "multiple dt 200.0": {
+    "n": 3,
+    "median_lag_ms": 113.4
+   },
+   "multiple dt 250.0": {
+    "n": 1,
+    "median_lag_ms": 126.6
+   },
+   "multiple dt 400.0": {
+    "n": 1,
+    "median_lag_ms": 38.2
+   },
+   "multiple dt 500.0": {
+    "n": 7,
+    "median_lag_ms": 127.9
+   },
+   "multiple dt None": {
+    "n": 1,
+    "median_lag_ms": 103.2
+   },
+   "nmea dt 1000.0": {
+    "n": 7,
+    "median_lag_ms": 238.5
+   },
+   "nmea dt 400.0": {
+    "n": 2,
+    "median_lag_ms": 84.8
+   },
+   "nmea dt 500.0": {
+    "n": 2,
+    "median_lag_ms": 141.8
+   },
+   "other:i2c/0x00 dt 1005.0": {
+    "n": 3,
+    "median_lag_ms": 160.5
+   },
+   "other:i2c/0x49 dt 330.0": {
+    "n": 1,
+    "median_lag_ms": 314.3
+   },
+   "other:mavlink/0xAF dt 100.0": {
+    "n": 1,
+    "median_lag_ms": -9.4
+   },
+   "other:mavlink/0xAF dt 500.0": {
+    "n": 2,
+    "median_lag_ms": -9.6
+   },
+   "other:mavlink/0xAF dt 505.0": {
+    "n": 3,
+    "median_lag_ms": -7.1
+   },
+   "sbf dt 500.0": {
+    "n": 1,
+    "median_lag_ms": -15.8
+   },
+   "uavcan dt 100.0": {
+    "n": 2,
+    "median_lag_ms": 130.6
+   },
+   "uavcan dt 1000.0": {
+    "n": 1,
+    "median_lag_ms": 106.3
+   },
+   "uavcan dt 110.0": {
+    "n": 1,
+    "median_lag_ms": 62.4
+   },
+   "uavcan dt 200.0": {
+    "n": 2,
+    "median_lag_ms": 129.4
+   },
+   "uavcan dt 400.0": {
+    "n": 10,
+    "median_lag_ms": 85.0
+   },
+   "uavcan dt 500.0": {
+    "n": 4,
+    "median_lag_ms": 82.1
+   },
+   "uavcan dt 600.0": {
+    "n": 6,
+    "median_lag_ms": 84.8
+   },
+   "ubx_10 dt 2000.0": {
+    "n": 1,
+    "median_lag_ms": 65.1
+   },
+   "ubx_10 dt 500.0": {
+    "n": 4,
+    "median_lag_ms": 138.9
+   },
+   "ubx_f9p dt 145.0": {
+    "n": 3,
+    "median_lag_ms": 138.4
+   },
+   "ubx_f9p dt 200.0": {
+    "n": 4,
+    "median_lag_ms": 185.8
+   },
+   "ubx_f9p dt 500.0": {
+    "n": 16,
+    "median_lag_ms": 145.1
+   },
+   "ubx_generic dt 200.0": {
+    "n": 3,
+    "median_lag_ms": 136.8
+   },
+   "ubx_generic dt 250.0": {
+    "n": 2,
+    "median_lag_ms": 267.2
+   },
+   "ubx_generic dt 400.0": {
+    "n": 3,
+    "median_lag_ms": 145.0
+   },
+   "ubx_generic dt 500.0": {
+    "n": 9,
+    "median_lag_ms": 111.5
+   },
+   "ubx_generic dt 600.0": {
+    "n": 1,
+    "median_lag_ms": 147.7
+   },
+   "ubx_m8 dt 400.0": {
+    "n": 8,
+    "median_lag_ms": 124.8
+   },
+   "ubx_m8 dt 600.0": {
+    "n": 2,
+    "median_lag_ms": 193.9
+   },
+   "ubx_m9 dt 500.0": {
+    "n": 16,
+    "median_lag_ms": 72.4
+   },
+   "unknown dt 1000.0": {
+    "n": 16,
+    "median_lag_ms": 47.9
+   },
+   "unknown dt 450.0": {
+    "n": 1,
+    "median_lag_ms": 88.8
+   }
+  },
+  "ubx_mode_by_receiver": {
+   "ashtech mode 0": {
+    "n": 2,
+    "median_lag_ms": 76.8
+   },
+   "femtomes mode 0": {
+    "n": 1,
+    "median_lag_ms": 65.7
+   },
+   "multiple mode 0": {
+    "n": 25,
+    "median_lag_ms": 109.7
+   },
+   "multiple mode 1": {
+    "n": 8,
+    "median_lag_ms": 152.2
+   },
+   "nmea mode 0": {
+    "n": 28,
+    "median_lag_ms": 209.5
+   },
+   "nmea mode 1": {
+    "n": 1,
+    "median_lag_ms": 94.8
+   },
+   "other:i2c/0x00 mode 0": {
+    "n": 3,
+    "median_lag_ms": 160.5
+   },
+   "other:i2c/0x49 mode None": {
+    "n": 1,
+    "median_lag_ms": 314.3
+   },
+   "other:mavlink/0xAF mode None": {
+    "n": 6,
+    "median_lag_ms": -8.2
+   },
+   "sbf mode 0": {
+    "n": 1,
+    "median_lag_ms": -15.8
+   },
+   "uavcan mode 0": {
+    "n": 66,
+    "median_lag_ms": 94.0
+   },
+   "uavcan mode 1": {
+    "n": 1,
+    "median_lag_ms": 110.5
+   },
+   "uavcan mode 3": {
+    "n": 1,
+    "median_lag_ms": 164.1
+   },
+   "uavcan mode None": {
+    "n": 20,
+    "median_lag_ms": 103.0
+   },
+   "ubx_10 mode 0": {
+    "n": 5,
+    "median_lag_ms": 124.1
+   },
+   "ubx_f9p mode 0": {
+    "n": 41,
+    "median_lag_ms": 143.5
+   },
+   "ubx_f9p mode 1": {
+    "n": 2,
+    "median_lag_ms": 154.3
+   },
+   "ubx_generic mode 0": {
+    "n": 46,
+    "median_lag_ms": 128.1
+   },
+   "ubx_m8 mode 0": {
+    "n": 22,
+    "median_lag_ms": 148.8
+   },
+   "ubx_m9 mode 0": {
+    "n": 57,
+    "median_lag_ms": 73.6
+   },
+   "unknown mode 0": {
+    "n": 1,
+    "median_lag_ms": 172.4
+   },
+   "unknown mode 1": {
+    "n": 4,
+    "median_lag_ms": 151.8
+   },
+   "unknown mode None": {
+    "n": 34,
+    "median_lag_ms": 91.2
+   }
+  },
+  "rank_corr_grid_lag_serial_ublox": 0.393
+ },
+ "rate_py": "0.1.0",
+ "receiver_py": "0.1.0",
+ "fleet": "0.1.1",
+ "blocked": null,
+ "not_reached_in_budget": 0,
+ "wall_s": 2929.6
+}

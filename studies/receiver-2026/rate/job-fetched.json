@@ -1,0 +1,56 @@
+{
+ "px4-gps-lag/main/studies/receiver-2026/PLAN-rate.md": {
+  "sha256": "8695c82c57e7ecebfcb12988fdedee243b96c98932f4005d55d168dfe63a76e9",
+  "waited_s": 0
+ },
+ "px4-gps-lag/main/rate.py": {
+  "sha256": "bcc617336eb77bcaea5a86ec872ccc9ef2170bb8dc869ac940d497095f54aecd",
+  "waited_s": 0
+ },
+ "px4-gps-lag/main/test_rate.py": {
+  "sha256": "5c00e774c31fa280d830f88d0b62b21204208d7d62e145eebdc4f98e0af5b215",
+  "waited_s": 0
+ },
+ "px4-gps-lag/main/studies/receiver-2026/confirm/logs.jsonl": {
+  "sha256": "ee0b0524da153710e7a5e3b0f5a8e449b4def8d1a74ce59b63d0c6a50860b18c",
+  "waited_s": 0,
+  "saved_as": "confirm.jsonl",
+  "lines": 213
+ },
+ "px4-gps-lag/main/studies/receiver-2026/logs.jsonl": {
+  "sha256": "12202a3ed97d493ac25129368aac6831096b834ec7521321c47e1c135509f267",
+  "waited_s": 0,
+  "saved_as": "receiver-2026.jsonl",
+  "lines": 537
+ },
+ "px4-gps-lag/f654f61454daa3ca048e4e0856e7f7f2cb12bd64/receiver.py": {
+  "sha256": "8077de08b27cfc5ad7960b275fd287eb91028503b77043de917241e78c32a28e",
+  "saved_as": "receiver.py",
+  "lines": 372
+ },
+ "px4-gps-lag/f654f61454daa3ca048e4e0856e7f7f2cb12bd64/test_receiver.py": {
+  "sha256": "b0ad9fff658e465760d6d8242daba8ea9e0eb307576c9237f036516ea4887d0c",
+  "saved_as": "test_receiver.py",
+  "lines": 180
+ },
+ "px4-gps-lag/62a205e946244d206e8298c51a75f20361f131ec/gps_lag.py": {
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d",
+  "saved_as": "gps_lag.py",
+  "lines": 348
+ },
+ "px4-gps-lag/62a205e946244d206e8298c51a75f20361f131ec/fleet.py": {
+  "sha256": "a953a27ce219aae2d46ca00cffaca5f4863da278f971195989a1dd3713f3171b",
+  "saved_as": "fleet.py",
+  "lines": 383
+ },
+ "px4-gps-lag/62a205e946244d206e8298c51a75f20361f131ec/test_gps_lag.py": {
+  "sha256": "e9f7e1ccc19d76d0f221fb244565bbcb86a8fe6e6f2761fb87121895ded75b79",
+  "saved_as": "test_gps_lag.py",
+  "lines": 164
+ },
+ "px4-gps-lag/62a205e946244d206e8298c51a75f20361f131ec/test_fleet.py": {
+  "sha256": "31209addb4a62e01bf3861e93d6d08246403fa94106ef3ed895c54944b89e70a",
+  "saved_as": "test_fleet.py",
+  "lines": 133
+ }
+}
