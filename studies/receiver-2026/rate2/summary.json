@@ -1,0 +1,101 @@
+{
+ "passing": 298,
+ "scored_gridded_era_known": 118,
+ "G1_driver_grid": {
+  "ubx_m8": {
+   "scored": 5,
+   "on_driver": 5,
+   "share": 1.0,
+   "by_era": {
+    "old": {
+     "n": 1,
+     "on_driver": 1
+    },
+    "new": {
+     "n": 4,
+     "on_driver": 4
+    }
+   }
+  },
+  "ubx_m9": {
+   "scored": 16,
+   "on_driver": 16,
+   "share": 1.0,
+   "by_era": {
+    "old": {
+     "n": 4,
+     "on_driver": 4
+    },
+    "new": {
+     "n": 12,
+     "on_driver": 12
+    }
+   }
+  },
+  "ubx_f9p": {
+   "scored": 21,
+   "on_driver": 21,
+   "share": 1.0,
+   "by_era": {
+    "old": {
+     "n": 3,
+     "on_driver": 3
+    },
+    "new": {
+     "n": 18,
+     "on_driver": 18
+    }
+   }
+  }
+ },
+ "G2_new_m9_100_minus_f9p_200": {
+  "diff_ms": -110.4,
+  "ci95_ms": [
+   -132.2,
+   -60.1
+  ]
+ },
+ "G2_n": [
+  12,
+  18
+ ],
+ "checks": {
+  "G0": false,
+  "G1": null,
+  "G2": true
+ },
+ "decision": {
+  "D1_rate_line_in_checkup": false,
+  "D2_rate_not_the_m9_story_on_v1_16": true
+ },
+ "reported": {
+  "m9_old_125": {
+   "n": 4,
+   "median_lag_ms": 89.5
+  },
+  "m9_new_100": {
+   "n": 12,
+   "median_lag_ms": 67.7
+  },
+  "f9p_old_100": {
+   "n": 3,
+   "median_lag_ms": 119.1
+  },
+  "f9p_new_200": {
+   "n": 18,
+   "median_lag_ms": 178.1
+  },
+  "m10_on_driver": [
+   0,
+   0
+  ],
+  "era_counts": {
+   "old": 112,
+   "new": 94,
+   "None": 92
+  },
+  "f9p_new_no_grid_dt_143_to_147": 0
+ },
+ "rate2_py": "0.1.0",
+ "receiver_py": "0.1.0"
+}

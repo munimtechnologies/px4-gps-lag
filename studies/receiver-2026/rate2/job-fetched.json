@@ -1,0 +1,25 @@
+{
+ "main/studies/receiver-2026/fresh/logs.jsonl": {
+  "sha256": "f44c036fac8fca924afc99b6377b5d9e34c240cb9787a9297210838f6889abf7",
+  "lines": 1000,
+  "waited_s": 0
+ },
+ "main/rate2.py": {
+  "sha256": "18a3c6501be6c1721832f110d123d7de4bb3436f9079be72be608f5fbd76badf"
+ },
+ "main/test_rate2.py": {
+  "sha256": "e5790197a7bbdc9f1c5445239ac329f4200e34beded75ad27b378e204f4c2df4"
+ },
+ "main/studies/receiver-2026/PLAN-rate2.md": {
+  "sha256": "071a94529ace38582d2cc210464c61d3aa26d4a478be40145a6fa72dca430acd"
+ },
+ "f654f61454daa3ca048e4e0856e7f7f2cb12bd64/receiver.py": {
+  "sha256": "8077de08b27cfc5ad7960b275fd287eb91028503b77043de917241e78c32a28e"
+ },
+ "62a205e946244d206e8298c51a75f20361f131ec/gps_lag.py": {
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d"
+ },
+ "62a205e946244d206e8298c51a75f20361f131ec/fleet.py": {
+  "sha256": "a953a27ce219aae2d46ca00cffaca5f4863da278f971195989a1dd3713f3171b"
+ }
+}
