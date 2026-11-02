@@ -17,37 +17,46 @@ How it works: for each pair of consecutive logged GPS samples in flight, the cha
 
 For a readable report per flight (health flags, fleet comparison and this GPS delay verdict), and a GitHub Action, see [px4-log-health](https://github.com/munimtechnologies/px4-log-health)'s `checkup.py`. It also runs in your browser, with nothing uploaded: [munimv2.github.io/px4-log-check](https://munimv2.github.io/px4-log-check/).
 
+**PX4 v1.18 and newer.** PX4 PR [#26660](https://github.com/PX4/PX4-Autopilot/pull/26660) replaced `EKF2_GPS_DELAY` with a delay per receiver (`SENS_GPS0_DELAY`, `SENS_GPS1_DELAY`), applied by moving each sample's `timestamp_sample` back. `gps_lag.py` still measures the lag on those logs, but `param_gps_delay_ms` is empty. px4-log-health's checkup (0.3.2 and newer) reads the delay EKF2 applied from the log's own sample times and names the parameter to change. On 8 public v1.18 pre-release logs, that applied delay was 110.0 ms every time ([`GRADE-fresh.md`](studies/receiver-2026/GRADE-fresh.md)). PX4 main has since renamed `vehicle_gps_position` to `vehicle_gnss` (PR [#24399](https://github.com/PX4/PX4-Autopilot/pull/24399)), which `gps_lag.py` does not read yet.
+
 ## What the fleet says
 
 On 164 public Flight Review logs from 115 vehicles (`studies/fleet-2026/GRADE.md`, pre-registered), the median lag was 99.8 ms, close to the default 110 ms. But 29.6% of logs were more than 50 ms away from their own setting, and two logs of the same vehicle agreed to a median 5.3 ms. 98% of them ran the default.
 
 **Replicated.** On an independent sample, 98 logs from 98 other vehicles, the median was 113.8 ms and 31.2% were more than 50 ms off their setting. Both figures were inside the ranges set before that run (px4-log-health, [`studies/fleet-health-2026/GRADE.md`](https://github.com/munimtechnologies/px4-log-health/blob/main/studies/fleet-health-2026/GRADE.md), R1 and R2).
 
-**EKF2's own residuals agree.** On those 98 fresh logs, EKF2's GPS velocity innovations, compared with acceleration, lean the way the measured mismatch says they should in 25 of 27 logs that are more than 50 ms off their setting, and the two methods rank the logs alike (Spearman +0.86). The check was pre-registered and decided C1 ([`studies/fleet-2026/GRADE-innov-confirm.md`](studies/fleet-2026/GRADE-innov-confirm.md)). The innovation shows about 0.6 of the measured mismatch, as a filter that partly follows a late GPS should.
+**EKF2's own residuals agree.** On those 98 fresh logs, EKF2's GPS velocity innovations, compared with acceleration, lean the way the measured mismatch says they should in 25 of 27 logs that are more than 50 ms off their setting, and the two methods rank the logs alike (Spearman +0.86). The check was pre-registered and decided C1 ([`studies/fleet-2026/GRADE-innov-confirm.md`](studies/fleet-2026/GRADE-innov-confirm.md)).
 
-**Next, pre-registered: does the mismatch matter?** EKF2 accepts or rejects each GPS velocity sample with an innovation test (ratio above 1 = rejected). [`studies/mismatch-2026/PLAN.md`](studies/mismatch-2026/PLAN.md) asks whether logs whose GPS delay is off their setting show higher GPS velocity test ratios while the vehicle accelerates, and whether they see more rejections (`mismatch.py`). Arithmetic from PX4's defaults, written down first, says the mismatch should show but should not cause rejections by itself. It reads the same fresh logs as fresh-2026 (below), in the same download.
+**Does the mismatch matter? It shows in EKF2's own GPS check (mismatch-2026, pre-registered).** EKF2 accepts or rejects each GPS velocity sample with an innovation test (ratio above 1 = rejected). On 256 fresh logs ([`studies/mismatch-2026/GRADE.md`](studies/mismatch-2026/GRADE.md)), the test ratio while accelerating was a median 2.7 times its steady-flight value on logs more than 50 ms off their setting, against 1.7 times on the others (difference in log10 lift +0.19, interval 0.10 to 0.31). The larger the mismatch, the larger the rise (Spearman 0.26, interval 0.15 to 0.37). 20% of mismatched logs had at least one GPS velocity rejection in flight, against 16% of the others. That gap is within chance, but the data can't rule out a real one of up to 14 points, so the plan's "no extra rejections" check (M3) failed. As the plan's rule D1 says, px4-log-health's checkup will say this on a mismatched log (0.3.3, in testing).
 
-**Also pre-registered: how consistent are EKF2's GNSS innovations on real flights?** PX4 RFC [#28837](https://github.com/PX4/PX4-Autopilot/issues/28837) argues, from simulation, that EKF2 treats GNSS samples as independent although real GNSS errors stay correlated for seconds to minutes. If so, its normalised innovation squared (NIS) sits far below 1 and its gate is far wider than the real innovations. [`studies/nis-2026/PLAN.md`](studies/nis-2026/PLAN.md) measures, on the same fresh logs, the NIS of EKF2's horizontal GNSS position and velocity innovations and how strongly they are correlated from 1 to 20 s apart, by fix type and receiver (`nis.py`). The predictions and the thresholds were written down before any log was read.
+**How consistent are EKF2's GNSS innovations on real flights? (nis-2026, pre-registered).** PX4 RFC [#28837](https://github.com/PX4/PX4-Autopilot/issues/28837) argues from simulation that EKF2 treats GNSS samples as independent although real GNSS errors stay correlated, which leaves its normalised innovation squared (NIS) far below 1 and its gate far wider than the real innovations. On 285 real flights ([`studies/nis-2026/GRADE.md`](studies/nis-2026/GRADE.md)), all four checks held:
 
-## Does the receiver model matter? (exploratory, seen twice)
+- the median position NIS was **0.0079** (consistent: 0.693), velocity **0.024**;
+- measured in the innovations' real spread, EKF2's 5-SD gate is about **30 SDs** wide for position and **17** for velocity (the RFC's simulation: more than 11);
+- position innovations 1 s apart correlate at **0.78** (1/e time about 3.7 s), velocity ones at **0.35** (about 1 s, the limit of 500 ms logging).
 
-PX4 uses one `EKF2_GPS_DELAY` for every receiver. ArduPilot assigns a lag by u-blox generation: 120 ms for M8 "based on flight logs", and the same 120 ms for F9, M9 and M10, with the comment "F9 lag not verified yet from flight log" (`AP_GPS_UBLOX.cpp`, `get_lag`). PX4's GPS driver records the receiver model it detected in the device_id of every GPS message, and `receiver.py` reads it.
+Figures by fix type (3D, SBAS, RTK fixed) and receiver are in the grade. Innovations are not raw GNSS errors, so these are what EKF2 sees, not the receiver's own error correlation time.
 
-Two samples with no vehicle in common, one log per vehicle:
+## Does the receiver model matter? (exploratory, seen three times)
 
-| receiver (as PX4 detected it) | receiver-2026: vehicles, median lag | receiver-confirm: vehicles, median lag | pooled |
+PX4 uses one GPS delay for every receiver up to v1.17. ArduPilot assigns a lag by u-blox generation: 120 ms for M8 "based on flight logs", and the same 120 ms for F9, M9 and M10, with the comment "F9 lag not verified yet from flight log" (`AP_GPS_UBLOX.cpp`, `get_lag`). PX4's GPS driver records the receiver model it detected in the device_id of every GPS message, and `receiver.py` reads it.
+
+Three samples with no vehicle in common, one log per vehicle:
+
+| receiver (as PX4 detected it) | receiver-2026: vehicles, median lag | receiver-confirm | fresh-2026 |
 |---|---|---|---|
-| u-blox M9 | 25, 71.3 ms | 32, 76.2 ms | 57, **73.6 ms** |
-| DroneCAN | 39, 104.4 ms | 49, 92.9 ms | 88, 97.9 ms |
-| u-blox, model not detected (includes M10 on v1.15) | 19, 127.8 ms | 27, 130.3 ms | 46, 128.1 ms |
-| u-blox F9P | 16, 142.6 ms | 27, 143.5 ms | 43, **143.5 ms** |
-| u-blox M8 | 15, 146.6 ms | 7, 150.9 ms | 22, **148.8 ms** |
-| NMEA | 13, 150.0 ms | 16, 230.9 ms | 29, 206.5 ms |
+| u-blox M9 | 25, **71.3 ms** | 32, **76.2 ms** | 29, **81.3 ms** |
+| DroneCAN | 39, 104.4 ms | 49, 92.9 ms | 84, 105.9 ms |
+| u-blox, model not detected (includes M10 on v1.15) | 19, 127.8 ms | 27, 130.3 ms | 38, 140.9 ms |
+| u-blox F9P | 16, **142.6 ms** | 27, **143.5 ms** | 42, **143.1 ms** |
+| u-blox M8 | 15, **146.6 ms** | 7, **150.9 ms** | 12, **145.3 ms** |
+| NMEA | 13, 150.0 ms | 16, 230.9 ms | 24, 208.4 ms |
 
-- **receiver-2026** ([`GRADE.md`](studies/receiver-2026/GRADE.md)) was a fresh random sample of 163 passing logs. Its enough-data check (E1) failed, so it is exploratory. It found M9 about 75 ms less late than M8 (interval 53 to 107 ms), and F9P and M8 alike.
-- **receiver-confirm** ([`GRADE-confirm.md`](studies/receiver-2026/GRADE-confirm.md)) read the receiver model of the 213 vehicles in the two earlier samples. Their lags had been published before the M9 gap was seen, and only the receiver class was new. **M9 − F9P = −67.3 ms (interval −101 to −48)**, as the plan predicted. Its E1 failed too: only 7 M8 vehicles turned up, against the 10 needed. So by the plan's own rule this is still exploratory, and the M9-vs-M8 gap could not be tested.
+- **receiver-2026** ([`GRADE.md`](studies/receiver-2026/GRADE.md)) was a fresh random sample of 163 passing logs. Its enough-data check (E1) failed, so it is exploratory.
+- **receiver-confirm** ([`GRADE-confirm.md`](studies/receiver-2026/GRADE-confirm.md)) read the receiver model of the 213 vehicles in the two earlier samples, whose lags had been published before the M9 gap was seen. **M9 − F9P = −67.3 ms (interval −101 to −48)**. E1 failed (7 M8 vehicles).
+- **fresh-2026** ([`GRADE-fresh.md`](studies/receiver-2026/GRADE-fresh.md)) was a new random sample of 298 passing logs, leaving out every earlier vehicle. **M9 − F9P = −61.8 ms (interval −88 to −42)**. E1 failed again: 12 M8 logs against the 15 needed (M8 receivers were 4% of passing logs, not the 9% the plan assumed). A per-receiver default would have brought only 2.3 points more vehicles within 50 ms of their lag (F5 failed), because the spread within each class is wide. The NMEA check (F4) failed. NMEA receivers on a 200 ms grid had a median lag of 102 ms, and those at 1 Hz 256 ms.
 
-What this means: on PX4, the M9 is far less late than the F9P, on two separate sets of vehicles, with an interval well away from 0 each time. The single 110 ms default sits between the M9 (about 74 ms) and the M8/F9P (about 145 ms). We still don't call it confirmed, and the decision to add a per-receiver line to px4-log-health's checkup did not fire. Measuring your own vehicle stays the advice. These are PX4 measurements only and say nothing about ArduPilot's own lag.
+What this means: on PX4, the M9 was 60-75 ms less late than the F9P and the M8 in three independent samples, and the F9P and M8 were within 8 ms of each other each time. By the plans' own rules it is still exploratory, because the M8 class never reached its count, and no per-receiver line was added to px4-log-health's checkup. Knowing the model doesn't replace measuring your own vehicle. Since PX4 v1.18 the delay can be set per receiver (`SENS_GPSn_DELAY`), which is where such a measurement goes. These are PX4 measurements only and say nothing about ArduPilot's own lag.
 
 ### The measurement rate does not explain the M9 gap (rate-2026, pre-registered)
 
@@ -62,18 +71,16 @@ Its check that receivers run at the rate PX4's driver asks for (Q1) **failed**, 
 | u-blox F9P L1L2 | 100 ms (10 Hz) | 200 ms (5 Hz) |
 | u-blox F9P L1L5 | 100 ms (10 Hz) | 143 ms (7 Hz) |
 
-Re-scored by release, after seeing the data and so only exploratory, the receivers nearly always ran at the rate their release asked for: M8 11/11, M9 33/34, F9P 13/14. The swap also works as a natural experiment. The M9 measured more slowly than the F9P before v1.16 and faster after it, and it was much less late both times (median 74.5 vs 153.9 ms before, 64.5 vs 179.0 ms after; small groups, no interval). This release-aware rule is now pre-registered on fresh logs: [`PLAN-rate2.md`](studies/receiver-2026/PLAN-rate2.md).
-
-**Next, pre-registered: does the gap hold on fresh logs?** [`studies/receiver-2026/PLAN-fresh.md`](studies/receiver-2026/PLAN-fresh.md) draws a new random sample that leaves out every vehicle above, sized from receiver-2026's own class shares so that enough M8 logs turn up this time (`fresh.py`). It tests M9 against M8 and F9P, ArduPilot's assumption that the F9 is no later than the M8, and the NMEA hint in the table. Its rate check F6 was written with the same v1.15.4 rates as rate-2026's Q1. It will be scored as written, and rate2-2026 gives the release-aware answer on the same logs.
+Re-scored by release, after seeing the data and so only exploratory, the receivers nearly always ran at the rate their release asked for: M8 11/11, M9 33/34, F9P 13/14. This release-aware rule was pre-registered before fresh-2026 was downloaded ([`PLAN-rate2.md`](studies/receiver-2026/PLAN-rate2.md)) and is scored from fresh-2026's rows by `rate2.py`. fresh-2026's own rate check (F6) used the v1.15.4 rates, as written, and failed the same way.
 
 ## Suggested setting (rule D1)
 
-If a passing log's `lag_minus_param_ms` is more than about 50 ms either way, the measured `lag_ms` is a reasonable **starting value** for `EKF2_GPS_DELAY`.
+If a passing log's `lag_minus_param_ms` is more than about 50 ms either way, the measured `lag_ms` is a reasonable **starting value** for `EKF2_GPS_DELAY` (on PX4 v1.18 and newer, for the receiver's `SENS_GPSn_DELAY`).
 
 - Measure two or three flights first. Flights of one vehicle should agree within a few ms.
 - Check the change with EKF2 log replay (PX4 docs: "EKF2 log replay") before flying it.
 - Smaller differences aren't worth changing.
-- This is not a calibration. The studies show that two independent methods agree on the direction and rank of the mismatch, not that the new setting improves any one vehicle's estimate. There is no ground truth for any one vehicle.
+- This is not a calibration. The studies show that two independent methods agree on the direction and rank of the mismatch, and that the mismatch shows in EKF2's own test ratios, not that the new setting improves any one vehicle's estimate. There is no ground truth for any one vehicle.
 
 History: D1 was withdrawn after the first innovation check came back C2 as written, because that plan had EKF2's innovation sign backwards (PX4 computes prediction minus measurement; see `GRADE-innov.md`). The corrected check was pre-registered on fresh logs and held, so D1 is back.
 
@@ -85,10 +92,10 @@ History: D1 was withdrawn after the first innovation check came back C2 as writt
 - `studies/receiver-2026/`: lag by GPS receiver model (`receiver.py` 0.1.0). Plan, grade (E1 failed, so exploratory; 5 of 6 predictions held as written), `logs.jsonl`, `summary.json` and `job-fetched.json`. The first run was stopped from outside the job after 88 logs (exit 143). Its rows were never scored, and the complete second run is the one graded.
 - `studies/receiver-2026/PLAN-confirm.md`, `GRADE-confirm.md`, `confirm/`: the M9 gap tested on the earlier samples' published lags (`confirm.py` 0.1.0). All 213 logs re-read; E0 held (213 of 213 re-measured within 1 ms); E1 failed (M8 7); C2 and C4 held as written; C1, C3 and C5 not scored.
 - `studies/receiver-2026/PLAN-rate.md`, `GRADE-rate.md`, `rate/`: measurement rate from the receiver's UTC times (`rate.py` 0.1.0), scored on the published lags. All 376 logs re-read; E0, E1 and Q2 held; Q1 failed (the driver's rates changed in v1.16); Q4 failed; Q3 not scored.
-- `studies/receiver-2026/PLAN-rate2.md`: the release-aware rate rule and the M9 gap on PX4 v1.16+, scored from fresh-2026's rows (`rate2.py` 0.1.0, which reads no log), pre-registered.
-- `studies/receiver-2026/PLAN-fresh.md`: the receiver gap on a fresh sample of public logs (`fresh.py` 0.1.0, which reuses `gps_lag.py`, `receiver.py` and `rate.py` unchanged), pre-registered. Queued.
-- `studies/mismatch-2026/PLAN.md`: does a GPS delay more than 50 ms off its setting raise EKF2's GPS velocity test ratios while accelerating, or add rejections? (`mismatch.py` 0.1.0), pre-registered. `fresh_mm.py` runs `fresh.py` 0.1.0 unchanged and reads these figures from the same downloaded logs.
-- `studies/nis-2026/PLAN.md`: NIS and autocorrelation of EKF2's horizontal GNSS position and velocity innovations on real flights, the open questions of PX4 RFC #28837 (`nis.py` 0.1.0), pre-registered. `fresh_nis.py` runs `fresh.py` 0.1.0 unchanged and reads both the mismatch and the NIS figures from the same downloaded logs.
+- `studies/receiver-2026/PLAN-fresh.md`, `GRADE-fresh.md`, `fresh/`: the receiver gap on a fresh sample (`fresh.py` 0.1.0, which reuses `gps_lag.py`, `receiver.py` and `rate.py` unchanged). 1,000 attempts, 298 passing logs. E1 failed (M8 12), so exploratory; F2 met its rule; F4 and F5 failed; F1, F3 and F6 not scored. `fresh/logs.jsonl` also carries the mismatch-2026 (`mm_`) and nis-2026 (`nis_`) fields of every log.
+- `studies/receiver-2026/PLAN-rate2.md`: the release-aware rate rule and the M9 gap on PX4 v1.16+, scored from fresh-2026's rows (`rate2.py` 0.1.0, which reads no log).
+- `studies/mismatch-2026/PLAN.md`, `GRADE.md`, `summary.json`: does a GPS delay more than 50 ms off its setting raise EKF2's GPS velocity test ratios while accelerating, or add rejections? (`mismatch.py` 0.1.0). E0, S0, M1 and M2 held; M3 failed.
+- `studies/nis-2026/PLAN.md`, `GRADE.md`, `summary.json`: NIS and autocorrelation of EKF2's horizontal GNSS position and velocity innovations on real flights, the open questions of PX4 RFC #28837 (`nis.py` 0.1.0). E0, N1, N2, W1 and W2 held.
 
 **How long the raw logs stay.** Since October 2024, Flight Review keeps every upload, public ones included, for 12 months, then removes it automatically (announcement on discuss.px4.io, "PX4 Flight Review & Data Retention", topic 41906, 2024-10-14). These studies drew logs uploaded from October 2025 on, so the raw logs behind them start to disappear from October 2026. The per-log rows in each study's `logs.jsonl` (log id, hashed vehicle id, every measured figure, no positions) stay here, and the scored checks can be recomputed from them, but once a log is gone it can't be measured again from the raw file. If you want to re-measure, download the logs you need while they are still listed.
 

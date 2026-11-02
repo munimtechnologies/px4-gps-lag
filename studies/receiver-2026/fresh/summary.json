@@ -1,0 +1,1387 @@
+{
+ "attempted": 1000,
+ "downloaded": 813,
+ "passed": 298,
+ "classes": {
+  "multiple": {
+   "n": 20,
+   "median_lag_ms": 122.7,
+   "p25": 103.8,
+   "p75": 182.2
+  },
+  "nmea": {
+   "n": 24,
+   "median_lag_ms": 208.4,
+   "p25": 77.5,
+   "p75": 255.7
+  },
+  "other:i2c/0x00": {
+   "n": 1,
+   "median_lag_ms": 123.6,
+   "p25": 123.6,
+   "p75": 123.6
+  },
+  "other:mavlink/0xAF": {
+   "n": 13,
+   "median_lag_ms": 18.9,
+   "p25": -3.6,
+   "p75": 135.1
+  },
+  "other:serial/0x21": {
+   "n": 1,
+   "median_lag_ms": 0.8,
+   "p25": 0.8,
+   "p75": 0.8
+  },
+  "other:serial/0xEC": {
+   "n": 3,
+   "median_lag_ms": 100.5,
+   "p25": 95.8,
+   "p75": 127.6
+  },
+  "other:unknown/0xA4": {
+   "n": 3,
+   "median_lag_ms": 53.3,
+   "p25": 52.5,
+   "p75": 67.5
+  },
+  "uavcan": {
+   "n": 84,
+   "median_lag_ms": 105.9,
+   "p25": 79.2,
+   "p75": 129.3
+  },
+  "ubx_10": {
+   "n": 7,
+   "median_lag_ms": 105.2,
+   "p25": 92.7,
+   "p75": 133.5
+  },
+  "ubx_7": {
+   "n": 1,
+   "median_lag_ms": 226.8,
+   "p25": 226.8,
+   "p75": 226.8
+  },
+  "ubx_f9p": {
+   "n": 42,
+   "median_lag_ms": 143.1,
+   "p25": 119.8,
+   "p75": 180.1
+  },
+  "ubx_generic": {
+   "n": 38,
+   "median_lag_ms": 140.9,
+   "p25": 100.4,
+   "p75": 167.1
+  },
+  "ubx_m8": {
+   "n": 12,
+   "median_lag_ms": 145.3,
+   "p25": 103.8,
+   "p75": 167.6
+  },
+  "ubx_m9": {
+   "n": 29,
+   "median_lag_ms": 81.3,
+   "p25": 62.0,
+   "p75": 100.0
+  },
+  "unknown": {
+   "n": 20,
+   "median_lag_ms": 105.8,
+   "p25": 72.4,
+   "p75": 134.4
+  }
+ },
+ "n_core": {
+  "ubx_m8": 12,
+  "ubx_m9": 29,
+  "ubx_f9p": 42
+ },
+ "F1_m9_minus_m8": null,
+ "F2_m9_minus_f9p": {
+  "diff_ms": -61.8,
+  "ci95_ms": [
+   -88.4,
+   -42.1
+  ]
+ },
+ "F3_f9p_minus_m8": null,
+ "F4_nmea_minus_serial_ublox": {
+  "diff_ms": 83.0,
+  "ci95_ms": [
+   -40.2,
+   128.1
+  ]
+ },
+ "F4_n": [
+  24,
+  128
+ ],
+ "F5_class_default": {
+  "n": 217,
+  "within_50_at_110": 0.6498,
+  "within_50_at_class_median": 0.6728,
+  "gain": 0.023
+ },
+ "F6_driver_grid": {
+  "ubx_m8": {
+   "gridded": 7,
+   "on_driver": 7,
+   "share": 1.0
+  },
+  "ubx_m9": {
+   "gridded": 19,
+   "on_driver": 7,
+   "share": 0.3684
+  },
+  "ubx_f9p": {
+   "gridded": 30,
+   "on_driver": 6,
+   "share": 0.2
+  }
+ },
+ "R2_m9_minus_other_at_125": null,
+ "R2_n": [
+  7,
+  8
+ ],
+ "R2": null,
+ "not_passed_reasons": {
+  "download too large": 187,
+  "IMU explains too little of the GPS velocity change": 181,
+  "too few in-flight GPS pairs": 98,
+  "error: no vehicle_gps_position in the log": 141,
+  "too little manoeuvring": 86,
+  "simulated GPS": 1,
+  "error: no sensor_combined in the log": 6,
+  "lag too uncertain": 1,
+  "best lag at the edge of the search": 1
+ },
+ "checks": {
+  "E1": false,
+  "F1": null,
+  "F2": true,
+  "F3": null,
+  "F4": false,
+  "F5": false,
+  "F6": null
+ },
+ "decision": {
+  "D1_receiver_line_in_checkup": false,
+  "D3_nmea_note": false
+ },
+ "exploratory": {
+  "note": "not pre-registered; descriptive only",
+  "receiver": {
+   "note": "not pre-registered; descriptive only",
+   "by_receiver_and_release": {
+    "multiple v0.0": {
+     "n": 1,
+     "median_lag_ms": 62.7
+    },
+    "multiple v1.12": {
+     "n": 10,
+     "median_lag_ms": 108.7
+    },
+    "multiple v1.13": {
+     "n": 1,
+     "median_lag_ms": 83.6
+    },
+    "multiple v1.14": {
+     "n": 3,
+     "median_lag_ms": 200.1
+    },
+    "multiple v1.15": {
+     "n": 2,
+     "median_lag_ms": 155.5
+    },
+    "multiple v1.16": {
+     "n": 3,
+     "median_lag_ms": 252.6
+    },
+    "nmea v0.0": {
+     "n": 1,
+     "median_lag_ms": 124.7
+    },
+    "nmea v1.12": {
+     "n": 4,
+     "median_lag_ms": 61.4
+    },
+    "nmea v1.13": {
+     "n": 2,
+     "median_lag_ms": 73.9
+    },
+    "nmea v1.14": {
+     "n": 1,
+     "median_lag_ms": 78.9
+    },
+    "nmea v1.15": {
+     "n": 9,
+     "median_lag_ms": 259.1
+    },
+    "nmea v1.16": {
+     "n": 4,
+     "median_lag_ms": 146.3
+    },
+    "nmea v1.17": {
+     "n": 1,
+     "median_lag_ms": 270.5
+    },
+    "nmea v1.18": {
+     "n": 1,
+     "median_lag_ms": 186.9
+    },
+    "nmea v2.13": {
+     "n": 1,
+     "median_lag_ms": 228.6
+    },
+    "other:i2c/0x00 v1.14": {
+     "n": 1,
+     "median_lag_ms": 123.6
+    },
+    "other:mavlink/0xAF unknown": {
+     "n": 1,
+     "median_lag_ms": 144.8
+    },
+    "other:mavlink/0xAF v1.12": {
+     "n": 1,
+     "median_lag_ms": -14.1
+    },
+    "other:mavlink/0xAF v1.13": {
+     "n": 4,
+     "median_lag_ms": 65.0
+    },
+    "other:mavlink/0xAF v1.14": {
+     "n": 3,
+     "median_lag_ms": 7.4
+    },
+    "other:mavlink/0xAF v1.15": {
+     "n": 1,
+     "median_lag_ms": 9.2
+    },
+    "other:mavlink/0xAF v1.16": {
+     "n": 1,
+     "median_lag_ms": 211.3
+    },
+    "other:mavlink/0xAF v1.17": {
+     "n": 2,
+     "median_lag_ms": 120.3
+    },
+    "other:serial/0x21 v1.17": {
+     "n": 1,
+     "median_lag_ms": 0.8
+    },
+    "other:serial/0xEC v1.15": {
+     "n": 3,
+     "median_lag_ms": 100.5
+    },
+    "other:unknown/0xA4 v0.0": {
+     "n": 1,
+     "median_lag_ms": 51.6
+    },
+    "other:unknown/0xA4 v1.15": {
+     "n": 2,
+     "median_lag_ms": 67.5
+    },
+    "uavcan v0.0": {
+     "n": 1,
+     "median_lag_ms": 131.1
+    },
+    "uavcan v1.12": {
+     "n": 1,
+     "median_lag_ms": 94.0
+    },
+    "uavcan v1.13": {
+     "n": 4,
+     "median_lag_ms": 97.9
+    },
+    "uavcan v1.14": {
+     "n": 11,
+     "median_lag_ms": 70.5
+    },
+    "uavcan v1.15": {
+     "n": 25,
+     "median_lag_ms": 110.1
+    },
+    "uavcan v1.16": {
+     "n": 23,
+     "median_lag_ms": 107.1
+    },
+    "uavcan v1.17": {
+     "n": 14,
+     "median_lag_ms": 117.8
+    },
+    "uavcan v2.1": {
+     "n": 1,
+     "median_lag_ms": 91.4
+    },
+    "uavcan v6.4": {
+     "n": 1,
+     "median_lag_ms": 42.8
+    },
+    "uavcan v6.6": {
+     "n": 1,
+     "median_lag_ms": 20.0
+    },
+    "uavcan v6.7": {
+     "n": 1,
+     "median_lag_ms": 35.2
+    },
+    "uavcan v6.9": {
+     "n": 1,
+     "median_lag_ms": 128.7
+    },
+    "ubx_10 v1.12": {
+     "n": 3,
+     "median_lag_ms": 127.8
+    },
+    "ubx_10 v1.14": {
+     "n": 1,
+     "median_lag_ms": 105.2
+    },
+    "ubx_10 v1.15": {
+     "n": 2,
+     "median_lag_ms": 97.7
+    },
+    "ubx_10 v1.20": {
+     "n": 1,
+     "median_lag_ms": 98.0
+    },
+    "ubx_7 v1.14": {
+     "n": 1,
+     "median_lag_ms": 226.8
+    },
+    "ubx_f9p unknown": {
+     "n": 1,
+     "median_lag_ms": 138.0
+    },
+    "ubx_f9p v1.12": {
+     "n": 5,
+     "median_lag_ms": 157.0
+    },
+    "ubx_f9p v1.13": {
+     "n": 5,
+     "median_lag_ms": 116.9
+    },
+    "ubx_f9p v1.14": {
+     "n": 4,
+     "median_lag_ms": 152.8
+    },
+    "ubx_f9p v1.15": {
+     "n": 8,
+     "median_lag_ms": 128.1
+    },
+    "ubx_f9p v1.16": {
+     "n": 12,
+     "median_lag_ms": 178.1
+    },
+    "ubx_f9p v1.17": {
+     "n": 6,
+     "median_lag_ms": 162.2
+    },
+    "ubx_f9p v2.2": {
+     "n": 1,
+     "median_lag_ms": 61.7
+    },
+    "ubx_generic v0.0": {
+     "n": 2,
+     "median_lag_ms": 130.3
+    },
+    "ubx_generic v1.14": {
+     "n": 10,
+     "median_lag_ms": 159.4
+    },
+    "ubx_generic v1.15": {
+     "n": 14,
+     "median_lag_ms": 125.3
+    },
+    "ubx_generic v1.16": {
+     "n": 7,
+     "median_lag_ms": 110.4
+    },
+    "ubx_generic v1.17": {
+     "n": 4,
+     "median_lag_ms": 137.1
+    },
+    "ubx_generic v4.0": {
+     "n": 1,
+     "median_lag_ms": 260.5
+    },
+    "ubx_m8 v0.0": {
+     "n": 1,
+     "median_lag_ms": 104.9
+    },
+    "ubx_m8 v1.12": {
+     "n": 4,
+     "median_lag_ms": 145.3
+    },
+    "ubx_m8 v1.13": {
+     "n": 2,
+     "median_lag_ms": 207.3
+    },
+    "ubx_m8 v1.16": {
+     "n": 4,
+     "median_lag_ms": 155.2
+    },
+    "ubx_m8 v1.18": {
+     "n": 1,
+     "median_lag_ms": 100.4
+    },
+    "ubx_m9 v1.12": {
+     "n": 1,
+     "median_lag_ms": 71.1
+    },
+    "ubx_m9 v1.13": {
+     "n": 7,
+     "median_lag_ms": 100.0
+    },
+    "ubx_m9 v1.14": {
+     "n": 3,
+     "median_lag_ms": 107.6
+    },
+    "ubx_m9 v1.15": {
+     "n": 5,
+     "median_lag_ms": 81.9
+    },
+    "ubx_m9 v1.16": {
+     "n": 7,
+     "median_lag_ms": 68.6
+    },
+    "ubx_m9 v1.17": {
+     "n": 5,
+     "median_lag_ms": 65.8
+    },
+    "ubx_m9 v1.18": {
+     "n": 1,
+     "median_lag_ms": 70.7
+    },
+    "unknown unknown": {
+     "n": 1,
+     "median_lag_ms": 341.9
+    },
+    "unknown v1.11": {
+     "n": 13,
+     "median_lag_ms": 111.5
+    },
+    "unknown v1.4": {
+     "n": 4,
+     "median_lag_ms": 69.8
+    },
+    "unknown v1.8": {
+     "n": 1,
+     "median_lag_ms": 131.6
+    },
+    "unknown v180.6": {
+     "n": 1,
+     "median_lag_ms": 154.9
+    }
+   },
+   "by_receiver_and_fix": {
+    "multiple fix<=3": {
+     "n": 10,
+     "median_lag_ms": 108.7
+    },
+    "multiple fix<=4": {
+     "n": 4,
+     "median_lag_ms": 109.1
+    },
+    "multiple fix<=6": {
+     "n": 5,
+     "median_lag_ms": 213.8
+    },
+    "multiple fix<=8": {
+     "n": 1,
+     "median_lag_ms": 124.9
+    },
+    "nmea fix<=3": {
+     "n": 8,
+     "median_lag_ms": 79.1
+    },
+    "nmea fix<=4": {
+     "n": 1,
+     "median_lag_ms": 186.9
+    },
+    "nmea fix<=6": {
+     "n": 15,
+     "median_lag_ms": 253.3
+    },
+    "other:i2c/0x00 fix<=4": {
+     "n": 1,
+     "median_lag_ms": 123.6
+    },
+    "other:mavlink/0xAF fix<=3": {
+     "n": 13,
+     "median_lag_ms": 18.9
+    },
+    "other:serial/0x21 fix<=3": {
+     "n": 1,
+     "median_lag_ms": 0.8
+    },
+    "other:serial/0xEC fix<=3": {
+     "n": 3,
+     "median_lag_ms": 100.5
+    },
+    "other:unknown/0xA4 fix<=4": {
+     "n": 1,
+     "median_lag_ms": 81.8
+    },
+    "other:unknown/0xA4 fix<=6": {
+     "n": 2,
+     "median_lag_ms": 52.5
+    },
+    "uavcan fix<=3": {
+     "n": 29,
+     "median_lag_ms": 93.8
+    },
+    "uavcan fix<=4": {
+     "n": 36,
+     "median_lag_ms": 98.2
+    },
+    "uavcan fix<=6": {
+     "n": 19,
+     "median_lag_ms": 120.9
+    },
+    "ubx_10 fix<=3": {
+     "n": 2,
+     "median_lag_ms": 127.3
+    },
+    "ubx_10 fix<=4": {
+     "n": 1,
+     "median_lag_ms": 105.2
+    },
+    "ubx_10 fix<=6": {
+     "n": 4,
+     "median_lag_ms": 107.5
+    },
+    "ubx_7 fix<=4": {
+     "n": 1,
+     "median_lag_ms": 226.8
+    },
+    "ubx_f9p fix<=3": {
+     "n": 10,
+     "median_lag_ms": 119.7
+    },
+    "ubx_f9p fix<=4": {
+     "n": 17,
+     "median_lag_ms": 142.0
+    },
+    "ubx_f9p fix<=6": {
+     "n": 15,
+     "median_lag_ms": 164.2
+    },
+    "ubx_generic fix<=3": {
+     "n": 19,
+     "median_lag_ms": 141.3
+    },
+    "ubx_generic fix<=4": {
+     "n": 19,
+     "median_lag_ms": 140.6
+    },
+    "ubx_m8 fix<=3": {
+     "n": 1,
+     "median_lag_ms": 104.9
+    },
+    "ubx_m8 fix<=4": {
+     "n": 11,
+     "median_lag_ms": 155.6
+    },
+    "ubx_m9 fix<=3": {
+     "n": 8,
+     "median_lag_ms": 106.5
+    },
+    "ubx_m9 fix<=4": {
+     "n": 21,
+     "median_lag_ms": 70.7
+    },
+    "unknown fix<=3": {
+     "n": 6,
+     "median_lag_ms": 69.8
+    },
+    "unknown fix<=4": {
+     "n": 14,
+     "median_lag_ms": 113.4
+    }
+   },
+   "by_receiver_count": {
+    "0 receiver(s)": {
+     "n": 20,
+     "median_lag_ms": 105.8
+    },
+    "1 receiver(s)": {
+     "n": 249,
+     "median_lag_ms": 115.0
+    },
+    "2 receiver(s)": {
+     "n": 28,
+     "median_lag_ms": 128.1
+    },
+    "3 receiver(s)": {
+     "n": 1,
+     "median_lag_ms": 124.9
+    }
+   },
+   "by_receiver_and_logged_interval": {
+    "multiple <=0.15 s": {
+     "n": 10,
+     "median_lag_ms": 108.7
+    },
+    "multiple >0.15 s": {
+     "n": 10,
+     "median_lag_ms": 167.4
+    },
+    "nmea <=0.15 s": {
+     "n": 3,
+     "median_lag_ms": 173.3
+    },
+    "nmea >0.15 s": {
+     "n": 21,
+     "median_lag_ms": 234.5
+    },
+    "other:i2c/0x00 >0.15 s": {
+     "n": 1,
+     "median_lag_ms": 123.6
+    },
+    "other:mavlink/0xAF <=0.15 s": {
+     "n": 2,
+     "median_lag_ms": 110.2
+    },
+    "other:mavlink/0xAF >0.15 s": {
+     "n": 11,
+     "median_lag_ms": 18.9
+    },
+    "other:serial/0x21 <=0.15 s": {
+     "n": 1,
+     "median_lag_ms": 0.8
+    },
+    "other:serial/0xEC <=0.15 s": {
+     "n": 3,
+     "median_lag_ms": 100.5
+    },
+    "other:unknown/0xA4 <=0.15 s": {
+     "n": 3,
+     "median_lag_ms": 53.3
+    },
+    "uavcan <=0.15 s": {
+     "n": 9,
+     "median_lag_ms": 108.5
+    },
+    "uavcan >0.15 s": {
+     "n": 75,
+     "median_lag_ms": 104.8
+    },
+    "ubx_10 <=0.15 s": {
+     "n": 1,
+     "median_lag_ms": 156.6
+    },
+    "ubx_10 >0.15 s": {
+     "n": 6,
+     "median_lag_ms": 101.6
+    },
+    "ubx_7 >0.15 s": {
+     "n": 1,
+     "median_lag_ms": 226.8
+    },
+    "ubx_f9p <=0.15 s": {
+     "n": 6,
+     "median_lag_ms": 135.0
+    },
+    "ubx_f9p >0.15 s": {
+     "n": 36,
+     "median_lag_ms": 143.1
+    },
+    "ubx_generic <=0.15 s": {
+     "n": 21,
+     "median_lag_ms": 133.5
+    },
+    "ubx_generic >0.15 s": {
+     "n": 17,
+     "median_lag_ms": 144.4
+    },
+    "ubx_m8 >0.15 s": {
+     "n": 12,
+     "median_lag_ms": 145.3
+    },
+    "ubx_m9 <=0.15 s": {
+     "n": 19,
+     "median_lag_ms": 70.7
+    },
+    "ubx_m9 >0.15 s": {
+     "n": 10,
+     "median_lag_ms": 101.7
+    },
+    "unknown <=0.15 s": {
+     "n": 4,
+     "median_lag_ms": 69.8
+    },
+    "unknown >0.15 s": {
+     "n": 16,
+     "median_lag_ms": 113.4
+    }
+   },
+   "param_by_receiver": {
+    "multiple param 110.0": {
+     "n": 20,
+     "median_lag_ms": 122.7
+    },
+    "nmea param 110.0": {
+     "n": 22,
+     "median_lag_ms": 211.4
+    },
+    "nmea param 80.0": {
+     "n": 1,
+     "median_lag_ms": 228.6
+    },
+    "nmea param None": {
+     "n": 1,
+     "median_lag_ms": 186.9
+    },
+    "other:i2c/0x00 param 110.0": {
+     "n": 1,
+     "median_lag_ms": 123.6
+    },
+    "other:mavlink/0xAF param 110.0": {
+     "n": 10,
+     "median_lag_ms": 120.3
+    },
+    "other:mavlink/0xAF param None": {
+     "n": 3,
+     "median_lag_ms": -10.0
+    },
+    "other:serial/0x21 param 110.0": {
+     "n": 1,
+     "median_lag_ms": 0.8
+    },
+    "other:serial/0xEC param 110.0": {
+     "n": 3,
+     "median_lag_ms": 100.5
+    },
+    "other:unknown/0xA4 param 10.0": {
+     "n": 1,
+     "median_lag_ms": 81.8
+    },
+    "other:unknown/0xA4 param 110.0": {
+     "n": 2,
+     "median_lag_ms": 52.5
+    },
+    "uavcan param 110.0": {
+     "n": 80,
+     "median_lag_ms": 105.9
+    },
+    "uavcan param 120.0": {
+     "n": 1,
+     "median_lag_ms": 94.0
+    },
+    "uavcan param 200.0": {
+     "n": 2,
+     "median_lag_ms": 139.9
+    },
+    "uavcan param 50.0": {
+     "n": 1,
+     "median_lag_ms": 118.2
+    },
+    "ubx_10 param 110.0": {
+     "n": 5,
+     "median_lag_ms": 105.2
+    },
+    "ubx_10 param 120.0": {
+     "n": 2,
+     "median_lag_ms": 113.2
+    },
+    "ubx_7 param 110.0": {
+     "n": 1,
+     "median_lag_ms": 226.8
+    },
+    "ubx_f9p param 110.0": {
+     "n": 35,
+     "median_lag_ms": 148.3
+    },
+    "ubx_f9p param 120.0": {
+     "n": 2,
+     "median_lag_ms": 151.7
+    },
+    "ubx_f9p param 160.0": {
+     "n": 5,
+     "median_lag_ms": 126.5
+    },
+    "ubx_generic param 110.0": {
+     "n": 38,
+     "median_lag_ms": 140.9
+    },
+    "ubx_m8 param 110.0": {
+     "n": 11,
+     "median_lag_ms": 155.6
+    },
+    "ubx_m8 param None": {
+     "n": 1,
+     "median_lag_ms": 100.4
+    },
+    "ubx_m9 param 110.0": {
+     "n": 28,
+     "median_lag_ms": 81.6
+    },
+    "ubx_m9 param None": {
+     "n": 1,
+     "median_lag_ms": 70.7
+    },
+    "unknown param 110.0": {
+     "n": 20,
+     "median_lag_ms": 105.8
+    }
+   },
+   "stamp_minus_sample_by_receiver": {
+    "multiple": null,
+    "nmea": 110.0,
+    "other:i2c/0x00": 0.0,
+    "other:mavlink/0xAF": null,
+    "other:serial/0x21": 0.0,
+    "other:serial/0xEC": null,
+    "other:unknown/0xA4": null,
+    "uavcan": 0.0,
+    "ubx_10": null,
+    "ubx_7": null,
+    "ubx_f9p": null,
+    "ubx_generic": 0.0,
+    "ubx_m8": 110.0,
+    "ubx_m9": 110.0,
+    "unknown": null
+   }
+  },
+  "rate": {
+   "note": "not pre-registered; descriptive only",
+   "by_receiver_and_grid": {
+    "multiple 125": {
+     "n": 10,
+     "median_lag_ms": 108.7
+    },
+    "multiple 200": {
+     "n": 2,
+     "median_lag_ms": 372.0
+    },
+    "multiple none": {
+     "n": 8,
+     "median_lag_ms": 167.4
+    },
+    "nmea 100": {
+     "n": 1,
+     "median_lag_ms": 188.3
+    },
+    "nmea 200": {
+     "n": 12,
+     "median_lag_ms": 102.0
+    },
+    "nmea none": {
+     "n": 11,
+     "median_lag_ms": 247.8
+    },
+    "other:i2c/0x00 none": {
+     "n": 1,
+     "median_lag_ms": 123.6
+    },
+    "other:mavlink/0xAF none": {
+     "n": 13,
+     "median_lag_ms": 18.9
+    },
+    "other:serial/0x21 none": {
+     "n": 1,
+     "median_lag_ms": 0.8
+    },
+    "other:serial/0xEC none": {
+     "n": 3,
+     "median_lag_ms": 100.5
+    },
+    "other:unknown/0xA4 100": {
+     "n": 3,
+     "median_lag_ms": 53.3
+    },
+    "uavcan 100": {
+     "n": 4,
+     "median_lag_ms": 212.7
+    },
+    "uavcan 125": {
+     "n": 1,
+     "median_lag_ms": 135.6
+    },
+    "uavcan 200": {
+     "n": 51,
+     "median_lag_ms": 109.9
+    },
+    "uavcan none": {
+     "n": 28,
+     "median_lag_ms": 89.9
+    },
+    "ubx_10 100": {
+     "n": 1,
+     "median_lag_ms": 156.6
+    },
+    "ubx_10 none": {
+     "n": 6,
+     "median_lag_ms": 101.6
+    },
+    "ubx_7 200": {
+     "n": 1,
+     "median_lag_ms": 226.8
+    },
+    "ubx_f9p 100": {
+     "n": 6,
+     "median_lag_ms": 135.0
+    },
+    "ubx_f9p 200": {
+     "n": 24,
+     "median_lag_ms": 140.7
+    },
+    "ubx_f9p none": {
+     "n": 12,
+     "median_lag_ms": 144.2
+    },
+    "ubx_generic 100": {
+     "n": 13,
+     "median_lag_ms": 110.4
+    },
+    "ubx_generic 125": {
+     "n": 8,
+     "median_lag_ms": 144.8
+    },
+    "ubx_generic 200": {
+     "n": 4,
+     "median_lag_ms": 85.0
+    },
+    "ubx_generic none": {
+     "n": 13,
+     "median_lag_ms": 153.3
+    },
+    "ubx_m8 200": {
+     "n": 7,
+     "median_lag_ms": 104.9
+    },
+    "ubx_m8 none": {
+     "n": 5,
+     "median_lag_ms": 160.0
+    },
+    "ubx_m9 100": {
+     "n": 12,
+     "median_lag_ms": 67.7
+    },
+    "ubx_m9 125": {
+     "n": 7,
+     "median_lag_ms": 71.1
+    },
+    "ubx_m9 none": {
+     "n": 10,
+     "median_lag_ms": 101.7
+    },
+    "unknown 100": {
+     "n": 4,
+     "median_lag_ms": 69.8
+    },
+    "unknown 200": {
+     "n": 6,
+     "median_lag_ms": 149.5
+    },
+    "unknown none": {
+     "n": 10,
+     "median_lag_ms": 99.8
+    }
+   },
+   "by_release_and_grid": {
+    "unknown grid": {
+     "n": 1,
+     "median_lag_ms": 341.9
+    },
+    "unknown none": {
+     "n": 2,
+     "median_lag_ms": 141.4
+    },
+    "v0.0 grid": {
+     "n": 5,
+     "median_lag_ms": 104.9
+    },
+    "v0.0 none": {
+     "n": 2,
+     "median_lag_ms": 136.3
+    },
+    "v1.11 grid": {
+     "n": 3,
+     "median_lag_ms": 144.1
+    },
+    "v1.11 none": {
+     "n": 10,
+     "median_lag_ms": 99.8
+    },
+    "v1.12 grid": {
+     "n": 17,
+     "median_lag_ms": 98.6
+    },
+    "v1.12 none": {
+     "n": 12,
+     "median_lag_ms": 137.1
+    },
+    "v1.13 grid": {
+     "n": 2,
+     "median_lag_ms": 99.2
+    },
+    "v1.13 none": {
+     "n": 23,
+     "median_lag_ms": 102.1
+    },
+    "v1.14 grid": {
+     "n": 2,
+     "median_lag_ms": 152.9
+    },
+    "v1.14 none": {
+     "n": 36,
+     "median_lag_ms": 119.1
+    },
+    "v1.15 grid": {
+     "n": 57,
+     "median_lag_ms": 114.7
+    },
+    "v1.15 none": {
+     "n": 14,
+     "median_lag_ms": 196.8
+    },
+    "v1.16 grid": {
+     "n": 50,
+     "median_lag_ms": 116.2
+    },
+    "v1.16 none": {
+     "n": 11,
+     "median_lag_ms": 154.2
+    },
+    "v1.17 grid": {
+     "n": 28,
+     "median_lag_ms": 119.5
+    },
+    "v1.17 none": {
+     "n": 5,
+     "median_lag_ms": 127.8
+    },
+    "v1.18 grid": {
+     "n": 3,
+     "median_lag_ms": 100.4
+    },
+    "v1.20 none": {
+     "n": 1,
+     "median_lag_ms": 98.0
+    },
+    "v1.4 grid": {
+     "n": 4,
+     "median_lag_ms": 69.8
+    },
+    "v1.8 grid": {
+     "n": 1,
+     "median_lag_ms": 131.6
+    },
+    "v180.6 grid": {
+     "n": 1,
+     "median_lag_ms": 154.9
+    },
+    "v2.1 grid": {
+     "n": 1,
+     "median_lag_ms": 91.4
+    },
+    "v2.13 none": {
+     "n": 1,
+     "median_lag_ms": 228.6
+    },
+    "v2.2 grid": {
+     "n": 1,
+     "median_lag_ms": 61.7
+    },
+    "v4.0 grid": {
+     "n": 1,
+     "median_lag_ms": 260.5
+    },
+    "v6.4 none": {
+     "n": 1,
+     "median_lag_ms": 42.8
+    },
+    "v6.6 none": {
+     "n": 1,
+     "median_lag_ms": 20.0
+    },
+    "v6.7 none": {
+     "n": 1,
+     "median_lag_ms": 35.2
+    },
+    "v6.9 none": {
+     "n": 1,
+     "median_lag_ms": 128.7
+    }
+   },
+   "dt_mode_without_grid": {
+    "multiple dt 145.0": {
+     "n": 1,
+     "median_lag_ms": 213.8
+    },
+    "multiple dt 200.0": {
+     "n": 2,
+     "median_lag_ms": 193.6
+    },
+    "multiple dt 500.0": {
+     "n": 5,
+     "median_lag_ms": 124.9
+    },
+    "nmea dt 100.0": {
+     "n": 1,
+     "median_lag_ms": 54.9
+    },
+    "nmea dt 1000.0": {
+     "n": 8,
+     "median_lag_ms": 256.2
+    },
+    "nmea dt 500.0": {
+     "n": 1,
+     "median_lag_ms": 228.6
+    },
+    "nmea dt 600.0": {
+     "n": 1,
+     "median_lag_ms": 68.5
+    },
+    "other:i2c/0x00 dt 1005.0": {
+     "n": 1,
+     "median_lag_ms": 123.6
+    },
+    "other:mavlink/0xAF dt 0.0": {
+     "n": 1,
+     "median_lag_ms": 9.2
+    },
+    "other:mavlink/0xAF dt 105.0": {
+     "n": 1,
+     "median_lag_ms": 211.3
+    },
+    "other:mavlink/0xAF dt 200.0": {
+     "n": 1,
+     "median_lag_ms": 127.8
+    },
+    "other:mavlink/0xAF dt 400.0": {
+     "n": 1,
+     "median_lag_ms": 112.9
+    },
+    "other:mavlink/0xAF dt 410.0": {
+     "n": 1,
+     "median_lag_ms": 144.8
+    },
+    "other:mavlink/0xAF dt 5.0": {
+     "n": 3,
+     "median_lag_ms": 7.4
+    },
+    "other:mavlink/0xAF dt 500.0": {
+     "n": 3,
+     "median_lag_ms": -10.0
+    },
+    "other:mavlink/0xAF dt 505.0": {
+     "n": 1,
+     "median_lag_ms": 135.1
+    },
+    "other:mavlink/0xAF dt 520.0": {
+     "n": 1,
+     "median_lag_ms": 218.5
+    },
+    "other:serial/0x21 dt None": {
+     "n": 1,
+     "median_lag_ms": 0.8
+    },
+    "other:serial/0xEC dt 1000.0": {
+     "n": 3,
+     "median_lag_ms": 100.5
+    },
+    "uavcan dt 100.0": {
+     "n": 2,
+     "median_lag_ms": 56.0
+    },
+    "uavcan dt 110.0": {
+     "n": 1,
+     "median_lag_ms": 68.6
+    },
+    "uavcan dt 145.0": {
+     "n": 1,
+     "median_lag_ms": 108.5
+    },
+    "uavcan dt 200.0": {
+     "n": 4,
+     "median_lag_ms": 160.3
+    },
+    "uavcan dt 400.0": {
+     "n": 10,
+     "median_lag_ms": 85.5
+    },
+    "uavcan dt 500.0": {
+     "n": 6,
+     "median_lag_ms": 72.4
+    },
+    "uavcan dt 550.0": {
+     "n": 1,
+     "median_lag_ms": 37.4
+    },
+    "uavcan dt 600.0": {
+     "n": 3,
+     "median_lag_ms": 94.0
+    },
+    "ubx_10 dt 1000.0": {
+     "n": 1,
+     "median_lag_ms": 98.0
+    },
+    "ubx_10 dt 2000.0": {
+     "n": 1,
+     "median_lag_ms": 38.7
+    },
+    "ubx_10 dt 500.0": {
+     "n": 4,
+     "median_lag_ms": 116.5
+    },
+    "ubx_f9p dt 400.0": {
+     "n": 2,
+     "median_lag_ms": 169.0
+    },
+    "ubx_f9p dt 500.0": {
+     "n": 9,
+     "median_lag_ms": 142.0
+    },
+    "ubx_f9p dt 600.0": {
+     "n": 1,
+     "median_lag_ms": 146.4
+    },
+    "ubx_generic dt 200.0": {
+     "n": 2,
+     "median_lag_ms": 147.4
+    },
+    "ubx_generic dt 375.0": {
+     "n": 1,
+     "median_lag_ms": 191.7
+    },
+    "ubx_generic dt 400.0": {
+     "n": 2,
+     "median_lag_ms": 159.4
+    },
+    "ubx_generic dt 500.0": {
+     "n": 7,
+     "median_lag_ms": 141.6
+    },
+    "ubx_generic dt 600.0": {
+     "n": 1,
+     "median_lag_ms": 167.7
+    },
+    "ubx_m8 dt 400.0": {
+     "n": 5,
+     "median_lag_ms": 160.0
+    },
+    "ubx_m9 dt 375.0": {
+     "n": 1,
+     "median_lag_ms": 95.5
+    },
+    "ubx_m9 dt 500.0": {
+     "n": 9,
+     "median_lag_ms": 103.3
+    },
+    "unknown dt 1000.0": {
+     "n": 10,
+     "median_lag_ms": 99.8
+    }
+   },
+   "ubx_mode_by_receiver": {
+    "multiple mode 0": {
+     "n": 15,
+     "median_lag_ms": 109.6
+    },
+    "multiple mode 1": {
+     "n": 5,
+     "median_lag_ms": 200.1
+    },
+    "nmea mode 0": {
+     "n": 24,
+     "median_lag_ms": 208.4
+    },
+    "other:i2c/0x00 mode 0": {
+     "n": 1,
+     "median_lag_ms": 123.6
+    },
+    "other:mavlink/0xAF mode None": {
+     "n": 13,
+     "median_lag_ms": 18.9
+    },
+    "other:serial/0x21 mode None": {
+     "n": 1,
+     "median_lag_ms": 0.8
+    },
+    "other:serial/0xEC mode 0": {
+     "n": 3,
+     "median_lag_ms": 100.5
+    },
+    "other:unknown/0xA4 mode None": {
+     "n": 3,
+     "median_lag_ms": 53.3
+    },
+    "uavcan mode 0": {
+     "n": 57,
+     "median_lag_ms": 95.7
+    },
+    "uavcan mode 1": {
+     "n": 1,
+     "median_lag_ms": 236.7
+    },
+    "uavcan mode None": {
+     "n": 26,
+     "median_lag_ms": 112.2
+    },
+    "ubx_10 mode 0": {
+     "n": 7,
+     "median_lag_ms": 105.2
+    },
+    "ubx_7 mode 0": {
+     "n": 1,
+     "median_lag_ms": 226.8
+    },
+    "ubx_f9p mode 0": {
+     "n": 39,
+     "median_lag_ms": 144.1
+    },
+    "ubx_f9p mode 1": {
+     "n": 2,
+     "median_lag_ms": 188.2
+    },
+    "ubx_f9p mode 6": {
+     "n": 1,
+     "median_lag_ms": 138.0
+    },
+    "ubx_generic mode 0": {
+     "n": 38,
+     "median_lag_ms": 140.9
+    },
+    "ubx_m8 mode 0": {
+     "n": 12,
+     "median_lag_ms": 145.3
+    },
+    "ubx_m9 mode 0": {
+     "n": 29,
+     "median_lag_ms": 81.3
+    },
+    "unknown mode None": {
+     "n": 20,
+     "median_lag_ms": 105.8
+    }
+   },
+   "rank_corr_grid_lag_serial_ublox": 0.294
+  }
+ },
+ "fresh_py": "0.1.0",
+ "receiver_py": "0.1.0",
+ "rate_py": "0.1.0",
+ "gps_lag": "0.1.0",
+ "fleet": "0.1.1",
+ "seed": 20261102,
+ "list": {
+  "listed": 484769,
+  "eligible": 36413,
+  "excluded": {
+   "shorter than 240 s": 149080,
+   "simulation": 16363,
+   "before 2025-10-01": 282913
+  }
+ },
+ "excluded_logs": 1237,
+ "excluded_vehicles": 1164,
+ "blocked": null,
+ "wall_s": 10736.7
+}
