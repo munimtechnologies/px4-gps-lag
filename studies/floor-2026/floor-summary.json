@@ -1,0 +1,255 @@
+{
+ "floor_py": "0.1.0",
+ "seed": 20261110,
+ "graded": {
+  "usable": 559,
+  "at_floor_or_above": 259,
+  "under_floor": 300,
+  "q_at_most_half": 180,
+  "F1_spearman_q_nis": {
+   "n": 559,
+   "rho": 0.36715,
+   "ci95": [
+    0.29191,
+    0.43724
+   ]
+  },
+  "F2_loglog_slope_under_floor": {
+   "n": 300,
+   "slope": 0.42112,
+   "theory": 2.0,
+   "ci95": [
+    0.30065,
+    0.53966
+   ]
+  },
+  "F3_nis_ratio_at_vs_half": {
+   "n_at": 259,
+   "n_half": 180,
+   "median_nis_at": 0.00812,
+   "median_nis_half": 0.00169,
+   "ratio": 4.81899,
+   "ci95": [
+    3.68254,
+    6.95203
+   ]
+  },
+  "F4_spearman_eph_nis_at_floor": {
+   "n": 259,
+   "rho": -0.08676
+  },
+  "thresholds": {
+   "F1_rho": 0.2,
+   "F2_max": 3.0,
+   "F3_ratio": 2.0,
+   "F4_abs": 0.25,
+   "MIN_ALL": 150,
+   "MIN_AT": 40,
+   "MIN_UNDER": 60,
+   "MIN_HALF": 30
+  },
+  "checks": {
+   "E0": true,
+   "F1": true,
+   "F2": true,
+   "F3": true,
+   "F4": true
+  },
+  "decision": {
+   "D1": true,
+   "D2": false
+  }
+ },
+ "graded_explore": {
+  "note": "not pre-registered; descriptive only",
+  "all": {
+   "n": 559,
+   "median_q": 0.856,
+   "median_eph": 0.436,
+   "median_pos_nis": 0.00439,
+   "share_under_floor": 0.5367
+  },
+  "by_fix_type": {
+   "3D": {
+    "n": 216,
+    "median_q": 1.0,
+    "median_eph": 0.77055,
+    "median_pos_nis": 0.00543,
+    "share_under_floor": 0.3056
+   },
+   "DGPS/SBAS": {
+    "n": 191,
+    "median_q": 1.0,
+    "median_eph": 0.537,
+    "median_pos_nis": 0.00714,
+    "share_under_floor": 0.466
+   },
+   "RTK float": {
+    "n": 6,
+    "median_q": 1.0,
+    "median_eph": 0.55,
+    "median_pos_nis": 0.03842,
+    "share_under_floor": 0.3333
+   },
+   "RTK fixed": {
+    "n": 145,
+    "median_q": 0.0336,
+    "median_eph": 0.0141,
+    "median_pos_nis": 0.00151,
+    "share_under_floor": 0.9862
+   },
+   "other": {
+    "n": 1,
+    "median_q": 1.0,
+    "median_eph": 6.0,
+    "median_pos_nis": 0.00078,
+    "share_under_floor": 0.0
+   }
+  },
+  "p_noise_default": {
+   "n": 469,
+   "median_q": 1.0,
+   "median_eph": 0.5335,
+   "median_pos_nis": 0.00562,
+   "share_under_floor": 0.4755
+  },
+  "p_noise_changed": {
+   "n": 90,
+   "median_q": 0.065,
+   "median_eph": 0.014,
+   "median_pos_nis": 0.00164,
+   "share_under_floor": 0.8556
+  },
+  "velocity_nis_spearman_q": {
+   "n": 559,
+   "rho": 0.39074
+  }
+ },
+ "replication": {
+  "note": "earlier sample, reported only, not graded",
+  "summary": {
+   "usable": 538,
+   "at_floor_or_above": 223,
+   "under_floor": 315,
+   "q_at_most_half": 189,
+   "F1_spearman_q_nis": {
+    "n": 538,
+    "rho": 0.2892,
+    "ci95": [
+     0.21174,
+     0.36689
+    ]
+   },
+   "F2_loglog_slope_under_floor": {
+    "n": 315,
+    "slope": 0.23472,
+    "theory": 2.0,
+    "ci95": [
+     -0.06152,
+     0.43379
+    ]
+   },
+   "F3_nis_ratio_at_vs_half": {
+    "n_at": 223,
+    "n_half": 189,
+    "median_nis_at": 0.00778,
+    "median_nis_half": 0.00221,
+    "ratio": 3.52036,
+    "ci95": [
+     2.07214,
+     5.31847
+    ]
+   },
+   "F4_spearman_eph_nis_at_floor": {
+    "n": 223,
+    "rho": -0.03222
+   },
+   "thresholds": {
+    "F1_rho": 0.2,
+    "F2_max": 3.0,
+    "F3_ratio": 2.0,
+    "F4_abs": 0.25,
+    "MIN_ALL": 150,
+    "MIN_AT": 40,
+    "MIN_UNDER": 60,
+    "MIN_HALF": 30
+   },
+   "checks": {
+    "E0": true,
+    "F1": true,
+    "F2": false,
+    "F3": true,
+    "F4": true
+   },
+   "decision": {
+    "D1": false,
+    "D2": false
+   }
+  },
+  "explore": {
+   "note": "not pre-registered; descriptive only",
+   "all": {
+    "n": 538,
+    "median_q": 0.752,
+    "median_eph": 0.375,
+    "median_pos_nis": 0.00385,
+    "share_under_floor": 0.5855
+   },
+   "by_fix_type": {
+    "3D": {
+     "n": 192,
+     "median_q": 1.0,
+     "median_eph": 0.7015,
+     "median_pos_nis": 0.00419,
+     "share_under_floor": 0.3125
+    },
+    "DGPS/SBAS": {
+     "n": 207,
+     "median_q": 0.806,
+     "median_eph": 0.4055,
+     "median_pos_nis": 0.00654,
+     "share_under_floor": 0.599
+    },
+    "RTK float": {
+     "n": 7,
+     "median_q": 1.0,
+     "median_eph": 0.405,
+     "median_pos_nis": 0.02538,
+     "share_under_floor": 0.4286
+    },
+    "RTK fixed": {
+     "n": 131,
+     "median_q": 0.0302,
+     "median_eph": 0.0141,
+     "median_pos_nis": 0.00157,
+     "share_under_floor": 0.9771
+    },
+    "other": {
+     "n": 1,
+     "median_q": 1.0,
+     "median_eph": 4.9209,
+     "median_pos_nis": 0.01437,
+     "share_under_floor": 0.0
+    }
+   },
+   "p_noise_default": {
+    "n": 458,
+    "median_q": 0.841,
+    "median_eph": 0.4205,
+    "median_pos_nis": 0.00452,
+    "share_under_floor": 0.5459
+   },
+   "p_noise_changed": {
+    "n": 80,
+    "median_q": 0.07,
+    "median_eph": 0.014,
+    "median_pos_nis": 0.00196,
+    "share_under_floor": 0.8125
+   },
+   "velocity_nis_spearman_q": {
+    "n": 538,
+    "rho": 0.37371
+   }
+  }
+ }
+}

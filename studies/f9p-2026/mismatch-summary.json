@@ -1,0 +1,106 @@
+{
+ "usable": 266,
+ "mismatched": 98,
+ "matched": 168,
+ "S0_slope_vs_mismatch": {
+  "n": 266,
+  "rho": 0.6433,
+  "ci95": [
+   0.5539,
+   0.7166
+  ]
+ },
+ "M1_lift_vs_abs_mismatch": {
+  "n": 266,
+  "rho": 0.169,
+  "ci95": [
+   0.0468,
+   0.2846
+  ]
+ },
+ "M2_lift_mismatched_minus_matched": {
+  "diff": 0.05909,
+  "ci95": [
+   -0.05641,
+   0.2589
+  ],
+  "n": [
+   98,
+   168
+  ]
+ },
+ "M3_rejected_share_mismatched_minus_matched": {
+  "diff": 0.06463,
+  "ci95": [
+   -0.02636,
+   0.15306
+  ],
+  "n": [
+   98,
+   168
+  ]
+ },
+ "median_lift": {
+  "mismatched": 0.37328,
+  "matched": 0.31419
+ },
+ "rejected_share": {
+  "mismatched": 0.1837,
+  "matched": 0.119
+ },
+ "not_usable_reasons": {
+  "missing estimator_innovation_test_ratios": 19,
+  "too few samples": 21,
+  "landed throughout": 1
+ },
+ "checks": {
+  "E0": true,
+  "S0": true,
+  "M1": true,
+  "M2": false,
+  "M3": false
+ },
+ "decision": {
+  "D1_checkup_line": true,
+  "D2_no_more_rejections_line": false
+ },
+ "exploratory": {
+  "note": "not pre-registered; descriptive only",
+  "by_abs_mismatch": {
+   "<=25 ms": {
+    "n": 100,
+    "median_lift": 0.29168,
+    "median_tr_hi": 0.0025,
+    "median_p95": 0.0132
+   },
+   "25-50 ms": {
+    "n": 67,
+    "median_lift": 0.34843,
+    "median_tr_hi": 0.0034,
+    "median_p95": 0.02037
+   },
+   "50-100 ms": {
+    "n": 76,
+    "median_lift": 0.29868,
+    "median_tr_hi": 0.00328,
+    "median_p95": 0.02128
+   },
+   ">100 ms": {
+    "n": 23,
+    "median_lift": 0.65893,
+    "median_tr_hi": 0.00514,
+    "median_p95": 0.02899
+   }
+  },
+  "late_vs_early": {
+   "gps_later_than_set_n": 65,
+   "gps_earlier_than_set_n": 33
+  },
+  "slope_over_mismatch_median": 0.2147
+ },
+ "mismatch_py": "0.1.0",
+ "seed": 20261103,
+ "fresh_nis_py": "0.1.0",
+ "fresh_mm_py": "0.1.0",
+ "fresh_py": "0.1.0"
+}
