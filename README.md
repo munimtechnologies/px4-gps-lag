@@ -56,6 +56,26 @@ All four held again on a second fresh sample of 289 flights (f9p-2026): 0.0076, 
 
 On fresh-2026's rows the slope was 0.23 (interval −0.06 to 0.43), and the other checks held.
 
+## Model 6 logs run later: the u-blox dynamic model (dynmodel-2026, pre-registered)
+
+[`studies/dynmodel-2026/GRADE.md`](studies/dynmodel-2026/GRADE.md) read the GPS parameters of 244 public u-blox logs whose lags had been published before the question existed (only the start of each log, where the parameters are). **Every pre-registered check held:**
+
+| receiver | `GPS_UBX_DYNMODEL` 6 (airborne <1g) | 7 (<2g, PX4's default) | 8 (<4g) |
+|---|---|---|---|
+| u-blox F9P | 15 logs, **180.7 ms** | 12, 137.3 ms | 6, 120.9 ms |
+| u-blox M9 | 25, **108.7 ms** | 19, 62.0 ms | 34, 69.1 ms |
+| u-blox M8 | 17, **186.1 ms** | 9, 114.1 ms | 7, 124.4 ms |
+| u-blox, model not detected | 47, **144.4 ms** | 19, 116.2 ms | 31, 115.8 ms |
+
+- Within receiver classes, model-6 logs were a median **+45.6 ms** later than model-7 logs (interval 33 to 55; K1). On the F9P, +43.4 ms (8 to 67; K2). On other receivers, +45.7 ms (31 to 58; K4).
+- On fresh-2026's F9P at 5 Hz, the model sorted 14 of 16 logs into the right one of the two lag groups seen before (K3). All 7 model-6 logs were in the late group.
+- Model 8 was no less late than 7 (+3.5 ms, −10 to 13).
+- **41.5%** of model-6 logs were more than 50 ms later than their own delay setting, against 8.8% at model 7.
+
+**Cause not yet known.** After the plan, we found that PX4's defaults tie the model to the vehicle. `rc.mc_defaults` set 6 for every multicopter up to v1.16, until PR [#24831](https://github.com/PX4/PX4-Autopilot/pull/24831) moved multicopters to 7 (first in v1.17), and `rc.fw_defaults` sets 8. So model 6 mostly means "a multicopter on v1.16 or older", and the pre-registered figure can't separate the model from the vehicle type and release. An exploratory re-score of the same logs (`dynconf.py`, in the grade) kept the gap among multicopters only (+45 ms, 28 to 60), and matched on receiver and release as well (+52 ms, 31 to 82). Release alone (−7 ms) and vehicle type alone (−4 ms) showed no gap. That makes the model itself the likelier cause, but the matched groups are small and were checked after seeing the data. A within-vehicle check is pre-registered ([`PLAN-paired.md`](studies/dynmodel-2026/PLAN-paired.md)). It uses the logs a PX4 maintainer attached to PR #24831, where one vehicle flew similar aggressive flights with model 6 and with model 7. Until it is graded, px4-log-health's checkup adds no line about the model, and no PX4 issue is filed.
+
+**What it means for you now:** if your u-blox vehicle runs model 6, there is about a 4-in-10 chance that its GPS lag is more than 50 ms past its delay setting. Measure it.
+
 ## Does the receiver model matter? (exploratory, seen four times)
 
 PX4 uses one GPS delay for every receiver up to v1.17. ArduPilot assigns a lag by u-blox generation: 120 ms for M8 "based on flight logs", and the same 120 ms for F9, M9 and M10, with the comment "F9 lag not verified yet from flight log" (`AP_GPS_UBLOX.cpp`, `get_lag`). PX4's GPS driver records the receiver model it detected in the device_id of every GPS message, and `receiver.py` reads it.
@@ -76,7 +96,7 @@ Four samples, with no vehicle in common between them:
 - **fresh-2026** ([`GRADE-fresh.md`](studies/receiver-2026/GRADE-fresh.md)) was a new random sample of 298 passing logs, leaving out every earlier vehicle. **M9 − F9P = −61.8 ms (interval −88 to −42)**. E1 failed again: 12 M8 logs against the 15 needed. A per-receiver default would have brought only 2.3 points more vehicles within 50 ms of their lag (F5 failed).
 - **f9p-2026** ([`studies/f9p-2026/GRADE.md`](studies/f9p-2026/GRADE.md)) recomputed fresh-2026's checks on its own new sample of 310 passing logs (reported, not graded). E1 held this time. **M9 − M8 = −90.7 ms (−111 to −64)**, M9 − F9P = −48.7 ms (−72 to −21), and a per-receiver default would bring 8.9 points more logs within 50 ms (F5 held). F3, F4 and F6 failed.
 
-What this means: on PX4, the M9 was the least-late u-blox receiver in four independent samples, by about 50-90 ms. It is still exploratory by the plans' own rules: the M8 class reached its count only in the reported fourth sample. No per-receiver line has been added to px4-log-health's checkup. Knowing the model doesn't replace measuring your own vehicle. Since PX4 v1.18 the delay can be set per receiver (`SENS_GPSn_DELAY`), which is where such a measurement goes. These are PX4 measurements only and say nothing about ArduPilot's own lag.
+What this means: on PX4, the M9 was the least-late u-blox receiver in four independent samples, by about 50-90 ms. It is still exploratory by the plans' own rules: the M8 class reached its count only in the reported fourth sample. No per-receiver line has been added to px4-log-health's checkup. Knowing the model doesn't replace measuring your own vehicle. Since PX4 v1.18 the delay can be set per receiver (`SENS_GPSn_DELAY`), which is where such a measurement goes. These are PX4 measurements only and say nothing about ArduPilot's own lag. The dynamic model (above) does not explain the receiver gap: at each model, the M9 is still the least late (at model 7, M9 62 ms against F9P 137 and M8 114).
 
 ### The measurement rate does not explain the M9 gap (rate-2026 and rate2-2026, pre-registered)
 
@@ -99,11 +119,7 @@ On fresh-2026, the F9P at 5 Hz on v1.16/v1.17 had a median lag of 178 ms, and it
 
 - **The 178 ms figure did not replicate** (rule D3). The median was 122 ms (105.7 to 191.9) on 12 qualifying logs, and 4 of 12 were more than 50 ms past their setting. Nothing is added to the checkup.
 - **The two groups did replicate** (P3). There were 8 logs at 82-144 ms, 4 at 185-239 ms, and none in between. The median depends on how many logs of each group a sample happens to have.
-- **Exploratory: one u-blox setting lines up with the groups.** All 4 high logs had `GPS_UBX_DYNMODEL` = 6 (airborne <1g). All 8 low logs had PX4's default 7 (<2g) or 8 (<4g). The release did not separate the groups.
-
-### Does the u-blox dynamic model add lag? (dynmodel-2026, pre-registered, running)
-
-[`studies/dynmodel-2026/PLAN.md`](studies/dynmodel-2026/PLAN.md) tests that on the three earlier samples, whose lags were published before the question existed and whose parameters nobody has read. `dynmodel.py` reads only the start of each log (the ULog definitions section, where the parameters are), not the flight data. The plan predicts that u-blox logs with model 6 are at least 30 ms later than logs with 7 of the same receiver, and the F9P at least 40 ms later. It also predicts that the model separates fresh-2026's two F9P groups. It leaves out the 12 logs above.
+- The dynamic model lines up with the groups: see dynmodel-2026 above (K3 held, 14 of 16).
 
 If you fly an F9P on PX4 v1.16 or v1.17, measure your own lag (`gps_lag.py`, or px4-log-health's checkup) rather than assume 110 ms.
 
@@ -132,7 +148,8 @@ History: D1 was withdrawn after the first innovation check came back C2 as writt
 - `studies/nis-2026/`: NIS and autocorrelation of EKF2's horizontal GNSS innovations on real flights (`nis.py` 0.1.0). E0, N1, N2, W1 and W2 held.
 - `studies/f9p-2026/PLAN.md`, `GRADE.md`, `logs.jsonl`, summaries, `f9p-extra.jsonl`, `job-fetched.json`: the F9P at 5 Hz on a new sample (seed 20261109; `fresh2.py`, `f9p.py`, `f9p_extra.py` 0.1.0). E0 and P3 held; P1, P2 and P4 failed (D3: the 178 ms figure is withdrawn). The first run was stopped from outside after 53 minutes and not scored.
 - `studies/floor-2026/PLAN.md`, `GRADE.md`, `floor-summary.json`: does EKF2's GPS position noise floor explain the low position NIS? (`floor.py` 0.1.0). E0 and F1-F4 held; D1.
-- `studies/dynmodel-2026/PLAN.md`: does the u-blox dynamic platform model add GPS lag? (`dynmodel.py` 0.1.0, standard library, reads only each log's parameters). Pre-registered; no results yet.
+- `studies/dynmodel-2026/PLAN.md`, `GRADE.md`, `dynmodel-rows.jsonl`, `dynmodel-summary.json`, `job-fetched.json`: does the u-blox dynamic platform model add GPS lag? (`dynmodel.py` 0.1.0, standard library, reads only each log's parameters). E0 and K1-K4 held; D1, with its checkup line and PX4 issue held until the paired check. `dynconf/`: the exploratory re-score within matched vehicle type, release and receiver (`dynconf.py` 0.1.0, `test_dynconf.py`, `dynmap.txt`, `dynconf-summary.json`).
+- `studies/dynmodel-2026/PLAN-paired.md`: the same question within one vehicle, on the logs attached to PX4 PR #24831 (`paired.py` 0.1.0). Pre-registered; no results yet.
 
 **How long the raw logs stay.** Since October 2024, Flight Review keeps every upload, public ones included, for 12 months, then removes it automatically (announcement on discuss.px4.io, "PX4 Flight Review & Data Retention", topic 41906, 2024-10-14). These studies drew logs uploaded from October 2025 on, so the raw logs behind them start to disappear from October 2026.
 
@@ -143,14 +160,15 @@ History: D1 was withdrawn after the first innovation check came back C2 as writt
 
 ```
 pip install numpy pyulog ijson requests
-python -m unittest -v test_gps_lag test_fleet test_innov test_receiver test_confirm test_rate test_rate2 test_fresh test_mismatch test_nis test_f9p test_floor test_dynmodel
+python -m unittest -v test_gps_lag test_fleet test_innov test_receiver test_confirm test_rate test_rate2 test_fresh test_mismatch test_nis test_f9p test_floor test_dynmodel test_paired
 ```
 
 The tests fly synthetic vehicles with known GPS delays and check that they are recovered within 3 ms. Each study's test file also checks its own scoring on synthetic rows, including the cases a plan leaves unscored.
 
-`test_dynmodel` (standard library only) checks:
+`test_dynmodel` and `test_paired` (standard library only) check:
 
 - the ULog reader on a synthetic log fed whole, byte by byte and cut short: it keeps only initial parameters and stops at the data section;
 - the log selection and the f9p-2026 rule;
 - the download loop's handling of deleted logs, blocks, network errors and the time budget;
-- every dynmodel-2026 check on synthetic rows, including the unscored cases and one log per vehicle.
+- every dynmodel-2026 check on synthetic rows, including the unscored cases and one log per vehicle;
+- `paired.py`'s zip extraction (nested zips one level down; archive paths are never used as output paths) and every paired check, including E0 failing and P2 unscored.

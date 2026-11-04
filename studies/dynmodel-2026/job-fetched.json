@@ -1,0 +1,42 @@
+{
+ "px4-gps-lag/main/studies/dynmodel-2026/PLAN.md": {
+  "sha256": "303e88087a106a3406f9c768c75f27d6f60d1896b41e4a7cc845f66bab5486c4",
+  "waited_s": 270
+ },
+ "px4-gps-lag/main/dynmodel.py": {
+  "sha256": "4fb8855ad76f44e4088d145c1b413a08ba201d7b899750f6fb172933c5f6520f",
+  "waited_s": 0,
+  "saved_as": "dynmodel.py",
+  "lines": 452
+ },
+ "px4-gps-lag/main/test_dynmodel.py": {
+  "sha256": "951c07a25f526d46b1707f5a1653950f0bdbb7b42ad154a53ceae2b9415d3269",
+  "waited_s": 0,
+  "saved_as": "test_dynmodel.py",
+  "lines": 275
+ },
+ "px4-gps-lag/main/studies/receiver-2026/logs.jsonl": {
+  "sha256": "12202a3ed97d493ac25129368aac6831096b834ec7521321c47e1c135509f267",
+  "waited_s": 0,
+  "saved_as": "receiver-2026.jsonl",
+  "lines": 537
+ },
+ "px4-gps-lag/main/studies/receiver-2026/fresh/logs.jsonl": {
+  "sha256": "f44c036fac8fca924afc99b6377b5d9e34c240cb9787a9297210838f6889abf7",
+  "waited_s": 0,
+  "saved_as": "fresh-2026.jsonl",
+  "lines": 1000
+ },
+ "px4-gps-lag/main/studies/f9p-2026/logs.jsonl": {
+  "sha256": "6d300292c62886857741034036b46ccad14700af34f90a90568946f083d2b2bf",
+  "waited_s": 0,
+  "saved_as": "f9p-2026.jsonl",
+  "lines": 1000
+ },
+ "px4-gps-lag/main/studies/f9p-2026/f9p-extra.jsonl": {
+  "sha256": "ff09f9ca2d356df95f0118ef6763d4ff99d5ed163487ea28c949115aae3925c9",
+  "waited_s": 0,
+  "saved_as": "f9p-extra.jsonl",
+  "lines": 36
+ }
+}
