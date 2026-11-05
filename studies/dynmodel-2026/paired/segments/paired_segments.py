@@ -15,6 +15,10 @@ This re-fits each log's lag with px4-gps-lag's own gps_lag.py functions, unchang
 
     python paired_segments.py --ulg-dir ulg --rows paired-rows.jsonl --out segments-summary.json
 
+0.1.1: the two yes/no fields are plain Python booleans, so the summary can be written as JSON
+(0.1.0 stopped there with "Object of type bool is not JSON serializable": numpy's bool). No figure
+is computed differently.
+
 By MV2 of Munim, Inc. (mv2@munimtech.com); written with AI agents. Apache-2.0.
 """
 
@@ -27,7 +31,7 @@ import numpy as np
 
 import gps_lag as gl
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 SEED = 20261105
 BLOCK = 25
 RESAMPLES = 400
@@ -51,8 +55,8 @@ def fit(p, sel=None):
     sel = np.arange(len(p["t1"])) if sel is None else np.asarray(sel)
     r = gl.fit_lag(p["imu_t"], p["a_ne"], p["t1"][sel], p["t2"][sel], p["dv"][sel])
     se = r["se_s"]
-    return {"lag_ms": round(r["lag_s"] * 1e3, 1),
-            "se_ms": round(se * 1e3, 2) if np.isfinite(se) else None,
+    return {"lag_ms": round(float(r["lag_s"]) * 1e3, 1),
+            "se_ms": round(float(se) * 1e3, 2) if np.isfinite(se) else None,
             "pairs": int(r["pairs"]), "excitation_m_s2": round(float(r["excitation_m_s2"]), 3),
             "r2": None if r["r2"] is None else round(float(r["r2"]), 4), "edge": bool(r["edge"])}
 
@@ -104,8 +108,8 @@ def analyse(preps, published):
     for f, p in sorted(preps.items()):
         model, pub = published[f]
         whole = fit(p)
-        row = {"dynmodel": model, "published_lag_ms": pub, "whole": whole,
-               "reproduced": abs(whole["lag_ms"] - pub) <= 0.05}
+        row = {"dynmodel": int(model), "published_lag_ms": float(pub), "whole": whole,
+               "reproduced": bool(abs(whole["lag_ms"] - pub) <= 0.05)}
         row["thirds"] = [fit(p, s) for s in thirds(len(p["t1"]))]
         b = bootstrap(p)
         boots[model] = np.asarray(b)
@@ -117,17 +121,17 @@ def analyse(preps, published):
                                             "p99": pct(imu_acc, 99), "max": round(float(np.max(imu_acc)), 1),
                                             "share_over_1g": round(float(np.mean(imu_acc > ONE_G)), 4)}
         out["logs"][f] = row
-    out["reproduced_all"] = all(r["reproduced"] for r in out["logs"].values())
+    out["reproduced_all"] = bool(all(r["reproduced"] for r in out["logs"].values()))
     if 6 in boots and 7 in boots:
         d = boots[6] - boots[7]
         out["diff_6_minus_7"] = {
             "whole_ms": round(next(r["whole"]["lag_ms"] for r in out["logs"].values() if r["dynmodel"] == 6)
                               - next(r["whole"]["lag_ms"] for r in out["logs"].values() if r["dynmodel"] == 7), 1),
             "block_bootstrap_ms": {"p2.5": pct(d, 2.5), "p50": pct(d, 50), "p97.5": pct(d, 97.5)},
-            "thirds_separated": (min(t["lag_ms"] for r in out["logs"].values() if r["dynmodel"] == 6
-                                     for t in r["thirds"])
-                                 > max(t["lag_ms"] for r in out["logs"].values() if r["dynmodel"] == 7
-                                       for t in r["thirds"])),
+            "thirds_separated": bool(min(t["lag_ms"] for r in out["logs"].values() if r["dynmodel"] == 6
+                                         for t in r["thirds"])
+                                     > max(t["lag_ms"] for r in out["logs"].values() if r["dynmodel"] == 7
+                                           for t in r["thirds"])),
             "low_accel_ms": round(sum(r["low_accel"]["lag_ms"] * (1 if r["dynmodel"] == 6 else -1)
                                       for r in out["logs"].values()), 1),
             "high_accel_ms": round(sum(r["high_accel"]["lag_ms"] * (1 if r["dynmodel"] == 6 else -1)
@@ -155,9 +159,10 @@ def main(argv=None):
     if set(preps) != set(published):
         sys.exit("logs found %s do not match the published rows %s" % (sorted(preps), sorted(published)))
     out = analyse(preps, published)
+    text = json.dumps(out, indent=1)          # fails here, before anything is written, if a field is not plain
     with open(args.out, "w", encoding="utf-8") as f:
-        json.dump(out, f, indent=1)
-    print(json.dumps(out, indent=1))
+        f.write(text + "\n")
+    print(text)
     if not out["reproduced_all"]:
         sys.exit("the whole-flight fit did not reproduce the published lag")
     return 0

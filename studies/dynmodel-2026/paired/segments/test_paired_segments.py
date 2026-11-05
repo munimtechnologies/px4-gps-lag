@@ -1,6 +1,7 @@
 """Tests for paired_segments.py on synthetic flights with known GPS lags.
 By MV2 of Munim, Inc.; written with AI agents. Apache-2.0."""
 
+import json
 import unittest
 
 import numpy as np
@@ -39,6 +40,9 @@ class Segments(unittest.TestCase):
     def setUpClass(cls):
         cls.p6 = ps.prepare(synthetic(0.200))
         cls.p7 = ps.prepare(synthetic(0.100))
+        cls.out = ps.analyse({"a.ulg": cls.p6, "b.ulg": cls.p7},
+                             {"a.ulg": (6, round(ps.fit(cls.p6)["lag_ms"], 1)),
+                              "b.ulg": (7, round(ps.fit(cls.p7)["lag_ms"], 1))})
 
     def test_whole_flight_recovers_the_lag(self):
         self.assertAlmostEqual(ps.fit(self.p6)["lag_ms"], 200.0, delta=3.0)
@@ -72,8 +76,7 @@ class Segments(unittest.TestCase):
         self.assertGreater(float(np.median(gps_acc)), 0.5)
 
     def test_analyse(self):
-        out = ps.analyse({"a.ulg": self.p6, "b.ulg": self.p7},
-                         {"a.ulg": (6, round(ps.fit(self.p6)["lag_ms"], 1)), "b.ulg": (7, round(ps.fit(self.p7)["lag_ms"], 1))})
+        out = self.out
         self.assertTrue(out["reproduced_all"])
         d = out["diff_6_minus_7"]
         self.assertAlmostEqual(d["whole_ms"], 100.0, delta=4.0)
@@ -84,9 +87,20 @@ class Segments(unittest.TestCase):
         self.assertAlmostEqual(d["high_accel_ms"], 100.0, delta=6.0)
         self.assertEqual(out["logs"]["a.ulg"]["imu_horizontal_accel_m_s2"]["share_over_1g"], 0.0)
 
+    def test_the_summary_is_plain_json(self):
+        # 0.1.0 failed on the real logs here: numpy bools are not JSON serializable.
+        text = json.dumps(self.out)
+        back = json.loads(text)
+        self.assertIs(type(self.out["reproduced_all"]), bool)
+        self.assertIs(type(self.out["diff_6_minus_7"]["thirds_separated"]), bool)
+        for row in self.out["logs"].values():
+            self.assertIs(type(row["reproduced"]), bool)
+        self.assertEqual(back["diff_6_minus_7"]["whole_ms"], self.out["diff_6_minus_7"]["whole_ms"])
+
     def test_a_wrong_published_lag_is_caught(self):
         out = ps.analyse({"a.ulg": self.p6, "b.ulg": self.p7}, {"a.ulg": (6, 150.0), "b.ulg": (7, 100.0)})
         self.assertFalse(out["reproduced_all"])
+        json.dumps(out)
 
 
 if __name__ == "__main__":
