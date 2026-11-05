@@ -1,0 +1,26 @@
+{
+ "px4-gps-lag/main/studies/dynmodel-2026/PLAN-paired.md": {
+  "sha256": "8701ca787d5b0127028c2f94b6524349244b14de449cfcd8dcaa95d2790b84de",
+  "waited_s": 540
+ },
+ "px4-gps-lag/main/paired.py": {
+  "sha256": "37ea2d52b75a438c2bf1bfd4f54b6fa4a05df0a501a59b818cd327031985e5de",
+  "waited_s": 0,
+  "saved_as": "paired.py"
+ },
+ "px4-gps-lag/main/test_paired.py": {
+  "sha256": "a33f6c8afabe72372d1b40734ca8f9c23731b623077dd3ca47fc0ed7ee61a1e8",
+  "waited_s": 0,
+  "saved_as": "test_paired.py"
+ },
+ "px4-gps-lag/main/gps_lag.py": {
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d",
+  "waited_s": 0,
+  "saved_as": "gps_lag.py"
+ },
+ "https://github.com/user-attachments/files/20456409/logs_dynmodel.zip": {
+  "sha256": "aa6997a9754d4a11149bb4aa23f9721e16450eba4dc4808c0644ed2e04343b49",
+  "bytes": 7978097,
+  "saved_as": "logs_dynmodel.zip"
+ }
+}

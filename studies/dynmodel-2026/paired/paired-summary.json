@@ -1,0 +1,67 @@
+{
+ "paired_py": "0.1.0",
+ "logs": 2,
+ "passing_with_model": 2,
+ "by_model": {
+  "6": 1,
+  "7": 1
+ },
+ "vehicles": {
+  "69b9cdfa06af": {
+   "n6": 1,
+   "n7": 1,
+   "lags6_ms": [
+    214.2
+   ],
+   "lags7_ms": [
+    110.5
+   ],
+   "median6_ms": 214.2,
+   "median7_ms": 110.5,
+   "diff_ms": 103.7,
+   "separated": null
+  }
+ },
+ "median_within_vehicle_diff_ms": 103.7,
+ "checks": {
+  "E0": true,
+  "P1": true,
+  "P2": null
+ },
+ "decision": "D1",
+ "reported": {
+  "note": "not pre-registered; descriptive only",
+  "per_log": [
+   {
+    "file": "log_8_2025-5-27-12-55-02.ulg",
+    "vehicle": "69b9cdfa06af",
+    "release": "v1.15.0",
+    "gps_devtypes": [
+     "0xAA"
+    ],
+    "passed": true,
+    "reason": "ok",
+    "lag_ms": 214.2,
+    "se_ms": 2.06,
+    "lag_minus_param_ms": 54.2,
+    "excitation_m_s2": 2.451643380795666,
+    "dynmodel": 6
+   },
+   {
+    "file": "log_5_2025-5-27-11-50-34.ulg",
+    "vehicle": "69b9cdfa06af",
+    "release": "v1.15.0",
+    "gps_devtypes": [
+     "0xAA"
+    ],
+    "passed": true,
+    "reason": "ok",
+    "lag_ms": 110.5,
+    "se_ms": 1.04,
+    "lag_minus_param_ms": -49.5,
+    "excitation_m_s2": 2.7706601734270913,
+    "dynmodel": 7
+   }
+  ]
+ }
+}
