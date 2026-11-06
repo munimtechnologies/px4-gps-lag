@@ -1,0 +1,99 @@
+{
+ "vehicles": 10,
+ "receivers": {
+  "M8": 6,
+  "M9": 2,
+  "F9P": 2
+ },
+ "diff_pre_minus_post_ms": {
+  "all": {
+   "n": 10,
+   "median": 84.6,
+   "ci95": [
+    19.3,
+    116.4
+   ]
+  },
+  "switched_6_to_7": {
+   "n": 9,
+   "median": 94.9,
+   "ci95": [
+    7.2,
+    137.9
+   ]
+  },
+  "unchanged_model": {
+   "n": 1,
+   "median": 19.3,
+   "ci95": null
+  },
+  "other_change": {
+   "n": 0,
+   "median": null
+  },
+  "not_in_dynmodel_2026": {
+   "n": 6,
+   "median": 86.0,
+   "ci95": [
+    13.2,
+    123.5
+   ]
+  }
+ },
+ "share_switched": 0.9,
+ "pre": {
+  "median_lag_ms": 194.6,
+  "dynmodel": {
+   "6": 10
+  },
+  "param_gps_delay_ms": [
+   110.0
+  ],
+  "share_over_50_past_setting": 0.7
+ },
+ "post": {
+  "median_lag_ms": 98.0,
+  "dynmodel": {
+   "7": 9,
+   "6": 1
+  },
+  "param_gps_delay_ms": [
+   110.0
+  ],
+  "share_over_50_past_setting": 0.2
+ },
+ "checks": {
+  "E0": false,
+  "U1": null,
+  "U2": null,
+  "U3": null,
+  "U4": null
+ },
+ "decision": "D3",
+ "upgrade": "0.1.0",
+ "seed": 20261113,
+ "boot_seed": 20261114,
+ "min_duration_s": 120,
+ "list": {
+  "listed": 486672,
+  "eligible": 17942,
+  "excluded": {
+   "not v1.16 or v1.17": 111574,
+   "shorter than 120 s": 269785,
+   "simulation": 36930,
+   "no vehicle id": 8834,
+   "not a multicopter": 39504,
+   "development build": 2103
+  },
+  "vehicles_eligible": 3192,
+  "vehicles_on_both": 139,
+  "vehicles_only_pre": 2080,
+  "vehicles_only_post": 973
+ },
+ "downloads": 357,
+ "vehicles_visited": 139,
+ "stopped": "list exhausted",
+ "blocked": null,
+ "dynmodel_2026_vehicles": 257,
+ "wall_s": 2958.2
+}

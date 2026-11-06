@@ -1,0 +1,12 @@
+{
+ "https://raw.githubusercontent.com/munimtechnologies/px4-gps-lag/main/gps_lag.py": {
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d",
+  "matches_paired_job": true
+ },
+ "https://github.com/user-attachments/files/20456409/logs_dynmodel.zip": {
+  "sha256": "aa6997a9754d4a11149bb4aa23f9721e16450eba4dc4808c0644ed2e04343b49",
+  "bytes": 7978097,
+  "matches_paired_job": true
+ },
+ "ulogs": 2
+}

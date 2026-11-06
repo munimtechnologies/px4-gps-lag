@@ -1,0 +1,25 @@
+{
+ "PLAN.md": {
+  "on_main": true,
+  "sha256": "ff32458d4f5d1a6e1889a650380490f182d389c2d6ab45fe4bf5fd357bce5652",
+  "waited_s": 0
+ },
+ "upgrade.py": {
+  "local_sha256": "e6b3dcac94ed8ef3cb2ec0242e84d54c685b6f643afa0f8edb40065df13c7b8b",
+  "main_sha256": "e6b3dcac94ed8ef3cb2ec0242e84d54c685b6f643afa0f8edb40065df13c7b8b",
+  "same_as_main": true
+ },
+ "test_upgrade.py": {
+  "local_sha256": "2b6e7f04c108fec723553ed83b2b8e8b511ddaf2e2f316e3ab8c1d4bf087ffac",
+  "main_sha256": "2b6e7f04c108fec723553ed83b2b8e8b511ddaf2e2f316e3ab8c1d4bf087ffac",
+  "same_as_main": true
+ },
+ "gps_lag.py": {
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d",
+  "pinned": true
+ },
+ "dynmodel-rows.jsonl": {
+  "sha256": "96bc66f6c0add13617ed664294a4973d7c81d6ea063e9603c16316d447326aa9",
+  "lines": 261
+ }
+}
