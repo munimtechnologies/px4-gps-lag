@@ -1,0 +1,37 @@
+{
+ "PLAN-ext.md": {
+  "on_main": true,
+  "sha256": "70855651dcb04beb86cede3f82799fdfde9d1c6cc229023c2bd86a6b71edfea7",
+  "waited_s": 0
+ },
+ "extend.py": {
+  "local_sha256": "d1f9118d88f89cdb7e3695fb678bbabf78b9206b7c35329b291784c7bdeb078c",
+  "main_sha256": "d1f9118d88f89cdb7e3695fb678bbabf78b9206b7c35329b291784c7bdeb078c",
+  "same_as_main": true
+ },
+ "test_extend.py": {
+  "local_sha256": "8e2ee6d368b3f783a8dc574ffd5fe44f291faaf0ea7a5af8bac92b4b69cbddf6",
+  "main_sha256": "8e2ee6d368b3f783a8dc574ffd5fe44f291faaf0ea7a5af8bac92b4b69cbddf6",
+  "same_as_main": true
+ },
+ "gps_lag.py": {
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d",
+  "pinned": true
+ },
+ "studies/upgrade-2026/upgrade.py": {
+  "sha256": "e6b3dcac94ed8ef3cb2ec0242e84d54c685b6f643afa0f8edb40065df13c7b8b",
+  "pinned": true
+ },
+ "studies/upgrade-2026/v1/rows.jsonl": {
+  "sha256": "2e9b6c2bd44dfd992528faca7897487936dd286b2dd1041d79a822873ede577f",
+  "lines": 357
+ },
+ "studies/upgrade-2026/v1/pairs.jsonl": {
+  "sha256": "8c30f5d607ad4c2ad835cf0659c53afd05d466c036beb32f387ec1f32693cbf0",
+  "lines": 10
+ },
+ "studies/dynmodel-2026/dynmodel-rows.jsonl": {
+  "sha256": "96bc66f6c0add13617ed664294a4973d7c81d6ea063e9603c16316d447326aa9",
+  "lines": 261
+ }
+}

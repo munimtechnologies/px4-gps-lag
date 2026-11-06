@@ -1,0 +1,162 @@
+{
+ "new_pairs": 1,
+ "diff_pre_minus_post_ms": {
+  "all": {
+   "n": 1,
+   "median": -2.1,
+   "ci95": null
+  },
+  "switched_6_to_7": {
+   "n": 0,
+   "median": null,
+   "ci95": null
+  },
+  "unchanged_model": {
+   "n": 1,
+   "median": -2.1,
+   "ci95": null
+  },
+  "positive": 0
+ },
+ "checks": {
+  "X0": false,
+  "X1": null,
+  "X2": null,
+  "X3": null,
+  "X4": null
+ },
+ "decision": "DX3",
+ "extend": "0.1.0",
+ "upgrade": "0.1.0",
+ "seed": 20261115,
+ "boot_seed": 20261116,
+ "tries_per_side": 10,
+ "list": {
+  "listed": 487180,
+  "eligible": 17994,
+  "excluded": {
+   "not v1.16 or v1.17": 111666,
+   "shorter than 120 s": 270084,
+   "simulation": 36945,
+   "no vehicle id": 8837,
+   "not a multicopter": 39542,
+   "development build": 2112
+  },
+  "vehicles_eligible": 3206,
+  "vehicles_on_both": 139,
+  "vehicles_only_pre": 2084,
+  "vehicles_only_post": 983,
+  "v1_rows": 357,
+  "v1_vehicles_tried": 139,
+  "v1_paired": 10,
+  "vehicles_x": 129,
+  "vehicles_x_not_on_both_now": 0
+ },
+ "downloads": 282,
+ "vehicles_visited": 129,
+ "stopped": "list exhausted",
+ "blocked": null,
+ "reported_not_graded": {
+  "pooled_first_plan": {
+   "vehicles": 11,
+   "receivers": {
+    "M8": 6,
+    "M9": 2,
+    "F9P": 3
+   },
+   "diff_pre_minus_post_ms": {
+    "all": {
+     "n": 11,
+     "median": 74.4,
+     "ci95": [
+      7.2,
+      109.1
+     ]
+    },
+    "switched_6_to_7": {
+     "n": 9,
+     "median": 94.9,
+     "ci95": [
+      7.2,
+      137.9
+     ]
+    },
+    "unchanged_model": {
+     "n": 2,
+     "median": 8.6,
+     "ci95": [
+      -2.1,
+      19.3
+     ]
+    },
+    "other_change": {
+     "n": 0,
+     "median": null
+    },
+    "not_in_dynmodel_2026": {
+     "n": 7,
+     "median": 74.4,
+     "ci95": [
+      7.2,
+      109.1
+     ]
+    }
+   },
+   "share_switched": 0.818,
+   "pre": {
+    "median_lag_ms": 194.7,
+    "dynmodel": {
+     "6": 11
+    },
+    "param_gps_delay_ms": [
+     110.0
+    ],
+    "share_over_50_past_setting": 0.727
+   },
+   "post": {
+    "median_lag_ms": 98.5,
+    "dynmodel": {
+     "7": 9,
+     "6": 2
+    },
+    "param_gps_delay_ms": [
+     110.0
+    ],
+    "share_over_50_past_setting": 0.273
+   },
+   "checks": {
+    "E0": false,
+    "U1": null,
+    "U2": null,
+    "U3": null,
+    "U4": null
+   },
+   "decision": "D3"
+  },
+  "new_post_log_not_before_pre_log": 1,
+  "new_receivers": {
+   "F9P": 1
+  },
+  "new_pre": {
+   "median_lag_ms": 223.4,
+   "dynmodel": {
+    "6": 1
+   },
+   "param_gps_delay_ms": [
+    110.0
+   ],
+   "share_over_50_past_setting": 1.0
+  },
+  "new_post": {
+   "median_lag_ms": 225.5,
+   "dynmodel": {
+    "6": 1
+   },
+   "param_gps_delay_ms": [
+    110.0
+   ],
+   "share_over_50_past_setting": 1.0
+  }
+ },
+ "wall_s": 3429.8
+}
