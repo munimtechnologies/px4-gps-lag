@@ -1,0 +1,502 @@
+{
+ "mechanism": "0.1.0",
+ "seed": 20261107,
+ "block": 25,
+ "resamples": 200,
+ "tau_grid_ms": [
+  0.0,
+  250.0,
+  10.0
+ ],
+ "lag_grid_ms": [
+  -200.0,
+  600.0,
+  5.0
+ ],
+ "logs": {
+  "6": {
+   "published_lag_ms": 214.2,
+   "gps_lag_fit_ms": 214.2,
+   "reproduced": true,
+   "grid": {
+    "pairs": 254,
+    "tau_ms": 110.0,
+    "lag_ms": 110.0,
+    "sum_ms": 220.0,
+    "r2": 0.99479,
+    "lag_tau0_ms": 215.0,
+    "r2_tau0": 0.99284,
+    "tau_edge": false,
+    "lag_edge": false,
+    "profile": [
+     {
+      "tau_ms": 0.0,
+      "lag_ms": 215.0,
+      "r2": 0.99284
+     },
+     {
+      "tau_ms": 10.0,
+      "lag_ms": 205.0,
+      "r2": 0.99309
+     },
+     {
+      "tau_ms": 20.0,
+      "lag_ms": 195.0,
+      "r2": 0.99325
+     },
+     {
+      "tau_ms": 30.0,
+      "lag_ms": 185.0,
+      "r2": 0.99341
+     },
+     {
+      "tau_ms": 40.0,
+      "lag_ms": 175.0,
+      "r2": 0.99362
+     },
+     {
+      "tau_ms": 50.0,
+      "lag_ms": 165.0,
+      "r2": 0.99385
+     },
+     {
+      "tau_ms": 60.0,
+      "lag_ms": 155.0,
+      "r2": 0.99408
+     },
+     {
+      "tau_ms": 70.0,
+      "lag_ms": 145.0,
+      "r2": 0.9943
+     },
+     {
+      "tau_ms": 80.0,
+      "lag_ms": 135.0,
+      "r2": 0.99448
+     },
+     {
+      "tau_ms": 90.0,
+      "lag_ms": 125.0,
+      "r2": 0.99463
+     },
+     {
+      "tau_ms": 100.0,
+      "lag_ms": 120.0,
+      "r2": 0.99474
+     },
+     {
+      "tau_ms": 110.0,
+      "lag_ms": 110.0,
+      "r2": 0.99479
+     },
+     {
+      "tau_ms": 120.0,
+      "lag_ms": 100.0,
+      "r2": 0.99477
+     },
+     {
+      "tau_ms": 130.0,
+      "lag_ms": 90.0,
+      "r2": 0.99465
+     },
+     {
+      "tau_ms": 140.0,
+      "lag_ms": 85.0,
+      "r2": 0.99448
+     },
+     {
+      "tau_ms": 150.0,
+      "lag_ms": 75.0,
+      "r2": 0.99423
+     },
+     {
+      "tau_ms": 160.0,
+      "lag_ms": 65.0,
+      "r2": 0.99387
+     },
+     {
+      "tau_ms": 170.0,
+      "lag_ms": 60.0,
+      "r2": 0.99343
+     },
+     {
+      "tau_ms": 180.0,
+      "lag_ms": 50.0,
+      "r2": 0.9929
+     },
+     {
+      "tau_ms": 190.0,
+      "lag_ms": 45.0,
+      "r2": 0.99225
+     },
+     {
+      "tau_ms": 200.0,
+      "lag_ms": 35.0,
+      "r2": 0.99153
+     },
+     {
+      "tau_ms": 210.0,
+      "lag_ms": 25.0,
+      "r2": 0.99069
+     },
+     {
+      "tau_ms": 220.0,
+      "lag_ms": 20.0,
+      "r2": 0.98977
+     },
+     {
+      "tau_ms": 230.0,
+      "lag_ms": 10.0,
+      "r2": 0.98875
+     },
+     {
+      "tau_ms": 240.0,
+      "lag_ms": 5.0,
+      "r2": 0.98762
+     },
+     {
+      "tau_ms": 250.0,
+      "lag_ms": -5.0,
+      "r2": 0.9864
+     }
+    ],
+    "boot": {
+     "tau_ms": [
+      90.0,
+      110.0,
+      140.0
+     ],
+     "lag_ms": [
+      80.0,
+      105.0,
+      125.0
+     ],
+     "sum_ms": [
+      205.0,
+      220.0,
+      225.0
+     ],
+     "tau_at_edge_share": 0.0
+    }
+   },
+   "grid_tau0_close": true,
+   "innov": {
+    "innov_topic": "estimator_innovations",
+    "time_source": "timestamp_sample",
+    "innov_samples": 104,
+    "param_gps_delay_ms": 160.0,
+    "k_s": 0.029191078503608046,
+    "se_s": 0.0026198296082581797,
+    "r": 0.6141560821271289,
+    "excitation_m_s2": 2.479864644863585,
+    "implied_excess_ms": 29.2,
+    "implied_se_ms": 2.6,
+    "passed": true,
+    "reason": "ok"
+   },
+   "ekf": {
+    "gps_hvel_test_ratio": {
+     "n": 104,
+     "p50": 0.0283,
+     "p95": 0.2766,
+     "share_over_1": 0.0
+    },
+    "gps_hpos_test_ratio": {
+     "n": 104,
+     "p50": 0.0063,
+     "p95": 0.0887,
+     "share_over_1": 0.0
+    },
+    "resets": {
+     "reset_count_vel_ne": {
+      "in_flight": 0,
+      "whole_log": 2
+     },
+     "reset_count_pos_ne": {
+      "in_flight": 0,
+      "whole_log": 3
+     },
+     "reset_count_vel_d": {
+      "in_flight": 0,
+      "whole_log": 1
+     },
+     "reset_count_quat": {
+      "in_flight": 0,
+      "whole_log": 1
+     }
+    },
+    "flags": {
+     "reject_hor_vel": {
+      "share_in_flight": 0.0,
+      "samples": 60
+     },
+     "reject_hor_pos": {
+      "share_in_flight": 0.0,
+      "samples": 60
+     },
+     "cs_gps": {
+      "share_in_flight": 1.0,
+      "samples": 60
+     }
+    }
+   },
+   "param_gps_delay_ms": 160.0,
+   "file": "log_8_2025-5-27-12-55-02.ulg",
+   "dynmodel": 6
+  },
+  "7": {
+   "published_lag_ms": 110.5,
+   "gps_lag_fit_ms": 110.5,
+   "reproduced": true,
+   "grid": {
+    "pairs": 275,
+    "tau_ms": 20.0,
+    "lag_ms": 95.0,
+    "sum_ms": 115.0,
+    "r2": 0.99243,
+    "lag_tau0_ms": 110.0,
+    "r2_tau0": 0.9924,
+    "tau_edge": false,
+    "lag_edge": false,
+    "profile": [
+     {
+      "tau_ms": 0.0,
+      "lag_ms": 110.0,
+      "r2": 0.9924
+     },
+     {
+      "tau_ms": 10.0,
+      "lag_ms": 105.0,
+      "r2": 0.99243
+     },
+     {
+      "tau_ms": 20.0,
+      "lag_ms": 95.0,
+      "r2": 0.99243
+     },
+     {
+      "tau_ms": 30.0,
+      "lag_ms": 85.0,
+      "r2": 0.99241
+     },
+     {
+      "tau_ms": 40.0,
+      "lag_ms": 75.0,
+      "r2": 0.99236
+     },
+     {
+      "tau_ms": 50.0,
+      "lag_ms": 65.0,
+      "r2": 0.99221
+     },
+     {
+      "tau_ms": 60.0,
+      "lag_ms": 55.0,
+      "r2": 0.99202
+     },
+     {
+      "tau_ms": 70.0,
+      "lag_ms": 45.0,
+      "r2": 0.99175
+     },
+     {
+      "tau_ms": 80.0,
+      "lag_ms": 35.0,
+      "r2": 0.99139
+     },
+     {
+      "tau_ms": 90.0,
+      "lag_ms": 25.0,
+      "r2": 0.99094
+     },
+     {
+      "tau_ms": 100.0,
+      "lag_ms": 20.0,
+      "r2": 0.99037
+     },
+     {
+      "tau_ms": 110.0,
+      "lag_ms": 10.0,
+      "r2": 0.98974
+     },
+     {
+      "tau_ms": 120.0,
+      "lag_ms": 0.0,
+      "r2": 0.98902
+     },
+     {
+      "tau_ms": 130.0,
+      "lag_ms": -10.0,
+      "r2": 0.9882
+     },
+     {
+      "tau_ms": 140.0,
+      "lag_ms": -20.0,
+      "r2": 0.98726
+     },
+     {
+      "tau_ms": 150.0,
+      "lag_ms": -25.0,
+      "r2": 0.98621
+     },
+     {
+      "tau_ms": 160.0,
+      "lag_ms": -35.0,
+      "r2": 0.98505
+     },
+     {
+      "tau_ms": 170.0,
+      "lag_ms": -45.0,
+      "r2": 0.98373
+     },
+     {
+      "tau_ms": 180.0,
+      "lag_ms": -50.0,
+      "r2": 0.98233
+     },
+     {
+      "tau_ms": 190.0,
+      "lag_ms": -60.0,
+      "r2": 0.98079
+     },
+     {
+      "tau_ms": 200.0,
+      "lag_ms": -65.0,
+      "r2": 0.97912
+     },
+     {
+      "tau_ms": 210.0,
+      "lag_ms": -75.0,
+      "r2": 0.97734
+     },
+     {
+      "tau_ms": 220.0,
+      "lag_ms": -80.0,
+      "r2": 0.97542
+     },
+     {
+      "tau_ms": 230.0,
+      "lag_ms": -90.0,
+      "r2": 0.9734
+     },
+     {
+      "tau_ms": 240.0,
+      "lag_ms": -95.0,
+      "r2": 0.97125
+     },
+     {
+      "tau_ms": 250.0,
+      "lag_ms": -105.0,
+      "r2": 0.96899
+     }
+    ],
+    "boot": {
+     "tau_ms": [
+      0.0,
+      20.0,
+      60.0
+     ],
+     "lag_ms": [
+      50.0,
+      95.0,
+      110.0
+     ],
+     "sum_ms": [
+      110.0,
+      115.0,
+      115.0
+     ],
+     "tau_at_edge_share": 0.0
+    }
+   },
+   "grid_tau0_close": true,
+   "innov": {
+    "innov_topic": "estimator_innovations",
+    "time_source": "timestamp_sample",
+    "innov_samples": 111,
+    "param_gps_delay_ms": 160.0,
+    "k_s": -0.03776396698154571,
+    "se_s": 0.002221276166739826,
+    "r": -0.7542725971143113,
+    "excitation_m_s2": 2.7936912388659936,
+    "implied_excess_ms": -37.8,
+    "implied_se_ms": 2.2,
+    "passed": true,
+    "reason": "ok"
+   },
+   "ekf": {
+    "gps_hvel_test_ratio": {
+     "n": 112,
+     "p50": 0.038,
+     "p95": 0.3446,
+     "share_over_1": 0.0
+    },
+    "gps_hpos_test_ratio": {
+     "n": 112,
+     "p50": 0.0003,
+     "p95": 0.0023,
+     "share_over_1": 0.0
+    },
+    "resets": {
+     "reset_count_vel_ne": {
+      "in_flight": 0,
+      "whole_log": 2
+     },
+     "reset_count_pos_ne": {
+      "in_flight": 0,
+      "whole_log": 3
+     },
+     "reset_count_vel_d": {
+      "in_flight": 0,
+      "whole_log": 1
+     },
+     "reset_count_quat": {
+      "in_flight": 0,
+      "whole_log": 2
+     }
+    },
+    "flags": {
+     "reject_hor_vel": {
+      "share_in_flight": 0.0,
+      "samples": 74
+     },
+     "reject_hor_pos": {
+      "share_in_flight": 0.0,
+      "samples": 74
+     },
+     "cs_gps": {
+      "share_in_flight": 1.0,
+      "samples": 74
+     }
+    }
+   },
+   "param_gps_delay_ms": 160.0,
+   "file": "log_5_2025-5-27-11-50-34.ulg",
+   "dynmodel": 7
+  }
+ },
+ "E1_reproduced": true,
+ "M1": {
+  "tau_diff_ms": 90.0,
+  "lag_diff_ms": 15.0,
+  "sum_diff_ms": 105.0,
+  "boot_tau_diff_ms": [
+   59.8,
+   90.0,
+   130.0
+  ],
+  "boot_lag_diff_ms": [
+   -20.0,
+   15.0,
+   50.1
+  ],
+  "identified_6": true,
+  "identified_7": true,
+  "outcome": "smoothing"
+ },
+ "M2": {
+  "implied_excess_ms_6": 29.2,
+  "implied_excess_ms_7": -37.8,
+  "held": true
+ }
+}

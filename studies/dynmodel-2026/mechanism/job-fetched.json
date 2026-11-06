@@ -1,0 +1,34 @@
+{
+ "PLAN-mechanism.md": {
+  "on_main": true,
+  "sha256": "0a8071fc727e0edf19d2860074312a1ec20c4ee5c0c02c4e8535fdb968a58b1c",
+  "waited_s": 0
+ },
+ "mechanism.py": {
+  "local_sha256": "2c54577586bd17ebff624a38016bbe48dcb66f31ac5f586f7d532fd49896b44f",
+  "main_sha256": "2c54577586bd17ebff624a38016bbe48dcb66f31ac5f586f7d532fd49896b44f",
+  "same_as_main": true
+ },
+ "test_mechanism.py": {
+  "local_sha256": "52b93517f5f0077bfcbdabd13cc88e53c4f35be04c89c4d9ad69fd52b8d94abd",
+  "main_sha256": "52b93517f5f0077bfcbdabd13cc88e53c4f35be04c89c4d9ad69fd52b8d94abd",
+  "same_as_main": true
+ },
+ "https://raw.githubusercontent.com/munimtechnologies/px4-gps-lag/967b5ad92d04ca6ac7e29684b411fbf5df243e05/gps_lag.py": {
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d",
+  "same_as_main_pinned_copy": true
+ },
+ "https://raw.githubusercontent.com/munimtechnologies/px4-gps-lag/967b5ad92d04ca6ac7e29684b411fbf5df243e05/innov.py": {
+  "sha256": "64625526298a14f3fb4a11d24a545788971625229f1b36b5fd3e289d73e657d6"
+ },
+ "studies/dynmodel-2026/paired/paired-rows.jsonl": {
+  "sha256": "1e2110809bb4b7735a3292a1b54b570544ca6332a1a635f8c68029d239d5c55d",
+  "lines": 2
+ },
+ "https://github.com/user-attachments/files/20456409/logs_dynmodel.zip": {
+  "sha256": "aa6997a9754d4a11149bb4aa23f9721e16450eba4dc4808c0644ed2e04343b49",
+  "bytes": 7978097,
+  "matches_paired_job": true
+ },
+ "ulogs": 2
+}
