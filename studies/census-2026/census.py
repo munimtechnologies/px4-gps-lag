@@ -15,12 +15,18 @@ the initial parameters ('P') and parameter defaults ('Q'). It stops at the first
 message and keeps only GPS-related parameters. No flight data, position or console message is
 read. Requests are 6 s apart, and the pass stops at the first block (403/429/444).
 
+0.1.1 (AMENDMENT-1.md, code only): Flight Review sends the list gzip-compressed, which 0.1.0 passed
+to the JSON parser undecoded, so the 0.1.0 job stopped before any log was read. Responses that
+start with the gzip magic bytes are now decompressed (the list and, if ever needed, a log).
+Nothing in the plan's draw, measure or scoring changed.
+
     python census.py --out-dir out [--budget-min 170] [--target 250] [--max-tries 400] [--seen dynmodel-rows.jsonl]
 
 By MV2 of Munim, Inc. (mv2@munimtech.com); written with AI agents. Apache-2.0.
 """
 
 import argparse
+import gzip
 import hashlib
 import json
 import math
@@ -31,7 +37,7 @@ import struct
 import sys
 import time
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 DBINFO = "https://review.px4.io/dbinfo"
 URL = "https://review.px4.io/download?log=%s"
@@ -56,9 +62,51 @@ NOT_MULTICOPTER = ("vtol", "helicopter", "fixed", "wing", "rover", "boat", "subm
 PARAM_PREFIXES = ("GPS_", "SER_GPS", "SENS_GPS", "EKF2_GPS_")
 READ = ("ok", "incomplete")
 MAGIC = b"ULog\x01\x12\x35"
+GZIP_MAGIC = b"\x1f\x8b"
 END_TYPES = frozenset(b"ALCD")   # first data-section message types (as dynmodel.py 0.1.0)
 _P = 0x50                   # 'P': parameter
 _Q = 0x51                   # 'Q': parameter default (uint8 default_types, then as 'P')
+
+
+# ---------------------------------------------------------------- reading responses (0.1.1)
+
+class Prefixed:
+    """A read-only stream: `head` (bytes already read) followed by the rest of `f`."""
+
+    def __init__(self, head, f):
+        self.head = bytes(head)
+        self.f = f
+
+    def read(self, n=-1):
+        if n is None or n < 0:
+            out = self.head + self.f.read()
+            self.head = b""
+            return out
+        if self.head:
+            out = self.head[:n]
+            self.head = self.head[n:]
+            if len(out) < n:
+                out += self.f.read(n - len(out))
+            return out
+        return self.f.read(n)
+
+
+def open_stream(f):
+    """`f` as a stream of its decoded bytes: gzip-decompressed if it starts with the gzip magic
+    bytes (Flight Review's /dbinfo does, whatever the request asks), else unchanged."""
+    head = f.read(2)
+    rest = Prefixed(head, f)
+    if head == GZIP_MAGIC:
+        return gzip.GzipFile(fileobj=rest, mode="rb")
+    return rest
+
+
+def chunks_of(f, size=CHUNK):
+    while True:
+        b = f.read(size)
+        if not b:
+            return
+        yield b
 
 
 # ---------------------------------------------------------------- the public list (upgrade.py 0.1.0)
@@ -242,13 +290,7 @@ def fetch(log_id):
     import urllib.request
     req = urllib.request.Request(URL % log_id, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(req, timeout=120) as resp:
-        def chunks():
-            while True:
-                b = resp.read(CHUNK)
-                if not b:
-                    return
-                yield b
-        return initial_params(chunks())
+        return initial_params(chunks_of(open_stream(resp)))
 
 
 def dyn(rec):
@@ -435,11 +477,14 @@ def report(recs):
 
 
 def plain(o):
-    """json.dumps default: anything with .item() or .tolist() as plain Python values."""
+    """json.dumps default: anything with .item() or .tolist() as plain Python values; Decimal
+    (from ijson) as float."""
     if hasattr(o, "item") and not hasattr(o, "__len__"):
         return o.item()
     if hasattr(o, "tolist"):
         return o.tolist()
+    if type(o).__name__ == "Decimal":
+        return float(o)
     raise TypeError("not JSON serializable: %r" % type(o))
 
 
@@ -470,7 +515,7 @@ def main(argv=None):
     seen = load_seen(args.seen)
     req = urllib.request.Request(DBINFO, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(req, timeout=600) as resp:
-        by_side, counts = build(ijson.items(resp, "item"))
+        by_side, counts = build(ijson.items(open_stream(resp), "item"))
     p = plan(by_side, seen)
     counts["draw"] = {PRE: len(p[PRE]), POST: len(p[POST]), "both": len(p["both"]),
                       "left_out_seen": p["left_out_seen"], "dynmodel_2026_vehicles": len(seen)}

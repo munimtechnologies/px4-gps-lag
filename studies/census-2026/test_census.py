@@ -1,12 +1,19 @@
-"""Synthetic tests for census.py (standard library only; no log or list is downloaded).
-By MV2 of Munim, Inc.; written with AI agents. Apache-2.0."""
+"""Synthetic tests for census.py (standard library only, plus ijson where installed; no log or list
+is downloaded). By MV2 of Munim, Inc.; written with AI agents. Apache-2.0."""
 
+import gzip
+import io
 import json
 import struct
 import unittest
 import urllib.error
 
 import census as cs
+
+try:
+    import ijson
+except ImportError:     # the job installs it; the stream tests below still run without it
+    ijson = None
 
 
 def msg(t, payload):
@@ -69,6 +76,65 @@ class Reader(unittest.TestCase):
 def entry(log_id, uuid, rel, mav="Quadrotor", dur=300, hw="PX4_FMU_V5"):
     return {"log_id": log_id, "vehicle_uuid": uuid, "ver_sw_release": rel, "mav_type": mav,
             "duration_s": dur, "sys_hw": hw, "log_date": "2026-05-01"}
+
+
+class Streams(unittest.TestCase):
+    """0.1.1: Flight Review's /dbinfo arrives gzip-compressed (the 0.1.0 job failed on it)."""
+
+    def read_all(self, f, size):
+        out = b""
+        while True:
+            b = f.read(size)
+            if not b:
+                return out
+            out += b
+
+    def test_plain_passes_through(self):
+        data = json.dumps([entry("a", "u", "v1.16.0 255")]).encode()
+        self.assertEqual(cs.open_stream(io.BytesIO(data)).read(), data)
+        self.assertEqual(self.read_all(cs.open_stream(io.BytesIO(data)), 1), data)
+        self.assertEqual(self.read_all(cs.open_stream(io.BytesIO(data)), 3), data)
+
+    def test_gzip_is_decoded(self):
+        data = json.dumps([entry("a", "u", "v1.16.0 255")] * 50).encode()
+        z = gzip.compress(data)
+        self.assertEqual(z[:2], cs.GZIP_MAGIC)
+        self.assertEqual(cs.open_stream(io.BytesIO(z)).read(), data)
+        self.assertEqual(self.read_all(cs.open_stream(io.BytesIO(z)), 1), data)
+        self.assertEqual(self.read_all(cs.open_stream(io.BytesIO(z)), 7), data)
+
+    def test_short_and_empty(self):
+        self.assertEqual(cs.open_stream(io.BytesIO(b"")).read(), b"")
+        self.assertEqual(cs.open_stream(io.BytesIO(b"[")).read(), b"[")
+        self.assertEqual(self.read_all(cs.open_stream(io.BytesIO(b"[]")), 5), b"[]")
+
+    def test_gzip_ulog(self):
+        z = gzip.compress(ulog())
+        got = cs.initial_params(cs.chunks_of(cs.open_stream(io.BytesIO(z)), 7))
+        self.assertEqual(got, cs.initial_params([ulog()]))
+        self.assertTrue(got[2])
+
+    def test_plain_ulog(self):
+        got = cs.initial_params(cs.chunks_of(cs.open_stream(io.BytesIO(ulog())), 5))
+        self.assertEqual(got, cs.initial_params([ulog()]))
+
+    @unittest.skipIf(ijson is None, "ijson not installed")
+    def test_gzip_list_through_ijson(self):
+        es = [entry("a1", "u1", "v1.16.0 255"), entry("b1", "u2", "v1.17.0 255", dur=150.5),
+              entry("x", "u4", "v1.17.0 0")]
+        z = gzip.compress(json.dumps(es).encode())
+        by_side, counts = cs.build(ijson.items(cs.open_stream(io.BytesIO(z)), "item"))
+        self.assertEqual(counts["listed"], 3)
+        self.assertEqual(counts["eligible"], 2)
+        self.assertEqual(counts["vehicles"], {"v1.16": 1, "v1.17": 1, "on_both": 0})
+        c = by_side["v1.17"][cs.vehicle_hash("u2")][0]
+        self.assertEqual(c["duration_s"], 150)
+        json.dumps(counts)
+        json.dumps(by_side)
+
+    def test_plain_decimal(self):
+        import decimal
+        self.assertEqual(json.dumps({"x": decimal.Decimal("1.5")}, default=cs.plain), '{"x": 1.5}')
 
 
 class List(unittest.TestCase):

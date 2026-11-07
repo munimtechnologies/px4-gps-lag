@@ -1,0 +1,21 @@
+{
+ "PLAN.md": {
+  "on_main": true,
+  "sha256": "5da57c61f3aeb8ef2a4ddc357b223ccfb7c68e8fe1aa83ec3a1fd700f59b4ed2",
+  "waited_s": 0
+ },
+ "census.py": {
+  "local_sha256": "5c168e98d0885be56a1ba6726b3118dc36fca173ef01b6e4bc687f7de319dbf9",
+  "main_sha256": "5c168e98d0885be56a1ba6726b3118dc36fca173ef01b6e4bc687f7de319dbf9",
+  "same_as_main": true
+ },
+ "test_census.py": {
+  "local_sha256": "749c5e8d4fbab4633fcef698f5c6bd2dd8a5ab8a6b3c8ab36588406ad2817b19",
+  "main_sha256": "749c5e8d4fbab4633fcef698f5c6bd2dd8a5ab8a6b3c8ab36588406ad2817b19",
+  "same_as_main": true
+ },
+ "studies/dynmodel-2026/dynmodel-rows.jsonl": {
+  "sha256": "96bc66f6c0add13617ed664294a4973d7c81d6ea063e9603c16316d447326aa9",
+  "lines": 261
+ }
+}
