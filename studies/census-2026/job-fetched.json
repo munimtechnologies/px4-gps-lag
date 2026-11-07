@@ -1,0 +1,25 @@
+{
+ "AMENDMENT-1.md": {
+  "on_main": true,
+  "sha256": "b00d06cd3aa886b90717bd2556087b7ba60c7d484c1cd495f4b389a3490d6616",
+  "waited_s": 0
+ },
+ "PLAN.md": {
+  "sha256": "5da57c61f3aeb8ef2a4ddc357b223ccfb7c68e8fe1aa83ec3a1fd700f59b4ed2",
+  "unchanged_since_0_1_0_job": true
+ },
+ "census.py": {
+  "local_sha256": "cf7c5c05fb3da3f9aea5778668ea0ead969919c6b2172240f12218f7fe845ff7",
+  "main_sha256": "cf7c5c05fb3da3f9aea5778668ea0ead969919c6b2172240f12218f7fe845ff7",
+  "same_as_main": true
+ },
+ "test_census.py": {
+  "local_sha256": "65658146154609a10928873f0172e2d70d2924491ef0528961a51ccf0e428c72",
+  "main_sha256": "65658146154609a10928873f0172e2d70d2924491ef0528961a51ccf0e428c72",
+  "same_as_main": true
+ },
+ "studies/dynmodel-2026/dynmodel-rows.jsonl": {
+  "sha256": "96bc66f6c0add13617ed664294a4973d7c81d6ea063e9603c16316d447326aa9",
+  "lines": 261
+ }
+}

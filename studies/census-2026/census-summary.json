@@ -1,0 +1,165 @@
+{
+ "census": "0.1.1",
+ "seed": 20261117,
+ "graded": {
+  "v1.16": {
+   "n": 250,
+   "models": {
+    "6": 204,
+    "7": 41,
+    "8": 5
+   },
+   "share6": 0.816,
+   "share6_ci95": [
+    0.7633,
+    0.8591
+   ]
+  },
+  "v1.17": {
+   "n": 250,
+   "models": {
+    "6": 14,
+    "7": 234,
+    "8": 2
+   },
+   "share6": 0.056,
+   "share6_ci95": [
+    0.0336,
+    0.0918
+   ]
+  },
+  "difference_share6": 0.76
+ },
+ "checks": {
+  "E0": true,
+  "C1": true,
+  "C2": true,
+  "C3": true
+ },
+ "decisions": {
+  "H0": false,
+  "H1": true,
+  "H2": false,
+  "H3": false
+ },
+ "reported": {
+  "note": "not pre-registered; descriptive only",
+  "status_counts": {
+   "both/ok": 139,
+   "graded/ok": 521
+  },
+  "read_without_dynmodel": 36,
+  "v1_17_by_build_kind": {
+   "pre": {
+    "n": 84,
+    "models": {
+     "6": 6,
+     "7": 78
+    },
+    "share6": 0.0714,
+    "share6_ci95": [
+     0.0331,
+     0.1472
+    ]
+   },
+   "release": {
+    "n": 166,
+    "models": {
+     "6": 8,
+     "7": 156,
+     "8": 2
+    },
+    "share6": 0.0482,
+    "share6_ci95": [
+     0.0246,
+     0.0922
+    ]
+   }
+  },
+  "v1_17_model6_boards": {
+   "PX4_FMU_V6X": 4,
+   "CUAV_X7PRO": 2,
+   "CUBEPILOT_CUBEORANGEPLUS": 2,
+   "PX4_FMU_V4": 2,
+   "CUAV_X25_EVO": 1,
+   "PX4_FMU_V5": 1,
+   "PX4_FMU_V6C": 1,
+   "X_MAV_AP_H743V2": 1
+  },
+  "dynmodel_vs_logged_config_default": {
+   "v1.16 model 6, config default 7": 4,
+   "v1.16 model 6, config default not logged": 200,
+   "v1.16 model 7, config default 6": 18,
+   "v1.16 model 7, config default not logged": 23,
+   "v1.16 model 8, config default 6": 4,
+   "v1.16 model 8, config default not logged": 1,
+   "v1.17 model 6, config default 7": 13,
+   "v1.17 model 6, config default not logged": 1,
+   "v1.17 model 7, config default not logged": 234,
+   "v1.17 model 8, config default 7": 2
+  },
+  "gps_1_protocol": {
+   "v1.16 GPS_1_PROTOCOL 0": 4,
+   "v1.16 GPS_1_PROTOCOL 1": 217,
+   "v1.16 GPS_1_PROTOCOL 6": 12,
+   "v1.16 GPS_1_PROTOCOL absent": 17,
+   "v1.17 GPS_1_PROTOCOL 0": 7,
+   "v1.17 GPS_1_PROTOCOL 1": 219,
+   "v1.17 GPS_1_PROTOCOL 6": 24
+  },
+  "on_both_v1_17": {
+   "n": 124,
+   "models": {
+    "6": 11,
+    "7": 113
+   },
+   "share6": 0.0887,
+   "share6_ci95": [
+    0.0503,
+    0.1519
+   ]
+  }
+ },
+ "list": {
+  "listed": 487576,
+  "eligible": 18037,
+  "excluded": {
+   "not v1.16 or v1.17": 111727,
+   "shorter than 120 s": 270294,
+   "simulation": 36971,
+   "no vehicle id": 8849,
+   "not a multicopter": 39582,
+   "development build": 2116
+  },
+  "vehicles": {
+   "v1.16": 2225,
+   "v1.17": 1126,
+   "on_both": 139
+  },
+  "draw": {
+   "v1.16": 2048,
+   "v1.17": 964,
+   "both": 139,
+   "left_out_seen": {
+    "v1.16": 38,
+    "v1.17": 23
+   },
+   "dynmodel_2026_vehicles": 257
+  }
+ },
+ "pass": {
+  "graded_with_model": {
+   "v1.16": 250,
+   "v1.17": 250
+  },
+  "graded_tries": {
+   "v1.16": 253,
+   "v1.17": 268
+  },
+  "graded_stop": "graded draw complete",
+  "both_read": 139,
+  "stop": "list exhausted",
+  "requests": 660
+ },
+ "wall_s": 5091.0
+}

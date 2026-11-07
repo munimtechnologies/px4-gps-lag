@@ -1,0 +1,144 @@
+[
+ {
+  "stack": "PX4 v1.16.0 multicopter defaults",
+  "repo": "PX4/PX4-Autopilot",
+  "ref": "v1.16.0",
+  "path": "ROMFS/px4fmu_common/init.d/rc.mc_defaults",
+  "pattern": "GPS_UBX_DYNMODEL",
+  "sha": "6ea3539157ca358c70a515878b77077af7d4611d",
+  "url": "https://github.com/PX4/PX4-Autopilot/blob/6ea3539157ca358c70a515878b77077af7d4611d/ROMFS/px4fmu_common/init.d/rc.mc_defaults",
+  "matches": [
+   {
+    "line": 23,
+    "text": "param set-default GPS_UBX_DYNMODEL 6",
+    "after": []
+   }
+  ],
+  "status": "ok"
+ },
+ {
+  "stack": "PX4 v1.17.0 multicopter defaults",
+  "repo": "PX4/PX4-Autopilot",
+  "ref": "v1.17.0",
+  "path": "ROMFS/px4fmu_common/init.d/rc.mc_defaults",
+  "pattern": "GPS_UBX_DYNMODEL",
+  "sha": "d6f12ad1c4f70ad3230afd7d86e971421e02fef4",
+  "url": "https://github.com/PX4/PX4-Autopilot/blob/d6f12ad1c4f70ad3230afd7d86e971421e02fef4/ROMFS/px4fmu_common/init.d/rc.mc_defaults",
+  "matches": [],
+  "status": "ok"
+ },
+ {
+  "stack": "PX4 v1.17.0 fixed-wing defaults",
+  "repo": "PX4/PX4-Autopilot",
+  "ref": "v1.17.0",
+  "path": "ROMFS/px4fmu_common/init.d/rc.fw_defaults",
+  "pattern": "GPS_UBX_DYNMODEL",
+  "sha": "d6f12ad1c4f70ad3230afd7d86e971421e02fef4",
+  "url": "https://github.com/PX4/PX4-Autopilot/blob/d6f12ad1c4f70ad3230afd7d86e971421e02fef4/ROMFS/px4fmu_common/init.d/rc.fw_defaults",
+  "matches": [
+   {
+    "line": 50,
+    "text": "param set-default GPS_UBX_DYNMODEL 8",
+    "after": []
+   }
+  ],
+  "status": "ok"
+ },
+ {
+  "stack": "PX4 v1.17.0 parameter default",
+  "repo": "PX4/PX4-Autopilot",
+  "ref": "v1.17.0",
+  "path": "src/drivers/gps/params.c",
+  "pattern": "PARAM_DEFINE_INT32\\(GPS_UBX_DYNMODEL",
+  "sha": "d6f12ad1c4f70ad3230afd7d86e971421e02fef4",
+  "url": "https://github.com/PX4/PX4-Autopilot/blob/d6f12ad1c4f70ad3230afd7d86e971421e02fef4/src/drivers/gps/params.c",
+  "matches": [
+   {
+    "line": 70,
+    "text": "PARAM_DEFINE_INT32(GPS_UBX_DYNMODEL, 7);",
+    "after": []
+   }
+  ],
+  "status": "ok"
+ },
+ {
+  "stack": "ArduPilot master",
+  "repo": "ArduPilot/ardupilot",
+  "ref": "master",
+  "path": "libraries/AP_GPS/AP_GPS.cpp",
+  "pattern": "_NAVFILTER",
+  "sha": "b7c08d4dbc69f58f5636642698b63a9130725db6",
+  "url": "https://github.com/ArduPilot/ardupilot/blob/b7c08d4dbc69f58f5636642698b63a9130725db6/libraries/AP_GPS/AP_GPS.cpp",
+  "matches": [
+   {
+    "line": 128,
+    "text": "    // @Param: _NAVFILTER",
+    "after": []
+   },
+   {
+    "line": 133,
+    "text": "    AP_GROUPINFO(\"_NAVFILTER\", 2, AP_GPS, _navfilter, GPS_ENGINE_AIRBORNE_4G),",
+    "after": []
+   }
+  ],
+  "status": "ok"
+ },
+ {
+  "stack": "Betaflight master",
+  "repo": "betaflight/betaflight",
+  "ref": "master",
+  "path": "src/main/pg/gps.c",
+  "pattern": "gps_ublox_(flight|acquire)_model",
+  "sha": "bfb608d25aefd4787a8273ca0b6a320cafbdf5e7",
+  "url": "https://github.com/betaflight/betaflight/blob/bfb608d25aefd4787a8273ca0b6a320cafbdf5e7/src/main/pg/gps.c",
+  "matches": [
+   {
+    "line": 44,
+    "text": "    .gps_ublox_acquire_model = UBLOX_MODEL_STATIONARY,",
+    "after": []
+   },
+   {
+    "line": 45,
+    "text": "    .gps_ublox_flight_model = UBLOX_MODEL_AIRBORNE_4G,",
+    "after": []
+   }
+  ],
+  "status": "ok"
+ },
+ {
+  "stack": "INAV master",
+  "repo": "iNavFlight/inav",
+  "ref": "master",
+  "path": "src/main/fc/settings.yaml",
+  "pattern": "^\\s*-?\\s*name:\\s*gps_dyn_model\\s*$",
+  "sha": "940b9281bbefb06b85d442ac5b456c81ae8672c9",
+  "url": "https://github.com/iNavFlight/inav/blob/940b9281bbefb06b85d442ac5b456c81ae8672c9/src/main/fc/settings.yaml",
+  "matches": [
+   {
+    "line": 50,
+    "text": "  - name: gps_dyn_model",
+    "after": [
+     "    values: [\"PEDESTRIAN\",\"AUTOMOTIVE\", \"AIR_1G\", \"AIR_2G\", \"AIR_4G\", \"SEA\", \"MOWER\"]",
+     "    enum: gpsDynModel_e",
+     "  - name: reset_type",
+     "    values: [\"NEVER\", \"FIRST_ARM\", \"EACH_ARM\"]",
+     "  - name: direction",
+     "    values: [\"RIGHT\", \"LEFT\", \"YAW\"]"
+    ]
+   },
+   {
+    "line": 1736,
+    "text": "      - name: gps_dyn_model",
+    "after": [
+     "        description: \"GPS navigation model: Pedestrian, Automotive, Air<1g, Air<2g, Air<4g. Default is AIR_2G. Use pedestrian/Automotive with caution, can cause flyaways with fast flying.\"",
+     "        default_value: \"AIR_2G\"",
+     "        field: dynModel",
+     "        table: gps_dyn_model",
+     "        type: uint8_t",
+     "      - name: gps_auto_config"
+    ]
+   }
+  ],
+  "status": "ok"
+ }
+]
