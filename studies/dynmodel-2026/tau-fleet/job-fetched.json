@@ -1,0 +1,32 @@
+{
+ "PLAN-tau-fleet.md": {
+  "on_main": true,
+  "sha256": "50914be6a3d2f855a4c79b7ceaddd0b3dc90c1bf6e2350f8dd1f84f8b8481d31",
+  "waited_s": 0
+ },
+ "tau_fleet.py": {
+  "local_sha256": "d2752e447f8df407b9f96f32e0e4751711600740a497cfb5c3e04d8f08b9f4b6",
+  "main_sha256": "d2752e447f8df407b9f96f32e0e4751711600740a497cfb5c3e04d8f08b9f4b6",
+  "same_as_main": true
+ },
+ "test_tau_fleet.py": {
+  "local_sha256": "d8c68c5cc7fd7a9461d9749b20807c923d626b1c3ac7c8ac593c078883712142",
+  "main_sha256": "d8c68c5cc7fd7a9461d9749b20807c923d626b1c3ac7c8ac593c078883712142",
+  "same_as_main": true
+ },
+ "studies/dynmodel-2026/mechanism/mechanism.py": {
+  "sha256": "2c54577586bd17ebff624a38016bbe48dcb66f31ac5f586f7d532fd49896b44f",
+  "same_as_mechanism_v1": true
+ },
+ "https://raw.githubusercontent.com/munimtechnologies/px4-gps-lag/967b5ad92d04ca6ac7e29684b411fbf5df243e05/gps_lag.py": {
+  "sha256": "3338d74392ad22939838c2252e38719ef8d1407d55cb6d8f9b12fb8c569c903d",
+  "same_as_mechanism_v1": true
+ },
+ "dynmodel.py": {
+  "sha256": "4fb8855ad76f44e4088d145c1b413a08ba201d7b899750f6fb172933c5f6520f"
+ },
+ "studies/dynmodel-2026/dynmodel-rows.jsonl": {
+  "sha256": "96bc66f6c0add13617ed664294a4973d7c81d6ea063e9603c16316d447326aa9",
+  "lines": 261
+ }
+}
