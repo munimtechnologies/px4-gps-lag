@@ -1,0 +1,103 @@
+{
+ "gnss_logs": "0.1.0",
+ "predictions": {
+  "P1": true,
+  "P2": true,
+  "P3": false,
+  "P4": true,
+  "P5": false
+ },
+ "reported": {
+  "requests": 236,
+  "status_counts": {
+   "no vehicle_gnss": 225,
+   "main log": 11
+  },
+  "main_logs": 11,
+  "main_vehicles": 11,
+  "main_logs_read": 8,
+  "read_log_ok": 8,
+  "passed": 5,
+  "fail_reasons": {
+   "IMU explains too little of the GPS velocity change": 2,
+   "too few in-flight GPS pairs": 1
+  },
+  "read_errors": [],
+  "main_by_kind": {
+   "pre": 10,
+   "dev": 1
+  },
+  "main_releases": {
+   "v1.18.0 128": 10,
+   "v1.18.0 0": 1
+  },
+  "main_mav_types": {
+   "Quadrotor": 11
+  },
+  "main_receivers": {
+   "0x85": 3,
+   "0xA5": 3,
+   "0xA2": 1,
+   "0xAF": 1
+  },
+  "main_with_gps_position_too": 0,
+  "columns_seen": {
+   "{\"device_id\": \"receiver.device_id\", \"fix_type\": \"receiver.fix_type\", \"timestamp\": \"receiver.timestamp\", \"timestamp_sample\": \"timestamp_sample\", \"vel_e_m_s\": \"receiver.vel_east\", \"vel_n_m_s\": \"receiver.vel_north\", \"vel_ned_valid\": \"receiver.vel_ned_valid\"}": 8
+  },
+  "applied_matches_param": "4 of 8",
+  "applied_ms": {
+   "110.0": 4,
+   "0.579": 1,
+   "10.176": 1,
+   "85.65": 1,
+   "98.034": 1
+  },
+  "publish_minus_receiver_ms_median": 0.017,
+  "lag_ms": [
+   -15.9,
+   92.8,
+   110.3,
+   166.3,
+   189.5
+  ],
+  "lag_minus_applied_ms": [
+   -16.5,
+   12.3,
+   79.5,
+   80.6,
+   82.6
+  ],
+  "lag_minus_applied_median_ms": 79.5,
+  "more_than_50_ms_off": 3,
+  "non_main_by_kind": {
+   "pre": 128,
+   "dev": 64,
+   "unknown": 21,
+   "release": 12
+  }
+ },
+ "list": {
+  "listed": 487780,
+  "eligible": 733,
+  "excluded": {
+   "before 2026-09-29": 434741,
+   "shorter than 60 s": 6968,
+   "older than v1.18": 8364,
+   "simulation": 36974
+  },
+  "by_kind": {
+   "pre": 491,
+   "unknown": 24,
+   "dev": 192,
+   "release": 26
+  },
+  "candidates": 733,
+  "candidate_vehicles": 236
+ },
+ "pass": {
+  "requested": 236,
+  "main_logs_read": 11,
+  "stop": "list exhausted"
+ },
+ "wall_s": 1602.8
+}

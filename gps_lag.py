@@ -13,8 +13,9 @@ error around it.
 
     python gps_lag.py flight.ulg [more.ulg ...]
 
-Reads sensor_combined, vehicle_attitude, vehicle_gps_position and
-vehicle_land_detected with pyulog. Uses no position, so no location leaves the
+Reads sensor_combined, vehicle_attitude, vehicle_gps_position (or, on PX4
+main since PR #24399, vehicle_gnss; new in 0.2.0) and vehicle_land_detected
+with pyulog. Uses no position, so no location leaves the
 log. A measured lag is a suggestion to check with EKF2 replay, not a setting.
 
 By MV2 of Munim, Inc.; written with AI agents. Apache-2.0.
@@ -27,7 +28,7 @@ import sys
 
 import numpy as np
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 LAG_MIN_S = -0.2
 LAG_MAX_S = 0.8
@@ -44,7 +45,18 @@ MIN_R2 = 0.6
 MAX_SE_S = 0.02
 
 TOPICS = ("sensor_combined", "vehicle_attitude", "vehicle_gps_position",
-          "vehicle_land_detected")
+          "vehicle_land_detected", "vehicle_gnss")
+# PX4 main (PR #24399, 2026-09-29) logs vehicle_gnss instead of vehicle_gps_position. The selected
+# receiver's sensor_gnss sample is nested as 'receiver' (pyulog: 'receiver.<field>'), its velocity
+# is vel_north / vel_east, and the delay-corrected sample time is the top-level timestamp_sample.
+# For each vehicle_gps_position column read_log reads: where vehicle_gnss has it, first match wins.
+GNSS_COLUMNS = (("timestamp", ("receiver.timestamp", "timestamp")),
+                ("vel_n_m_s", ("receiver.vel_north", "receiver.vel_n_m_s")),
+                ("vel_e_m_s", ("receiver.vel_east", "receiver.vel_e_m_s")),
+                ("fix_type", ("receiver.fix_type",)),
+                ("vel_ned_valid", ("receiver.vel_ned_valid",)),
+                ("timestamp_sample", ("timestamp_sample", "receiver.timestamp_sample")),
+                ("device_id", ("receiver.device_id",)))
 # PX4 DeviceBusType, the low 3 bits of a device_id
 BUS_TYPES = {0: "unknown", 1: "i2c", 2: "spi", 3: "uavcan", 4: "simulation",
              5: "serial", 6: "mavlink"}
@@ -208,6 +220,17 @@ def _col(d, name, default=None):
     return d[name] if name in d else default
 
 
+def gnss_as_gps(g):
+    """The vehicle_gps_position columns read_log reads, from a vehicle_gnss topic (PX4 main).
+    A column vehicle_gnss doesn't have is left out, so read_log names what is missing."""
+    out = {}
+    for name, sources in GNSS_COLUMNS:
+        src = next((s for s in sources if s in g), None)
+        if src is not None:
+            out[name] = g[src]
+    return out
+
+
 def read_log(path):
     """The arrays measure() needs, from a ULog file, plus a few facts about the
     vehicle. Raises ValueError when a topic or field is missing."""
@@ -217,6 +240,8 @@ def read_log(path):
     for d in ulog.data_list:
         if d.name in TOPICS and d.multi_id == 0:
             data[d.name] = d.data
+    if "vehicle_gps_position" not in data and "vehicle_gnss" in data:
+        data["vehicle_gps_position"] = gnss_as_gps(data["vehicle_gnss"])
     for name in ("sensor_combined", "vehicle_attitude", "vehicle_gps_position"):
         if name not in data:
             raise ValueError("no %s in the log" % name)
