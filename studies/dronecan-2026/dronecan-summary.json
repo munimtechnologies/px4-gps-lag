@@ -1,0 +1,87 @@
+{
+ "dronecan_logs": "0.1.0",
+ "predictions": {
+  "D1": false,
+  "D2": true,
+  "D3": null,
+  "D4": null,
+  "D5": true
+ },
+ "reported": {
+  "requests": 96,
+  "status_counts": {
+   "uavcan off": 53,
+   "uavcan on": 40,
+   "uavcan on, too big": 3
+  },
+  "read_ok": 37,
+  "read_errors": [
+   "error: no vehicle_gps_position in the log",
+   "error: no vehicle_gps_position in the log",
+   "error: no vehicle_gps_position in the log"
+  ],
+  "buses": {
+   "serial": 17,
+   "unknown": 16,
+   "uavcan": 4
+  },
+  "dronecan_logs": 4,
+  "dronecan_self_stamped": "2 of 4",
+  "dronecan_unknown": 0,
+  "dronecan_self_stamped_passed": 1,
+  "fail_reasons_dronecan": {
+   "IMU explains too little of the GPS velocity change": 2
+  },
+  "self_stamped_rows": [
+   {
+    "order": 44,
+    "sys_hw": "CUBEPILOT_CUBEORANGEPLUS",
+    "kind": "pre",
+    "devtype": "0x85",
+    "device_id": 8748291,
+    "applied_ms": 83.27,
+    "lag_ms": 155.3,
+    "se_ms": 0.53,
+    "residual_ms": 72.0
+   }
+  ],
+  "residual_median_ms": 72.0,
+  "closer_to_110": "1 of 1",
+  "dronecan_fallback_residual_ms": [
+   -72.9
+  ],
+  "serial_applied_matches": "10 of 10",
+  "serial_residual_median_ms": 38.0,
+  "dronecan_by_kind": {
+   "pre": 4
+  },
+  "dronecan_devtypes": {
+   "0x85": 4
+  }
+ },
+ "list": {
+  "listed": 488002,
+  "eligible": 2985,
+  "excluded": {
+   "before 2026-06-30": 384989,
+   "shorter than 60 s": 28803,
+   "older than v1.18": 34199,
+   "simulation": 36997,
+   "read in gnss-2026": 29
+  },
+  "by_kind": {
+   "pre": 2163,
+   "unknown": 59,
+   "dev": 638,
+   "release": 125
+  },
+  "candidates": 2985,
+  "candidate_vehicles": 986
+ },
+ "pass": {
+  "requested": 96,
+  "downloaded": 40,
+  "stop": "max full logs"
+ },
+ "wall_s": 718.6
+}
