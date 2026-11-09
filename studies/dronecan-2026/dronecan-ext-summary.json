@@ -1,0 +1,332 @@
+{
+ "dronecan_ext": "0.1.0",
+ "graded_on": "extension only",
+ "extension": {
+  "dronecan_logs": "0.1.0",
+  "predictions": {
+   "D1": true,
+   "D2": false,
+   "D3": null,
+   "D4": null,
+   "D5": true
+  },
+  "reported": {
+   "requests": 890,
+   "status_counts": {
+    "uavcan on, not v1.x": 505,
+    "uavcan off": 256,
+    "uavcan on": 123,
+    "uavcan on, too big": 6
+   },
+   "read_ok": 90,
+   "read_errors": [
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log"
+   ],
+   "buses": {
+    "serial": 50,
+    "uavcan": 31,
+    "unknown": 8,
+    "simulation": 1
+   },
+   "dronecan_logs": 31,
+   "dronecan_self_stamped": "5 of 22",
+   "dronecan_unknown": 9,
+   "dronecan_self_stamped_passed": 4,
+   "fail_reasons_dronecan": {
+    "IMU explains too little of the GPS velocity change": 8,
+    "too little manoeuvring": 6,
+    "too few in-flight GPS pairs": 4
+   },
+   "self_stamped_rows": [
+    {
+     "order": 221,
+     "sys_hw": "CUBEPILOT_CUBEORANGEPLUS",
+     "kind": "pre",
+     "devtype": "0x85",
+     "device_id": 8748291,
+     "applied_ms": 69.23,
+     "lag_ms": 89.0,
+     "se_ms": 0.23,
+     "residual_ms": 19.8
+    },
+    {
+     "order": 550,
+     "sys_hw": "CUBEPILOT_CUBEORANGEPLUS",
+     "kind": "pre",
+     "devtype": "0x85",
+     "device_id": 8748291,
+     "applied_ms": 47.21,
+     "lag_ms": 92.2,
+     "se_ms": 2.24,
+     "residual_ms": 45.0
+    },
+    {
+     "order": 114,
+     "sys_hw": "CUAV_FMU_V6X",
+     "kind": "pre",
+     "devtype": "0x85",
+     "device_id": 8748035,
+     "applied_ms": 10.37,
+     "lag_ms": 65.4,
+     "se_ms": 1.47,
+     "residual_ms": 55.0
+    },
+    {
+     "order": 7,
+     "sys_hw": "CUBEPILOT_CUBEORANGEPLUS",
+     "kind": "pre",
+     "devtype": "0x85",
+     "device_id": 8748299,
+     "applied_ms": 9.88,
+     "lag_ms": 180.4,
+     "se_ms": 0.82,
+     "residual_ms": 170.5
+    }
+   ],
+   "residual_median_ms": 50.0,
+   "closer_to_110": "3 of 4",
+   "dronecan_fallback_residual_ms": [
+    -63.1,
+    0.4,
+    91.4,
+    95.2
+   ],
+   "serial_applied_matches": "48 of 48",
+   "serial_residual_median_ms": -16.8,
+   "dronecan_by_kind": {
+    "pre": 22,
+    "dev": 9
+   },
+   "dronecan_devtypes": {
+    "0x85": 31
+   },
+   "hidden_dronecan_not_graded": [
+    {
+     "order": 30,
+     "sys_hw": "ECHOMAV_ECHOPILOT_AI",
+     "receivers": 2,
+     "applied_ms": 110.0,
+     "lag_ms": 175.5,
+     "passed": false,
+     "reason": "too little manoeuvring"
+    },
+    {
+     "order": 338,
+     "sys_hw": "ZEROONE_X6",
+     "receivers": 2,
+     "applied_ms": 10.678,
+     "lag_ms": 63.9,
+     "passed": true,
+     "reason": "ok"
+    }
+   ]
+  }
+ },
+ "pooled_not_the_grade": {
+  "dronecan_logs": "0.1.0",
+  "predictions": {
+   "D1": true,
+   "D2": false,
+   "D3": true,
+   "D4": true,
+   "D5": true
+  },
+  "reported": {
+   "requests": 986,
+   "status_counts": {
+    "uavcan on, not v1.x": 505,
+    "uavcan off": 309,
+    "uavcan on": 163,
+    "uavcan on, too big": 9
+   },
+   "read_ok": 127,
+   "read_errors": [
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log",
+    "error: no vehicle_gps_position in the log"
+   ],
+   "buses": {
+    "serial": 67,
+    "uavcan": 35,
+    "unknown": 24,
+    "simulation": 1
+   },
+   "dronecan_logs": 35,
+   "dronecan_self_stamped": "7 of 26",
+   "dronecan_unknown": 9,
+   "dronecan_self_stamped_passed": 5,
+   "fail_reasons_dronecan": {
+    "IMU explains too little of the GPS velocity change": 10,
+    "too little manoeuvring": 6,
+    "too few in-flight GPS pairs": 4
+   },
+   "self_stamped_rows": [
+    {
+     "order": 221,
+     "sys_hw": "CUBEPILOT_CUBEORANGEPLUS",
+     "kind": "pre",
+     "devtype": "0x85",
+     "device_id": 8748291,
+     "applied_ms": 69.23,
+     "lag_ms": 89.0,
+     "se_ms": 0.23,
+     "residual_ms": 19.8
+    },
+    {
+     "order": 550,
+     "sys_hw": "CUBEPILOT_CUBEORANGEPLUS",
+     "kind": "pre",
+     "devtype": "0x85",
+     "device_id": 8748291,
+     "applied_ms": 47.21,
+     "lag_ms": 92.2,
+     "se_ms": 2.24,
+     "residual_ms": 45.0
+    },
+    {
+     "order": 114,
+     "sys_hw": "CUAV_FMU_V6X",
+     "kind": "pre",
+     "devtype": "0x85",
+     "device_id": 8748035,
+     "applied_ms": 10.37,
+     "lag_ms": 65.4,
+     "se_ms": 1.47,
+     "residual_ms": 55.0
+    },
+    {
+     "order": 44,
+     "sys_hw": "CUBEPILOT_CUBEORANGEPLUS",
+     "kind": "pre",
+     "devtype": "0x85",
+     "device_id": 8748291,
+     "applied_ms": 83.27,
+     "lag_ms": 155.3,
+     "se_ms": 0.53,
+     "residual_ms": 72.0
+    },
+    {
+     "order": 7,
+     "sys_hw": "CUBEPILOT_CUBEORANGEPLUS",
+     "kind": "pre",
+     "devtype": "0x85",
+     "device_id": 8748299,
+     "applied_ms": 9.88,
+     "lag_ms": 180.4,
+     "se_ms": 0.82,
+     "residual_ms": 170.5
+    }
+   ],
+   "residual_median_ms": 55.0,
+   "closer_to_110": "4 of 5",
+   "dronecan_fallback_residual_ms": [
+    -72.9,
+    -63.1,
+    0.4,
+    91.4,
+    95.2
+   ],
+   "serial_applied_matches": "58 of 58",
+   "serial_residual_median_ms": -9.4,
+   "dronecan_by_kind": {
+    "pre": 26,
+    "dev": 9
+   },
+   "dronecan_devtypes": {
+    "0x85": 35
+   }
+  }
+ },
+ "list": {
+  "listed": 488002,
+  "eligible": 2515,
+  "excluded": {
+   "before 2026-06-30": 384989,
+   "shorter than 60 s": 28803,
+   "older than v1.18": 34199,
+   "simulation": 36997,
+   "read in gnss-2026": 29,
+   "read in the first pass": 470
+  },
+  "by_kind": {
+   "pre": 1826,
+   "dev": 522,
+   "unknown": 52,
+   "release": 115
+  },
+  "candidates": 2515,
+  "candidate_vehicles": 890,
+  "downloadable_vehicles": 224
+ },
+ "pass": {
+  "requested": 890,
+  "downloaded": 123,
+  "stop": "list exhausted"
+ },
+ "wall_s": 6203.3
+}
