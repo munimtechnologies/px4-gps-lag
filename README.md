@@ -160,6 +160,12 @@ If a passing log's `lag_minus_param_ms` is more than about 50 ms either way, the
 
 History: D1 was withdrawn after the first innovation check came back C2 as written, because that plan had EKF2's innovation sign backwards (PX4 computes prediction minus measurement; see `GRADE-innov.md`). The corrected check was pre-registered on fresh logs and held, so D1 is back.
 
+## PX4 main and v1.18: read the delay PX4 applied (0.2.0, gnss-2026, pre-registered)
+
+PX4 main (since PR #24399, 2026-09-29) logs `vehicle_gnss` instead of `vehicle_gps_position`. **0.2.0** reads it: when a log has no `vehicle_gps_position`, `gps_lag.py` takes its columns from `vehicle_gnss` (`receiver.timestamp`, `receiver.vel_north`, `receiver.vel_east`, ...). Logs with `vehicle_gps_position` are read exactly as before. The pre-registered check on all 11 public PX4 main logs since 2026-09-29 ([GRADE](studies/gnss-2026/GRADE.md)) found the expected field names in every log read (8 of 8), and the quality gates passed on 5.
+
+One thing changed on PX4's side. On main and v1.18, **PX4 ignores the GPS delay setting** (`SENS_GNSSn_DELAY` / `SENS_GPSn_DELAY`) when the driver stamps its own sample time, and DroneCAN receivers have done so since PX4 PR #27427. All four serial receivers had the 110 ms setting applied, while the three DroneCAN receivers got 85.7, 98.0 and 10.2 ms. So on these logs, compare the measured lag with `stamp_minus_sample_ms` (the delay PX4 applied), not with the parameter. On those three DroneCAN receivers, the measured lag was 12 to 83 ms later than the applied delay, and the old 110 ms would have been closer on all three. That was not predicted and rests on three vehicles, so [dronecan-2026](studies/dronecan-2026/PLAN.md) tests it, pre-registered, on others.
+
 ## Studies
 
 - `studies/fleet-2026/`: GPS lag across a random sample of PX4 Flight Review public logs (CC BY 4.0) from 2025-10 on, compared with each vehicle's `EKF2_GPS_DELAY`. Plan, grade (E1 passed, 5 of 6 predictions held), and one line per log in `v1/logs.jsonl`. `v1/summary.json` is the same rows re-scored, and it matches the grade.
