@@ -1,0 +1,24 @@
+test_ekf2_parameter_wins_up_to_v117 (test_gnss_latency.TestAppliedDelay.test_ekf2_parameter_wins_up_to_v117) ... ok
+test_parameter_when_no_sample_stamps (test_gnss_latency.TestAppliedDelay.test_parameter_when_no_sample_stamps) ... ok
+test_sample_stamps_on_v118_and_main (test_gnss_latency.TestAppliedDelay.test_sample_stamps_on_v118_and_main) ... ok
+test_150_ms (test_gnss_latency.TestEstimateDelay.test_150_ms) ... ok
+test_210_ms_at_5_hz (test_gnss_latency.TestEstimateDelay.test_210_ms_at_5_hz) ... ok
+test_40_ms_level_attitude (test_gnss_latency.TestEstimateDelay.test_40_ms_level_attitude) ... ok
+test_beyond_window_is_flagged_at_edge (test_gnss_latency.TestEstimateDelay.test_beyond_window_is_flagged_at_edge) ... ok
+test_too_little_airborne_time (test_gnss_latency.TestEstimateDelay.test_too_little_airborne_time) ... ok
+test_zero (test_gnss_latency.TestEstimateDelay.test_zero) ... ok
+test_air_intervals (test_gnss_latency.TestHelpers.test_air_intervals) ... ok
+test_bus_name (test_gnss_latency.TestHelpers.test_bus_name) ... ok
+test_gap_mask (test_gnss_latency.TestHelpers.test_gap_mask) ... ok
+test_increasing (test_gnss_latency.TestHelpers.test_increasing) ... ok
+test_integrate_mean_since_previous (test_gnss_latency.TestHelpers.test_integrate_mean_since_previous) ... ok
+test_parabolic_peak_edge (test_gnss_latency.TestHelpers.test_parabolic_peak_edge) ... ok
+test_parabolic_peak_exact_on_a_parabola (test_gnss_latency.TestHelpers.test_parabolic_peak_exact_on_a_parabola) ... ok
+test_interp_quat_handles_sign_flip (test_gnss_latency.TestRotation.test_interp_quat_handles_sign_flip) ... ok
+test_level_gravity_has_no_horizontal_part (test_gnss_latency.TestRotation.test_level_gravity_has_no_horizontal_part) ... ok
+test_yaw90_body_x_points_east (test_gnss_latency.TestRotation.test_yaw90_body_x_points_east) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.574s
+
+OK
