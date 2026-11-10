@@ -1,0 +1,34 @@
+{
+ "px4-gps-lag/main/studies/gnss-2026/gnss_logs.py": {
+  "sha256": "cfb0c71b0177148823db9a95676caa285ca4212e42c2f0d4a403e30e82cdbb1f",
+  "bytes": 22985
+ },
+ "px4-gps-lag/main/studies/dronecan-2026/dronecan_logs.py": {
+  "sha256": "bb08d03a5242a626cd890d70168f044ebbd6309932760a9cd00b8ac784229031",
+  "bytes": 17624
+ },
+ "px4-gps-lag/main/studies/dronecan-2026/nodefw.py": {
+  "sha256": "0053ab5dd22a62a260190ffa88d83736ab79fd7fa1c362008958abc4fd728b44",
+  "bytes": 19392
+ },
+ "px4-gps-lag/main/studies/dronecan-2026/test_nodefw.py": {
+  "sha256": "be33c050899a3e2316e7bbb837374d4a1f9c74c7bf709a191cc443cd3ec67b1e",
+  "bytes": 11794
+ },
+ "px4-gps-lag/main/studies/dronecan-2026/PLAN-nodefw.md": {
+  "sha256": "4e7ff2827a385fba129ad917d15c51ab3ec1d5547b5dad8f85a3c8b4736e5b21",
+  "bytes": 4805
+ },
+ "px4-gps-lag/main/studies/gnss-2026/gnss-rows.jsonl": {
+  "sha256": "5ffb2b308251aa3b026cdc122d141347cff70ec385faa27b3cf448ffd8237c28",
+  "bytes": 273439
+ },
+ "px4-gps-lag/main/studies/dronecan-2026/dronecan-rows.jsonl": {
+  "sha256": "cfd30c9fb6043a3e3c1ff75f80b409a0a5f831ff11cda06aee08d49db6c1779f",
+  "bytes": 125949
+ },
+ "px4-gps-lag/main/studies/dronecan-2026/dronecan-ext-rows.jsonl": {
+  "sha256": "8855fcb599cae428fa223984aab5626f1235e7f4680c58e08faf71650c304bef",
+  "bytes": 905828
+ }
+}
