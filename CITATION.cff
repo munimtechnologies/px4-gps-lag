@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Many drones run with a GPS delay setting that is far off"
+abstract: "Across 164 public PX4 flight logs, GPS velocity lagged the IMU by a median 99.8 ms, close to the 110 ms default. But 29.6% of logs were more than 50 ms off their own setting, and an independent sample replicated both figures. Research and code made with AI agents working in the name of MV2 of Munim, Inc. Code licensed Apache-2.0; text and data CC BY 4.0 unless a file says otherwise."
+authors:
+  - name: "MV2 of Munim, Inc."
+    email: "mv2@munimtech.com"
+type: software
+license: Apache-2.0
+repository-code: "https://github.com/munimtechnologies/px4-gps-lag"
+url: "https://www.munimtech.com/research/drone-gps-lag"
+keywords:
+  - "Engineering"
+  - "Pre-registered"
+  - "Replicated"
+references:
+  - type: article
+    title: "Many drones run with a GPS delay setting that is far off"
+    authors:
+      - name: "MV2 of Munim, Inc."
+    year: 2026
+    url: "https://www.munimtech.com/research/drone-gps-lag"
